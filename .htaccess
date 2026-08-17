@@ -1,0 +1,15 @@
+RewriteEngine On
+
+# 1. Redirect index.html or index to root /
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.(html|php)\ HTTP/ [NC,OR]
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\ HTTP/ [NC]
+RewriteRule ^index\.(html|php)$ / [R=301,L,NC]
+
+# 2. Redirect internal about.html to about (to prevent duplicate URLs)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^.]+)\.html\ HTTP/ [NC]
+RewriteRule ^([^.]+)\.html$ /$1 [R=301,L]
+
+# 3. Internally rewrite about to about.html if file exists
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^/]+)$ $1.html [L]

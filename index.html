@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- SEO Meta Tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puri Sand Resort & Hotel | Premium 5-Star Hotel in Puri Near Beach</title>
+  <meta name="description" content="Welcome to Puri Sand Resort & Hotel. A luxury 5-star experience located just 700m from Puri Beach and 1km from Jagannath Temple. 24/7 service, premium dining, and WiFi. Call or WhatsApp at +91 9437752000 / +91 9040082000.">
+  <meta name="keywords" content="5 star hotel in Puri, luxury hotel near Puri beach, best hotels near Jagannath Temple, Puri Sand Resort, luxury family suite Puri, Puri resort booking, Puri hotel contact number, premium rooms in Puri">
+  <meta name="author" content="Puri Sand Resort">
+  <meta name="robots" content="index, follow">
+
+  <!-- Favicon / Browser Tab Logo -->
+  <link rel="icon" type="image/png" href="./main logo.png" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://purisandresort.com/">
+  <meta property="og:title" content="Puri Sand Resort & Hotel | Premium 5-Star Hotel in Puri">
+  <meta property="og:description" content="Luxurious white & gold themed 5-star experience, 700m from Puri Beach & 1km from Jagannath Temple. 24/7 services, premium dining & high-class amenities.">
+  <meta property="og:image" content="./main logo.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="Puri Sand Resort & Hotel | Premium 5-Star Hotel in Puri">
+  <meta property="twitter:description" content="Experience pure luxury in Puri. AC Rooms, Balcony, Free WiFi, Dining, 700m from Beach, 1km from Jagannath Temple.">
+  <meta property="twitter:image" content="./main logo.png">
+
+  <!-- Schema.org for Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Hotel",
+    "name": "Puri Sand Resort & Hotel",
+    "image": "./main logo.png",
+    "description": "Premium 5-star luxury hotel in Puri. Located 700m from Puri Beach and 1km from Jagannath Temple. Features AC rooms, private balconies, and premium dining.",
+    "telephone": ["+91 9437752000", "+91 9040082000"],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Puri",
+      "addressRegion": "Odisha",
+      "addressCountry": "India"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "19.7964821",
+      "longitude": "85.8151437"
+    },
+    "url": "https://purisandresort.com",
+    "starRating": {
+      "@type": "Rating",
+      "ratingValue": "5"
+    },
+    "priceRange": "$$$$"
+  }
+  </script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              light: '#F4E0A5',
+              DEFAULT: '#D4AF37',
+              dark: '#AA7C11',
+              deep: '#8C6A1A',
+            },
+            luxury: {
+              white: '#08080c',
+              cream: '#0d0f18',
+              charcoal: '#FAF8F5',
+            }
+          },
+          fontFamily: {
+            title: ['Cinzel', 'serif'],
+            body: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- External Styles (Swiper, FontAwesome, AOS) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="./style.css?v=2.0" />
+</head>
+<body class="bg-[#080912]/50 text-luxury-charcoal selection:bg-gold selection:text-white mobile-bottom-spacing">
+
+  <!-- Premium Sand Preloader -->
+  <div id="preloader" class="fixed inset-0 z-50 bg-[#050508] flex flex-col justify-center items-center transition-opacity duration-700">
+    <div class="relative w-24 h-24 flex items-center justify-center">
+      <!-- Outer Glowing Frame -->
+      <div class="absolute inset-0 rounded-full border-2 border-gold/10 animate-spin-slow"></div>
+      
+      <!-- Custom Sandglass (Hourglass) SVG/CSS -->
+      <div class="hourglass-animation">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-16 h-16 fill-gold">
+          <!-- Glass Top/Bottom Frame -->
+          <path d="M30,10 L70,10 C70,10 70,35 55,48 C52,50 52,50 55,52 C70,65 70,90 70,90 L30,90 C30,90 30,65 45,52 C48,50 48,50 45,48 C30,35 30,10 30,10 Z" fill="none" stroke="#D4AF37" stroke-width="3" stroke-linejoin="round" />
+          <!-- Sand Top (falling out) -->
+          <path class="sand-top" d="M35,15 L65,15 C62,25 58,35 50,45 C42,35 38,25 35,15 Z" fill="#D4AF37" />
+          <!-- Sand Stream (line) -->
+          <line class="sand-stream" x1="50" y1="45" x2="50" y2="85" stroke="#D4AF37" stroke-width="2.5" stroke-dasharray="5,5" />
+          <!-- Sand Bottom (piling up) -->
+          <path class="sand-bottom" d="M50,75 C56,75 62,80 65,85 L35,85 C38,80 44,75 50,75 Z" fill="#D4AF37" />
+        </svg>
+      </div>
+    </div>
+    <!-- Loading Text -->
+    <div class="mt-6 text-center space-y-1">
+      <p class="font-title text-gold tracking-[0.3em] uppercase text-xs font-semibold animate-pulse">Puri Sand</p>
+      <p class="text-[9px] text-gray-500 uppercase tracking-widest">Resort & Hotel</p>
+    </div>
+  </div>
+  <script>
+    (function() {
+      var preloader = document.getElementById('preloader');
+      var fadeEffect = function() {
+        if (preloader) {
+          preloader.classList.add('opacity-0');
+          preloader.style.pointerEvents = 'none';
+          setTimeout(function() {
+            if (preloader.parentNode) {
+              preloader.parentNode.removeChild(preloader);
+            }
+          }, 700);
+        }
+      };
+      // Fade out on window load
+      window.addEventListener('load', fadeEffect);
+      // Safety Fallback: Force fadeout after 1.5 seconds if loading is already done or takes too long
+      setTimeout(fadeEffect, 1500);
+    })();
+  </script>
+
+  <!-- Top Announcement Bar -->
+  <div class="hidden md:flex bg-gold text-luxury-charcoal font-semibold text-xs py-2 px-4 text-center tracking-wider uppercase justify-between items-center sm:px-8">
+    <div class="hidden md:block"><i class="fa-solid fa-crown mr-2"></i> Puri's Ultra-Luxury 5-Star Destination</div>
+    <div class="mx-auto md:mx-0"><i class="fa-solid fa-gift mr-1 animate-pulse"></i> Special Offer: 2 Bottles of Water Free & Free High-Speed WiFi on Arrival!</div>
+    <div class="hidden lg:flex items-center space-x-4">
+      <a href="tel:+919437752000" class="hover:text-white transition-colors duration-300"><i class="fa-solid fa-phone mr-1"></i> +91 9437752000</a>
+      <span class="text-luxury-charcoal/40">|</span>
+      <a href="tel:+919040082000" class="hover:text-white transition-colors duration-300"><i class="fa-solid fa-phone mr-1"></i> +91 9040082000</a>
+    </div>
+  </div>
+
+  <!-- Main Luxury Header -->
+  <header class="hidden md:block sticky top-0 z-40 w-full glass-premium transition-all duration-500 border-b border-gold/20">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between sm:px-6 lg:px-8">
+      
+      <!-- Brand Logo -->
+      <a href="./" class="flex items-center group">
+        <img src="./main logo.png" alt="Puri Sand Logo" class="h-14 w-auto object-contain transition-transform duration-500 group-hover:scale-105" />
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden md:flex items-center space-x-8 font-medium text-sm uppercase tracking-widest text-gray-300">
+        <a href="./" class="nav-link-underline hover:text-gold transition-colors duration-300">Home</a>
+        <a href="about" class="nav-link-underline hover:text-gold transition-colors duration-300">About</a>
+        <a href="rooms" class="nav-link-underline hover:text-gold transition-colors duration-300">Rooms</a>
+        <a href="amenities" class="nav-link-underline hover:text-gold transition-colors duration-300">Amenities</a>
+        <a href="reviews" class="nav-link-underline hover:text-gold transition-colors duration-300">Reviews</a>
+        <a href="location" class="nav-link-underline hover:text-gold transition-colors duration-300">Location</a>
+      </nav>
+
+      <!-- Booking / Call CTA -->
+      <div class="hidden md:flex items-center space-x-4">
+        <button onclick="openBookingModal()" class="px-5 py-2.5 rounded-full bg-gold-gradient text-white text-xs font-semibold uppercase tracking-wider shadow-lg hover:shadow-gold-glow hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-sm"></i> Book Now
+        </button>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-menu-btn" class="md:hidden text-luxury-charcoal focus:outline-none p-1.5 rounded-lg border border-gold/20" aria-label="Toggle menu">
+        <i class="fa-solid fa-bars-staggered text-xl"></i>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- Mobile Fullscreen Dropdown Menu -->
+  <div id="mobile-menu" class="fixed inset-0 z-30 bg-[#050508] backdrop-blur-md hidden flex-col justify-center items-center space-y-8 text-center text-xl uppercase tracking-widest font-title text-luxury-charcoal">
+    <button id="close-mobile-menu" class="absolute top-6 right-6 text-gold focus:outline-none p-2" aria-label="Close menu">
+      <i class="fa-solid fa-xmark text-3xl"></i>
+    </button>
+    <a href="./" class="mobile-nav-link hover:text-gold transition-colors duration-300">Home</a>
+    <a href="about" class="mobile-nav-link hover:text-gold transition-colors duration-300">About</a>
+    <a href="rooms" class="mobile-nav-link hover:text-gold transition-colors duration-300">Rooms</a>
+    <a href="amenities" class="mobile-nav-link hover:text-gold transition-colors duration-300">Amenities</a>
+    <a href="reviews" class="mobile-nav-link hover:text-gold transition-colors duration-300">Reviews</a>
+    <a href="location" class="mobile-nav-link hover:text-gold transition-colors duration-300">Location</a>
+    <div class="flex flex-col space-y-2">
+      <a href="tel:+919437752000" class="text-gold-gradient font-semibold tracking-normal text-lg"><i class="fa-solid fa-phone mr-2"></i> +91 9437752000</a>
+      <a href="tel:+919040082000" class="text-gold-gradient font-semibold tracking-normal text-lg"><i class="fa-solid fa-phone mr-2"></i> +91 9040082000</a>
+    </div>
+    <button onclick="openBookingModal(); toggleMobileMenu(false);" class="px-8 py-3 rounded-full bg-gold-gradient text-white text-sm font-semibold flex items-center gap-2 pulse-gold">
+      <i class="fa-brands fa-whatsapp text-lg"></i> Book on WhatsApp
+    </button>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="home" class="relative h-[85vh] md:h-screen w-full overflow-hidden bg-black">
+    <!-- Swiper Hero Background -->
+    <div class="swiper hero-swiper h-full w-full">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide relative">
+          <img src="Rooms images/ChatGPT Image Aug 15, 2026, 03_06_16 PM.png" alt="Puri Sand Hotel Front View" class="w-full h-full object-cover object-center" />
+          <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+        <div class="swiper-slide relative">
+          <img src="Rooms images/ChatGPT Image Aug 15, 2026, 03_06_57 PM.png" alt="Luxury Hotel Lobby" class="w-full h-full object-cover object-center" />
+          <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+        <div class="swiper-slide relative">
+          <img src="Rooms images/ChatGPT Image Aug 15, 2026, 03_08_47 PM.png" alt="Premium Hotel Suite View" class="w-full h-full object-cover object-center" />
+          <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Content Overlay -->
+    <div class="absolute inset-0 z-10 flex flex-col justify-center items-center px-4 text-center text-white">
+      <!-- Mobile Only Hero Logo -->
+      <img src="./main logo.png" alt="Puri Sand Logo" class="h-20 w-auto object-contain mb-4 md:hidden animate-float" />
+      <h2 data-aos="fade-down" data-aos-duration="1000" class="text-gold uppercase tracking-[0.3em] font-semibold text-xs md:text-sm mb-4"><i class="fa-solid fa-star text-[10px] mx-0.5"></i><i class="fa-solid fa-star text-[10px] mx-0.5"></i><i class="fa-solid fa-star text-[10px] mx-0.5"></i><i class="fa-solid fa-star text-[10px] mx-0.5"></i><i class="fa-solid fa-star text-[10px] mx-0.5"></i> Luxury Awaits You</h2>
+      <h1 data-aos="fade-up" data-aos-duration="1200" class="font-title text-4xl md:text-6xl lg:text-7xl font-bold tracking-widest mb-6 max-w-5xl leading-tight">
+        Experience Premium Royalty <br><span class="text-gold-gradient font-black">In Puri</span>
+      </h1>
+      <p data-aos="fade-up" data-aos-duration="1400" data-aos-delay="200" class="text-sm md:text-lg max-w-2xl font-light text-gray-200 tracking-wide mb-5 md:mb-10">
+        Located just 700m from Puri Beach and 1km from Jagannath Temple. Indulge in state-of-the-art hospitality, 24/7 room service, and stunning views.
+      </p>
+      
+      <!-- Quick Action Buttons -->
+      <div data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400" class="flex flex-wrap gap-4 justify-center items-center">
+        <button onclick="openBookingModal()" class="px-8 py-3.5 rounded-full bg-gold-gradient text-white text-xs font-bold uppercase tracking-widest shadow-xl hover:shadow-gold/40 hover:-translate-y-1 hover:brightness-110 transition-all duration-300 flex items-center gap-2">
+          <i class="fa-solid fa-calendar-days"></i> Reserve Your Stay
+        </button>
+        <a href="about" class="px-8 py-3.5 rounded-full border border-white/30 backdrop-blur-sm text-white hover:border-gold hover:text-gold text-xs font-bold uppercase tracking-widest transition-all duration-300">
+          Explore Hotel
+        </a>
+      </div>
+    </div>
+
+    <!-- Floating Quick Check-In Bar (Desktop Only) -->
+    <div class="hidden lg:block absolute bottom-8 left-1/2 -translate-x-1/2 z-20 w-[90%] max-w-6xl">
+      <div class="glass-premium rounded-2xl p-5 shadow-2xl border border-gold/20 flex items-center justify-between gap-4">
+        
+        <div class="flex-1 flex flex-col border-r border-gold/20 pr-4">
+          <label class="text-[10px] uppercase font-bold text-gold tracking-wider mb-1"><i class="fa-solid fa-calendar-check mr-1"></i> Check In</label>
+          <input type="date" id="hero-checkin" class="bg-transparent text-sm font-semibold outline-none text-luxury-charcoal focus:text-gold cursor-pointer" />
+        </div>
+
+        <div class="flex-1 flex flex-col border-r border-gold/20 pr-4 pl-2">
+          <label class="text-[10px] uppercase font-bold text-gold tracking-wider mb-1"><i class="fa-solid fa-calendar-xmark mr-1"></i> Check Out</label>
+          <input type="date" id="hero-checkout" class="bg-transparent text-sm font-semibold outline-none text-luxury-charcoal focus:text-gold cursor-pointer" />
+        </div>
+
+        <div class="flex-1 flex flex-col border-r border-gold/20 pr-4 pl-2">
+          <label class="text-[10px] uppercase font-bold text-gold tracking-wider mb-1"><i class="fa-solid fa-bed mr-1"></i> Room Type</label>
+          <select id="hero-room-type" class="bg-transparent text-sm font-semibold outline-none text-luxury-charcoal focus:text-gold cursor-pointer">
+            <option value="Deluxe King Size Bed" class="bg-[#0b0c16]">Deluxe King Size (2 Guests)</option>
+            <option value="Super Deluxe 4 Bed Room" class="bg-[#0b0c16]">Super Deluxe (4 Guests)</option>
+          </select>
+        </div>
+
+        <div class="flex-1 flex flex-col pr-4 pl-2">
+          <label class="text-[10px] uppercase font-bold text-gold tracking-wider mb-1"><i class="fa-solid fa-users mr-1"></i> Guests</label>
+          <select id="hero-guests" class="bg-transparent text-sm font-semibold outline-none text-luxury-charcoal focus:text-gold cursor-pointer">
+            <option value="1 Guest" class="bg-[#0b0c16]">1 Guest</option>
+            <option value="2 Guests" class="bg-[#0b0c16]">2 Guests</option>
+            <option value="3 Guests" class="bg-[#0b0c16]">3 Guests</option>
+            <option value="4 Guests" class="bg-[#0b0c16]">4 Guests</option>
+            <option value="5+ Guests" class="bg-[#0b0c16]">5+ Guests</option>
+          </select>
+        </div>
+
+        <button onclick="triggerDirectHeroBooking()" class="px-8 py-4 rounded-xl bg-gold-gradient text-white text-xs font-bold uppercase tracking-widest hover:shadow-lg hover:shadow-gold-glow shine-effect transition-all duration-300">
+          Book Now
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Welcome / About Section -->
+  <section class="py-8 md:py-20 bg-[#0d0f18] overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-12 items-center">
+        
+        <!-- Left Side: Image collage -->
+        <div class="lg:col-span-6 grid grid-cols-12 gap-4 relative" data-aos="fade-right" data-aos-duration="1200">
+          <div class="col-span-8 relative">
+            <img src="Rooms images/all.jpg" alt="Luxury Hotel Balcony View" class="rounded-2xl shadow-xl w-full h-[320px] object-cover gold-border-glow" />
+            <div class="absolute -bottom-6 -left-6 bg-gold-gradient text-luxury-charcoal p-5 rounded-2xl shadow-lg hidden sm:block text-center font-title border border-white/20">
+              <span class="block text-3xl font-black">5★</span>
+              <span class="text-xs uppercase tracking-wider font-semibold">Puri Resort</span>
+            </div>
+          </div>
+          <div class="col-span-4 self-end space-y-4">
+            <img src="Rooms images/master_kitchen.jpg" alt="Veg & Non-Veg Culinary Dining" class="rounded-2xl shadow-lg w-full h-[180px] object-cover gold-border-glow" />
+            <img src="Rooms images/Deluxe 4 Bed 2.jpg" alt="Premium Room Interior" class="rounded-2xl shadow-lg w-full h-[120px] object-cover gold-border-glow" />
+          </div>
+        </div>
+
+        <!-- Right Side: Narrative -->
+        <div class="lg:col-span-6 space-y-6" data-aos="fade-left" data-aos-duration="1200">
+          <div class="space-y-2">
+            <span class="text-gold font-bold uppercase tracking-[0.25em] text-xs"><i class="fa-solid fa-hotel mr-1"></i> Welcome to Paradise</span>
+            <h2 class="font-title text-3xl md:text-4xl font-bold tracking-wider leading-tight text-luxury-charcoal">
+              A Royal Oasis in the Sacred Town of <span class="text-gold-gradient">Puri</span>
+            </h2>
+          </div>
+          <div class="w-20 h-1 bg-gold rounded-full"></div>
+          <p class="text-gray-300 font-light leading-relaxed">
+            Puri Sand Resort & Hotel stands as a landmark of pristine elegance and top-tier luxury. Our state-of-the-art **4-floor building** is crafted for travelers searching for comfort, tranquility, and divine proximity.
+          </p>
+
+          <!-- Core stats grid -->
+          <div class="grid grid-cols-2 gap-6 py-4">
+            <div class="flex items-start space-x-3">
+              <div class="p-3 bg-gold/10 rounded-xl text-gold"><i class="fa-solid fa-umbrella-beach text-xl"></i></div>
+              <div>
+                <h4 class="font-title font-bold text-sm tracking-wide text-luxury-charcoal">700m To Beach</h4>
+                <p class="text-xs text-gray-400 font-light">Walk to Golden Puri Beach in minutes.</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <div class="p-3 bg-gold/10 rounded-xl text-gold"><i class="fa-solid fa-gopuram text-xl"></i></div>
+              <div>
+                <h4 class="font-title font-bold text-sm tracking-wide text-luxury-charcoal">1km To Mandir</h4>
+                <p class="text-xs text-gray-400 font-light">Convenient Jagannath Mandir access.</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <div class="p-3 bg-gold/10 rounded-xl text-gold"><i class="fa-solid fa-bell text-xl"></i></div>
+              <div>
+                <h4 class="font-title font-bold text-sm tracking-wide text-luxury-charcoal">24/7 Room Service</h4>
+                <p class="text-xs text-gray-400 font-light">Elegantly served premium meals.</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <div class="p-3 bg-gold/10 rounded-xl text-gold"><i class="fa-solid fa-wifi text-xl"></i></div>
+              <div>
+                <h4 class="font-title font-bold text-sm tracking-wide text-luxury-charcoal">Free High-Speed WiFi</h4>
+                <p class="text-xs text-gray-400 font-light">Stay connected at blazing speeds.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 flex flex-wrap gap-4">
+            <a href="about" class="px-6 py-3 rounded-full bg-gold-gradient text-white text-xs font-semibold uppercase tracking-wider hover:shadow-lg transition-all duration-300">
+              Read Our Full Story
+            </a>
+            <a href="tel:+919437752000" class="px-6 py-3 rounded-full border border-gold/30 hover:border-gold text-gold text-xs font-semibold uppercase tracking-wider transition-all duration-300 flex items-center gap-2">
+              <i class="fa-solid fa-phone"></i> Call Desk
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Luxury Features Overview -->
+  <section class="py-8 md:py-20 bg-[#080912]/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div class="p-8 rounded-3xl border border-gold/20 bg-[#0d0f18] text-center space-y-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="w-12 h-12 rounded-full bg-gold/10 text-gold flex items-center justify-center mx-auto text-xl"><i class="fa-solid fa-hotel"></i></div>
+          <h3 class="font-title font-bold text-lg text-luxury-charcoal">Architectural Splendor</h3>
+          <p class="text-xs text-gray-400 font-light leading-relaxed">
+            Beautiful 4-floor modern complex featuring gold-gilded balconies, custom elevators, and wide corridors decorated with premium coastal art.
+          </p>
+          <a href="about" class="inline-block text-xs font-bold text-gold hover:text-gold-dark">Learn More &rarr;</a>
+        </div>
+
+        <div class="p-8 rounded-3xl border border-gold/20 bg-[#0d0f18] text-center space-y-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="w-12 h-12 rounded-full bg-gold/10 text-gold flex items-center justify-center mx-auto text-xl"><i class="fa-solid fa-bed"></i></div>
+          <h3 class="font-title font-bold text-lg text-luxury-charcoal">Bespoke Suites</h3>
+          <p class="text-xs text-gray-400 font-light leading-relaxed">
+            Our Deluxe and Super Deluxe suites represent premium comfort. Fitted with custom AC, smart TVs, tea makers, and private balconies.
+          </p>
+          <a href="rooms" class="inline-block text-xs font-bold text-gold hover:text-gold-dark">Explore Rooms &rarr;</a>
+        </div>
+
+        <div class="p-8 rounded-3xl border border-gold/20 bg-[#0d0f18] text-center space-y-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="w-12 h-12 rounded-full bg-gold/10 text-gold flex items-center justify-center mx-auto text-xl"><i class="fa-solid fa-plate-wheat"></i></div>
+          <h3 class="font-title font-bold text-lg text-luxury-charcoal">Gourmet Dining</h3>
+          <p class="text-xs text-gray-400 font-light leading-relaxed">
+            Indulge in delicious local cuisines. In-house Veg and Non-veg master chefs serving hot premium delicacies 24 hours a day.
+          </p>
+          <a href="amenities" class="inline-block text-xs font-bold text-gold hover:text-gold-dark">See Menu &rarr;</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Rooms Taster Section -->
+  <section class="py-8 md:py-20 bg-[#0d0f18]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 md:mb-16 gap-4">
+        <div class="space-y-2">
+          <span class="text-gold font-bold uppercase tracking-[0.25em] text-xs"><i class="fa-solid fa-star mr-1"></i> Stay In Style</span>
+          <h2 class="font-title text-3xl md:text-4xl font-bold tracking-wider text-luxury-charcoal">Featured Accommodations</h2>
+        </div>
+        <a href="rooms" class="px-6 py-3 rounded-full bg-gold-gradient text-white text-xs font-semibold uppercase tracking-wider shadow hover:scale-105 transition-all duration-300">
+          View All Rooms & Suite Options
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-10">
+        
+        <!-- Deluxe Room Preview Card -->
+        <div class="rounded-3xl overflow-hidden bg-[#080912]/50 shadow-lg border border-gold/20 flex flex-col justify-between group hover:border-gold/30 transition-all duration-300" data-aos="fade-up">
+          <img src="Rooms images/Deluxe King Size Bed Room.jpg" alt="Deluxe Room Preview" class="w-full h-[250px] object-cover group-hover:scale-102 transition-transform duration-500" />
+          <div class="p-6 md:p-8 space-y-4">
+            <h3 class="font-title font-bold text-xl text-luxury-charcoal">Deluxe King Size Bed Room</h3>
+            <p class="text-xs text-gray-400 font-light">Fit for 2 Adults. Double Bed configuration featuring private balcony, wardrobe, split AC, and premium TV services. 2 free bottles of packaged water included.</p>
+            <div class="flex justify-between items-center pt-4 border-t border-gold/20">
+              <span class="text-xs font-semibold uppercase text-gold tracking-wider"><i class="fa-solid fa-users mr-1"></i> Max 2 Adults</span>
+              <button onclick="openBookingModal('Deluxe King Size Bed')" class="px-5 py-2.5 rounded-xl bg-gold-gradient text-white text-xs font-bold uppercase tracking-wider">Book Deluxe</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Super Deluxe Preview Card -->
+        <div class="rounded-3xl overflow-hidden bg-[#080912]/50 shadow-lg border border-gold/20 flex flex-col justify-between group hover:border-gold/30 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+          <img src="Rooms images/Super Deluxe 4 Bed Room.jpg" alt="Super Deluxe Suite Preview" class="w-full h-[250px] object-cover group-hover:scale-102 transition-transform duration-500" />
+          <div class="p-6 md:p-8 space-y-4">
+            <h3 class="font-title font-bold text-xl text-luxury-charcoal">Super Deluxe 4 Bed Room</h3>
+            <p class="text-xs text-gray-400 font-light">Expansive Family suite featuring 2 grand King Size beds (fits 4 adults). Couple & family friendly atmosphere with dedicated sitting space and customized kitchen service.</p>
+            <div class="flex justify-between items-center pt-4 border-t border-gold/20">
+              <span class="text-xs font-semibold uppercase text-gold tracking-wider"><i class="fa-solid fa-users-rays mr-1"></i> Max 4 Adults</span>
+              <button onclick="openBookingModal('Super Deluxe 4 Bed Room')" class="px-5 py-2.5 rounded-xl bg-gold-gradient text-white text-xs font-bold uppercase tracking-wider">Book Super Deluxe</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Gallery Grid Teaser -->
+  <section class="py-8 md:py-20 bg-[#080912]/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-6 md:mb-16 space-y-2" data-aos="fade-up">
+        <span class="text-gold font-bold uppercase tracking-[0.25em] text-xs">Coastal Sanctuary</span>
+        <h2 class="font-title text-3xl font-bold tracking-wider">Visual Grandeur</h2>
+        <div class="w-16 h-1 bg-gold mx-auto rounded-full"></div>
+      </div>
+
+      <!-- Swiper Gallery -->
+      <div class="swiper gallery-swiper h-[300px] md:h-[400px]">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide rounded-2xl overflow-hidden shadow border border-gold/20">
+            <img src="Rooms images/Deluxe 4 Bed.jpg" alt="Gallery Room 1" class="w-full h-full object-cover" />
+          </div>
+          <div class="swiper-slide rounded-2xl overflow-hidden shadow border border-gold/20">
+            <img src="Rooms images/Deluxe 4 Bed 2.jpg" alt="Gallery Room 2" class="w-full h-full object-cover" />
+          </div>
+          <div class="swiper-slide rounded-2xl overflow-hidden shadow border border-gold/20">
+            <img src="Rooms images/IMG_20260808_215150.jpg" alt="Gallery Bathroom" class="w-full h-full object-cover" />
+          </div>
+          <div class="swiper-slide rounded-2xl overflow-hidden shadow border border-gold/20">
+            <img src="Rooms images/IMG_20260808_215220.jpg" alt="Gallery Food tray" class="w-full h-full object-cover" />
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location Map Details Teaser -->
+  <section class="py-8 md:py-20 bg-[#0d0f18]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 items-center">
+        
+        <div class="space-y-6" data-aos="fade-right">
+          <span class="text-gold font-bold uppercase tracking-[0.25em] text-xs"><i class="fa-solid fa-location-dot"></i> Prime Spot</span>
+          <h2 class="font-title text-3xl font-bold tracking-wider leading-tight">700m to Puri Beach & <br>1km to Jagannath Mandir</h2>
+          <p class="text-sm text-gray-400 font-light leading-relaxed">
+            Our luxury hotel coordinates place you right at the heart of Puri's spiritual and natural beauty. Easily walk to the golden sands of Puri beach or catch an auto-rickshaw to the sacred Shree Jagannath Temple.
+          </p>
+          <div class="pt-4 flex flex-wrap gap-4">
+            <a href="location" class="px-6 py-3.5 rounded-xl bg-gold-gradient text-white text-xs font-bold uppercase tracking-widest shadow">Open Directions Map</a>
+            <a href="https://www.google.com/maps?q=19.7964821,85.8151437&z=17&hl=en" target="_blank" class="px-6 py-3.5 rounded-xl border border-gold/30 hover:border-gold text-gold text-xs font-bold uppercase tracking-widest">Open Google Maps Link &rarr;</a>
+          </div>
+        </div>
+
+        <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-gold/25 h-[300px] md:h-[380px]" data-aos="fade-left">
+          <iframe 
+            src="https://maps.google.com/maps?q=19.7964821,85.8151437&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+            class="w-full h-full" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy">
+          </iframe>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Luxury Footer -->
+  <footer class="bg-[#050508] text-gray-400 pt-10 pb-6 md:pt-16 md:pb-8 border-t-2 border-gold/25 relative overflow-hidden">
+    <div class="absolute -right-20 -bottom-20 w-60 h-60 rounded-full bg-gold/5 blur-3xl"></div>
+    <div class="absolute -left-20 -top-20 w-60 h-60 rounded-full bg-gold/5 blur-3xl"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-12 gap-5 md:gap-10 border-b border-gold/20 pb-12">
+      <div class="col-span-2 md:col-span-5 space-y-6 text-center md:text-left">
+        <a href="./" class="flex items-center justify-center md:justify-start">
+          <img src="./main logo.png" alt="Puri Sand Logo" class="h-16 w-auto object-contain brightness-110 transition-transform duration-500 hover:scale-105" />
+        </a>
+        <p class="text-xs font-light leading-relaxed max-w-sm mx-auto md:mx-0">
+          Experiencing luxury has a new address in Puri. Offering custom 5-star amenities, pure culinary excellence, and a peaceful environment close to the ocean.
+        </p>
+        <div class="flex justify-center md:justify-start space-x-4">
+          <a href="#" class="w-8 h-8 rounded-full border border-gold/20 flex items-center justify-center text-gold hover:bg-gold-gradient hover:text-luxury-charcoal hover:border-gold transition-all duration-300"><i class="fa-brands fa-facebook-f text-xs"></i></a>
+          <a href="#" class="w-8 h-8 rounded-full border border-gold/20 flex items-center justify-center text-gold hover:bg-gold-gradient hover:text-luxury-charcoal hover:border-gold transition-all duration-300"><i class="fa-brands fa-instagram text-xs"></i></a>
+          <a href="#" class="w-8 h-8 rounded-full border border-gold/20 flex items-center justify-center text-gold hover:bg-gold-gradient hover:text-luxury-charcoal hover:border-gold transition-all duration-300"><i class="fa-brands fa-x-twitter text-xs"></i></a>
+        </div>
+      </div>
+
+      <div class="col-span-1 md:col-span-3 space-y-4">
+        <h4 class="font-title font-bold text-sm tracking-widest text-gold uppercase">Quick Menu</h4>
+        <ul class="space-y-2 text-xs font-light">
+          <li><a href="./" class="hover:text-gold transition-colors duration-300">Home Base</a></li>
+          <li><a href="about" class="hover:text-gold transition-colors duration-300">Resort Story</a></li>
+          <li><a href="rooms" class="hover:text-gold transition-colors duration-300">Luxury Rooms</a></li>
+          <li><a href="amenities" class="hover:text-gold transition-colors duration-300">Our Services</a></li>
+          <li><a href="reviews" class="hover:text-gold transition-colors duration-300">Verified Reviews</a></li>
+          <li><a href="location" class="hover:text-gold transition-colors duration-300">Get Directions</a></li>
+        </ul>
+      </div>
+
+      <div class="col-span-1 md:col-span-4 space-y-4">
+        <h4 class="font-title font-bold text-sm tracking-widest text-gold uppercase">Contact Details</h4>
+        <ul class="space-y-3 text-xs font-light">
+          <li class="flex items-start space-x-2.5">
+            <i class="fa-solid fa-map-pin text-gold mt-0.5"></i>
+            <span>Puri Sand Resort & Hotel, Near Puri Golden Beach, Puri, Odisha, India - 752001</span>
+          </li>
+          <li class="flex items-start space-x-2.5">
+            <i class="fa-solid fa-phone text-gold mt-1"></i>
+            <div class="flex flex-col">
+              <a href="tel:+919437752000" class="hover:text-gold transition-colors">+91 9437752000</a>
+              <a href="tel:+919040082000" class="hover:text-gold transition-colors">+91 9040082000</a>
+            </div>
+          </li>
+          <li class="flex items-start space-x-2.5">
+            <i class="fa-brands fa-whatsapp text-gold mt-1"></i>
+            <div class="flex flex-col">
+              <a href="https://wa.me/919437752000" target="_blank" class="hover:text-gold transition-colors">Book via WhatsApp (Desk 1)</a>
+              <a href="https://wa.me/919040082000" target="_blank" class="hover:text-gold transition-colors">Book via WhatsApp (Desk 2)</a>
+            </div>
+          </li>
+          <li class="flex items-center space-x-2.5">
+            <i class="fa-solid fa-envelope text-gold"></i>
+            <span>stay@purisandresort.com</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-gray-400 font-light tracking-wide text-center">
+      <div>
+        &copy; 2026 Puri Sand Resort & Hotel. All Rights Reserved. Designed to 5-Star Premium Specifications.
+      </div>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="./" class="hover:text-gold">Best Luxury Hotels Puri</a>
+        <span>|</span>
+        <a href="rooms" class="hover:text-gold">Family Suites Puri Beach</a>
+        <span>|</span>
+        <a href="location" class="hover:text-gold">Hotels Near Jagannath Temple</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating booking buttons -->
+  <div class="fixed bottom-6 right-6 z-40 hidden md:flex flex-col space-y-3">
+    <a href="tel:+919437752000" class="w-12 h-12 rounded-full bg-gold text-luxury-charcoal shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-300 pulse-gold border border-white/20"><i class="fa-solid fa-phone text-lg"></i></a>
+    <button onclick="openBookingModal()" class="w-14 h-14 rounded-full bg-green-950/200 text-white shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-300 pulse-gold border-2 border-white/20"><i class="fa-brands fa-whatsapp text-3xl"></i></button>
+  </div>
+
+  <!-- Mobile Only Bottom Navigation Bar -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#050508] backdrop-blur-md border-t border-gold/20 shadow-2xl flex justify-around items-center py-2 px-1">
+    <a href="./" class="mobile-tab-btn flex flex-col items-center justify-center text-[10px] text-gray-400 flex-1 py-1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mb-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+      </svg>
+      <span>Home</span>
+    </a>
+    <a href="rooms" class="mobile-tab-btn flex flex-col items-center justify-center text-[10px] text-gray-400 flex-1 py-1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mb-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+      <span>Rooms</span>
+    </a>
+    <!-- Floating App Booking Button -->
+    <button onclick="openBookingModal()" class="-mt-6 w-14 h-14 rounded-full bg-gold-gradient text-white flex items-center justify-center shadow-lg shadow-gold/40 border-4 border-luxury-white focus:outline-none flex-shrink-0 animate-bounce">
+      <i class="fa-brands fa-whatsapp text-2xl"></i>
+    </button>
+    <a href="amenities" class="mobile-tab-btn flex flex-col items-center justify-center text-[10px] text-gray-400 flex-1 py-1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mb-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+      </svg>
+      <span>Services</span>
+    </a>
+    <a href="location" class="mobile-tab-btn flex flex-col items-center justify-center text-[10px] text-gray-400 flex-1 py-1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mb-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+      <span>Map</span>
+    </a>
+  </div>
+
+  <!-- Booking Modal -->
+  <div id="booking-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-[#080912]/50 rounded-3xl overflow-hidden shadow-2xl border border-gold/35 max-w-md w-full scale-95 transition-all duration-300 ease-out" id="modal-container">
+      
+      <div class="bg-gold-gradient p-6 text-luxury-charcoal relative flex items-center justify-between">
+        <div>
+          <h3 class="font-title font-extrabold text-xl tracking-wider uppercase">Luxury Reservation</h3>
+          <p class="text-[10px] uppercase font-bold tracking-wider opacity-85">Instant WhatsApp Booking Desk</p>
+        </div>
+        <button onclick="closeBookingModal()" class="text-luxury-charcoal hover:text-white transition-colors duration-300 p-1.5 focus:outline-none" aria-label="Close modal">
+          <i class="fa-solid fa-xmark text-2xl"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-4">
+        <div class="flex flex-col">
+          <label class="text-[10px] uppercase font-bold text-gold tracking-wider mb-1"><i class="fa-solid fa-user mr-1"></i> Full Name</label>
+          <input type="text" id="booking-name" placeholder="Enter your full name" class="w-full bg-[#0d0f18] border border-gold/20 rounded-xl px-4 py-2.5 text-sm focus:border-gold focus:outline-none text-luxury-charcoal" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="flex flex-col">
+            <label class="text-[10px] uppercase font-bold text-gold tracking-wider mb-1"><i class="fa-solid fa-calendar-check mr-1"></i> Check In</label>
+            <input type="date" id="booking-checkin" class="bg-[#0d0f18] border border-gold/20 rounded-xl px-4 py-2.5 text-sm focus:border-gold focus:outline-none text-luxury-charcoal" />
+          </div>
+          <div class="flex flex-col">
+            <label class="text-[10px] uppercase font-bold text-gold tracking-wider mb-1"><i class="fa-solid fa-calendar-xmark mr-1"></i> Check Out</label>
+            <input type="date" id="booking-checkout" class="bg-[#0d0f18] border border-gold/20 rounded-xl px-4 py-2.5 text-sm focus:border-gold focus:outline-none text-luxury-charcoal" />
+          </div>
+        </div>
+
+        <div class="flex flex-col">
+          <label class="text-[10px] uppercase font-bold text-gold tracking-wider mb-1"><i class="fa-solid fa-bed mr-1"></i> Room Category</label>
+          <select id="booking-room-type" class="w-full bg-[#0d0f18] border border-gold/20 rounded-xl px-4 py-2.5 text-sm focus:border-gold focus:outline-none text-luxury-charcoal">
+            <option value="Deluxe King Size Bed">Deluxe King Size Bed (Double Bed, 2 Guests)</option>
+            <option value="Super Deluxe 4 Bed Room">Super Deluxe 4 Bed Room (2 King Beds, 4 Guests)</option>
+          </select>
+        </div>
+
+        <div class="flex flex-col">
+          <label class="text-[10px] uppercase font-bold text-gold tracking-wider mb-1"><i class="fa-solid fa-headset mr-1"></i> Booking Desk</label>
+          <select id="booking-desk" class="w-full bg-[#0d0f18] border border-gold/20 rounded-xl px-4 py-2.5 text-sm focus:border-gold focus:outline-none text-luxury-charcoal">
+            <option value="9437752000">Booking Desk 1 (+91 9437752000)</option>
+            <option value="9040082000">Booking Desk 2 (+91 9040082000)</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="flex flex-col">
+            <label class="text-[10px] uppercase font-bold text-gold tracking-wider mb-1"><i class="fa-solid fa-users mr-1"></i> Adults</label>
+            <select id="booking-adults" class="bg-[#0d0f18] border border-gold/20 rounded-xl px-4 py-2.5 text-sm focus:border-gold focus:outline-none text-luxury-charcoal">
+              <option value="1">1 Adult</option>
+              <option value="2" selected>2 Adults</option>
+              <option value="3">3 Adults</option>
+              <option value="4">4 Adults</option>
+              <option value="5+">5+ Adults</option>
+            </select>
+          </div>
+          <div class="flex flex-col">
+            <label class="text-[10px] uppercase font-bold text-gold tracking-wider mb-1"><i class="fa-solid fa-child mr-1"></i> Children</label>
+            <select id="booking-children" class="bg-[#0d0f18] border border-gold/20 rounded-xl px-4 py-2.5 text-sm focus:border-gold focus:outline-none text-luxury-charcoal">
+              <option value="0" selected>0 Children</option>
+              <option value="1">1 Child</option>
+              <option value="2">2 Children</option>
+              <option value="3+">3+ Children</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="p-3 bg-gold/5 border border-gold/25 rounded-2xl text-[11px] text-gray-300 flex items-start gap-2">
+          <i class="fa-solid fa-circle-info text-gold mt-0.5 text-xs"></i>
+          <div>
+            Booking request details will be sent directly to the selected WhatsApp Desk (+91 9437752000 or +91 9040082000). No payment is required right now.
+          </div>
+        </div>
+
+        <button onclick="sendWhatsAppBooking()" class="w-full py-4 rounded-xl bg-gold-gradient text-luxury-charcoal font-bold text-xs uppercase tracking-widest shadow-xl hover:shadow-gold-glow flex items-center justify-center gap-2 shine-effect transition-all duration-300">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Confirm Booking on WhatsApp
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

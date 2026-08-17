@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@200;300;400;500;600;700&display=swap');
+
+:root {
+  --color-gold-light: #F4E0A5;
+  --color-gold: #D4AF37;
+  --color-gold-dark: #AA7C11;
+  --color-gold-deep: #8C6A1A;
+  --color-gold-glow: rgba(212, 175, 55, 0.4);
+  --color-charcoal: #FAF8F5; /* Soft light text for dark mode */
+  --color-luxury-white: #050508; /* Dark base */
+  --color-soft-bg: #090a12;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  background-color: var(--color-luxury-white);
+}
+
+@keyframes gradient-bg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--color-charcoal);
+  background: linear-gradient(-45deg, #050508 0%, #0a0e1e 35%, #060812 70%, #0e111d 100%);
+  background-size: 400% 400%;
+  animation: gradient-bg 12s ease infinite;
+}
+
+/* Headings Custom Font */
+.font-luxury-title {
+  font-family: 'Cinzel', serif;
+}
+
+/* Golden Gradient Effects */
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #F4E0A5 0%, #D4AF37 50%, #AA7C11 100%);
+}
+
+.bg-gold-gradient-soft {
+  background: linear-gradient(135deg, #050508 0%, #0c0f1d 100%);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #AA7C11 0%, #D4AF37 50%, #F4E0A5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Luxury Glassmorphism - DARK MODE */
+.glass-premium {
+  background: rgba(5, 5, 8, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.glass-premium-dark {
+  background: rgba(5, 5, 8, 0.96);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* Premium Border Golden Glow */
+.gold-border-glow {
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gold-border-glow:hover {
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.35);
+  border-color: rgba(212, 175, 55, 0.7);
+  transform: translateY(-4px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090a14;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-dark);
+}
+
+/* Swiper Customize */
+.swiper-pagination-bullet-active {
+  background: var(--color-gold) !important;
+  width: 24px !important;
+  border-radius: 4px !important;
+}
+
+.swiper-pagination-bullet {
+  background: #555555;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  color: var(--color-gold) !important;
+}
+
+/* Luxury Float Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes gold-shine {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.shine-effect {
+  background-size: 200% auto;
+  animation: gold-shine 3s linear infinite;
+}
+
+/* App Bottom Navigation Specifics */
+.active-nav-tab {
+  color: var(--color-gold) !important;
+}
+
+.active-nav-tab svg {
+  stroke: var(--color-gold) !important;
+  fill: rgba(212, 175, 55, 0.1);
+  transform: scale(1.1);
+}
+
+.active-nav-tab span {
+  font-weight: 600;
+}
+
+/* Custom Hero Mask Overlay */
+.hero-overlay {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(5, 5, 8, 0.9) 100%);
+}
+
+/* Smooth Navigation Triggers */
+.nav-link-underline {
+  position: relative;
+}
+
+.nav-link-underline::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--color-gold);
+  transition: width 0.3s ease;
+}
+
+.nav-link-underline:hover::after {
+  width: 100%;
+}
+
+/* Luxury Badge Pulse */
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6); }
+  70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+}
+
+.pulse-gold {
+  animation: pulse-glow 2s infinite;
+}
+
+/* Quick Page Toggles for App-like Tabs */
+.app-section {
+  display: none;
+}
+
+.app-section.active {
+  display: block;
+}
+
+/* Mobile responsive bottom space for tab bar */
+@media (max-width: 768px) {
+  .mobile-bottom-spacing {
+    padding-bottom: 80px;
+  }
+}
+
+/* Unique Sandglass Preloader Styles */
+@keyframes spin-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+@keyframes hourglass-rotate {
+  0%, 90% { transform: rotate(0deg); }
+  95%, 100% { transform: rotate(180deg); }
+}
+
+.hourglass-animation {
+  animation: hourglass-rotate 4s ease-in-out infinite;
+}
+
+/* Sand animation effects */
+@keyframes sand-fall-top {
+  0%, 10% { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); }
+  90%, 100% { clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%); }
+}
+
+@keyframes sand-pile-bottom {
+  0%, 10% { transform: scaleY(0.1); transform-origin: bottom; }
+  90%, 100% { transform: scaleY(1); transform-origin: bottom; }
+}
+
+@keyframes sand-line {
+  0%, 10% { stroke-dashoffset: 0; opacity: 0; }
+  15%, 85% { stroke-dashoffset: 20; opacity: 1; }
+  90%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+.sand-top {
+  animation: sand-fall-top 4s ease-in-out infinite;
+}
+
+.sand-stream {
+  animation: sand-line 4s linear infinite;
+  animation-delay: 0.2s;
+}
+
+.sand-bottom {
+  animation: sand-pile-bottom 4s ease-in-out infinite;
+}
