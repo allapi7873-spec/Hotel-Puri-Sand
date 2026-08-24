@@ -336,6 +336,7 @@
     let productPriceMap = {};
     let previousOrderCount = -1;
     let orderPollInterval = null;
+    let lastRenderedOrdersJSON = '';
 
     const catNames = {
         'breakfast-snacks': '🍳 Breakfast & Snacks',
@@ -455,6 +456,12 @@
             }
 
             if (data.success && data.orders.length > 0) {
+                const newOrdersJSON = JSON.stringify(data.orders);
+                if (isBackground && newOrdersJSON === lastRenderedOrdersJSON) {
+                    return; // No changes, skip DOM update
+                }
+                lastRenderedOrdersJSON = newOrdersJSON;
+
                 if (previousOrderCount !== -1 && data.orders.length > previousOrderCount) {
                     const sound = document.getElementById('newOrderSound');
                     if (sound) {
