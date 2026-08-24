@@ -859,7 +859,7 @@ body:not(.loading) .preloader-content { opacity: 0; }
 ========================================= */
 @media (max-width: 768px) {
     /* Base Resets */
-    html, 
+    html, body { overflow-x: hidden; }
 
     /* Hide entire navbar on mobile, show mobile bottom nav */
     
@@ -1065,5 +1065,6 @@ body:not(.loading) .preloader-content { opacity: 0; }
     line-height: 1.5;
     color: var(--text-muted);
 }
+
 
 
