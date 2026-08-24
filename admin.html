@@ -44,13 +44,17 @@
     <div id="loginScreen" class="flex-1 w-full flex items-center justify-center p-4">
         <div class="glass-panel p-8 rounded-2xl max-w-sm w-full text-center">
             <i class="fa-solid fa-crown text-gold text-4xl mb-4"></i>
-            <h1 class="font-title text-2xl text-gold mb-6">Admin Login</h1>
+            <h1 class="font-title text-2xl text-gold mb-2">Admin Login</h1>
+            <p class="text-gray-500 text-xs mb-6">Hotel Puri Sands Management</p>
+            <input type="text" id="adminUsername" placeholder="Enter Username" 
+                   class="w-full bg-black/50 border border-gold/30 rounded-lg px-4 py-3 mb-3 text-white focus:outline-none focus:border-gold">
             <input type="password" id="adminPassword" placeholder="Enter Password" 
-                   class="w-full bg-black/50 border border-gold/30 rounded-lg px-4 py-3 mb-4 text-white focus:outline-none focus:border-gold">
+                   class="w-full bg-black/50 border border-gold/30 rounded-lg px-4 py-3 mb-4 text-white focus:outline-none focus:border-gold"
+                   onkeydown="if(event.key==='Enter') login()">
             <button onclick="login()" class="w-full bg-gold-gradient text-black font-bold py-3 rounded-lg hover:opacity-90 transition">
-                Access Dashboard
+                <i class="fa-solid fa-right-to-bracket mr-2"></i>Access Dashboard
             </button>
-            <p id="loginError" class="text-red-500 text-sm mt-3 hidden">Incorrect Password!</p>
+            <p id="loginError" class="text-red-500 text-sm mt-3 hidden">Incorrect Username or Password!</p>
         </div>
     </div>
 
@@ -132,8 +136,9 @@
 
         // --- Login Logic ---
         function login() {
+            const user = document.getElementById('adminUsername').value.trim();
             const pwd = document.getElementById('adminPassword').value;
-            if (pwd === 'admin123') { // Simple password
+            if (user === 'admin' && pwd === 'admin') { // Admin credentials
                 document.getElementById('loginScreen').classList.add('hidden');
                 document.getElementById('dashboardScreen').classList.remove('hidden');
                 fetchData();
@@ -143,7 +148,9 @@
         }
 
         function logout() {
+            document.getElementById('adminUsername').value = '';
             document.getElementById('adminPassword').value = '';
+            document.getElementById('loginError').classList.add('hidden');
             document.getElementById('loginScreen').classList.remove('hidden');
             document.getElementById('dashboardScreen').classList.add('hidden');
         }
