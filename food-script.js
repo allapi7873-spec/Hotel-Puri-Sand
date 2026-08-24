@@ -3,13 +3,962 @@
 // =========================================
 
 // Full Menu Data
-const products = [];
+const products = [
+    {
+        "name": "Bread Toast with Butter & Jam",
+        "price": 50,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Breakfast",
+        "id": 1
+    },
+    {
+        "name": "Veg Sandwich",
+        "price": 60,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Breakfast",
+        "id": 2
+    },
+    {
+        "name": "Chicken Sandwich",
+        "price": 70,
+        "type": "non-veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Breakfast",
+        "id": 3
+    },
+    {
+        "name": "Cheese Sandwich",
+        "price": 80,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Breakfast",
+        "id": 4
+    },
+    {
+        "name": "Poori Bhaji",
+        "price": 70,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Breakfast",
+        "id": 5
+    },
+    {
+        "name": "Aloo Paratha (Served with Curd & Pickle)",
+        "price": 70,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Breakfast",
+        "id": 6
+    },
+    {
+        "name": "Gobi Paratha (Served with Curd & Pickle)",
+        "price": 70,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Breakfast",
+        "id": 7
+    },
+    {
+        "name": "Paneer Paratha (Served with Curd & Pickle)",
+        "price": 90,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Breakfast",
+        "id": 8
+    },
+    {
+        "name": "Plain Paratha with Aloo Dum",
+        "price": 80,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Breakfast",
+        "id": 9
+    },
+    {
+        "name": "Idly / Poha (Served with Sambar & Chutney)",
+        "price": 70,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Breakfast",
+        "id": 10
+    },
+    {
+        "name": "Cereals with Hot & Cold Milk",
+        "price": 80,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Breakfast",
+        "id": 11
+    },
+    {
+        "name": "Eggs to Order (Omlete/Boiled/Bread Omlete)",
+        "price": 80,
+        "type": "non-veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Breakfast",
+        "id": 12
+    },
+    {
+        "name": "Paneer Chilli",
+        "price": 180,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Snacks",
+        "id": 13
+    },
+    {
+        "name": "Mushroom Chilli",
+        "price": 180,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Snacks",
+        "id": 14
+    },
+    {
+        "name": "Chicken Chilli",
+        "price": 220,
+        "type": "non-veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Snacks",
+        "id": 15
+    },
+    {
+        "name": "Assorted Veg Pakoda",
+        "price": 120,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Snacks",
+        "id": 16
+    },
+    {
+        "name": "Gobi/Onion/Mushroom/Paneer Pakoda",
+        "price": 150,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Snacks",
+        "id": 17
+    },
+    {
+        "name": "Egg Pakoda",
+        "price": 100,
+        "type": "non-veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Snacks",
+        "id": 18
+    },
+    {
+        "name": "Chicken Pakoda",
+        "price": 180,
+        "type": "non-veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Snacks",
+        "id": 19
+    },
+    {
+        "name": "Prawn Pakoda",
+        "price": 280,
+        "type": "non-veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Snacks",
+        "id": 20
+    },
+    {
+        "name": "Finger Chips",
+        "price": 100,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Snacks",
+        "id": 21
+    },
+    {
+        "name": "Dry Chana",
+        "price": 130,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Snacks",
+        "id": 22
+    },
+    {
+        "name": "Peanuts Masala",
+        "price": 100,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Snacks",
+        "id": 23
+    },
+    {
+        "name": "Paneer 65",
+        "price": 170,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Snacks",
+        "id": 24
+    },
+    {
+        "name": "Boil Corn Chaat",
+        "price": 100,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Snacks",
+        "id": 25
+    },
+    {
+        "name": "Dry Papad",
+        "price": 25,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Snacks",
+        "id": 26
+    },
+    {
+        "name": "Fry Papad",
+        "price": 30,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Snacks",
+        "id": 27
+    },
+    {
+        "name": "Masala Papad",
+        "price": 35,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Snacks",
+        "id": 28
+    },
+    {
+        "name": "Fish Fry",
+        "price": 130,
+        "type": "non-veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Snacks",
+        "id": 29
+    },
+    {
+        "name": "Veg Roll",
+        "price": 110,
+        "type": "veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Snacks",
+        "id": 30
+    },
+    {
+        "name": "Non-Veg Roll",
+        "price": 149,
+        "type": "non-veg",
+        "category": "breakfast-snacks",
+        "subCategory": "Snacks",
+        "id": 31
+    },
+    {
+        "name": "Ready Made Tea",
+        "price": 20,
+        "type": "veg",
+        "category": "soup-beverage",
+        "subCategory": "Beverages",
+        "id": 32
+    },
+    {
+        "name": "Masala/Black/Lemon/Green Tea",
+        "price": 20,
+        "type": "veg",
+        "category": "soup-beverage",
+        "subCategory": "Beverages",
+        "id": 33
+    },
+    {
+        "name": "Coffee",
+        "price": 25,
+        "type": "veg",
+        "category": "soup-beverage",
+        "subCategory": "Beverages",
+        "id": 34
+    },
+    {
+        "name": "Black Coffee",
+        "price": 30,
+        "type": "veg",
+        "category": "soup-beverage",
+        "subCategory": "Beverages",
+        "id": 35
+    },
+    {
+        "name": "Hot Milk / Cold Milk",
+        "price": 50,
+        "type": "veg",
+        "category": "soup-beverage",
+        "subCategory": "Beverages",
+        "id": 36
+    },
+    {
+        "name": "Hot Chocolate / Horlicks / Bournvita",
+        "price": 100,
+        "type": "veg",
+        "category": "soup-beverage",
+        "subCategory": "Beverages",
+        "id": 37
+    },
+    {
+        "name": "Plain Cold Drink",
+        "price": 30,
+        "type": "veg",
+        "category": "soup-beverage",
+        "subCategory": "Beverages",
+        "id": 38
+    },
+    {
+        "name": "Masala Cold Drink",
+        "price": 40,
+        "type": "veg",
+        "category": "soup-beverage",
+        "subCategory": "Beverages",
+        "id": 39
+    },
+    {
+        "name": "Juice (Canned / Fresh)",
+        "price": 70,
+        "type": "veg",
+        "category": "soup-beverage",
+        "subCategory": "Beverages",
+        "id": 40
+    },
+    {
+        "name": "Mineral Water",
+        "price": 20,
+        "type": "veg",
+        "category": "soup-beverage",
+        "subCategory": "Beverages",
+        "id": 41
+    },
+    {
+        "name": "Veg Manchow Soup",
+        "price": 70,
+        "type": "veg",
+        "category": "soup-beverage",
+        "subCategory": "Soup",
+        "id": 42
+    },
+    {
+        "name": "Non-Veg Manchow Soup",
+        "price": 90,
+        "type": "non-veg",
+        "category": "soup-beverage",
+        "subCategory": "Soup",
+        "id": 43
+    },
+    {
+        "name": "Veg Noodle Soup",
+        "price": 70,
+        "type": "veg",
+        "category": "soup-beverage",
+        "subCategory": "Soup",
+        "id": 44
+    },
+    {
+        "name": "Non-Veg Noodle Soup",
+        "price": 90,
+        "type": "non-veg",
+        "category": "soup-beverage",
+        "subCategory": "Soup",
+        "id": 45
+    },
+    {
+        "name": "Veg Hot & Sour Soup",
+        "price": 70,
+        "type": "veg",
+        "category": "soup-beverage",
+        "subCategory": "Soup",
+        "id": 46
+    },
+    {
+        "name": "Non-Veg Hot & Sour Soup",
+        "price": 90,
+        "type": "non-veg",
+        "category": "soup-beverage",
+        "subCategory": "Soup",
+        "id": 47
+    },
+    {
+        "name": "Veg Sweet Corn Soup",
+        "price": 70,
+        "type": "veg",
+        "category": "soup-beverage",
+        "subCategory": "Soup",
+        "id": 48
+    },
+    {
+        "name": "Non-Veg Sweet Corn Soup",
+        "price": 90,
+        "type": "non-veg",
+        "category": "soup-beverage",
+        "subCategory": "Soup",
+        "id": 49
+    },
+    {
+        "name": "Garden Fresh Green Salad",
+        "price": 50,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Salad & Raita",
+        "id": 50
+    },
+    {
+        "name": "Onion Salad",
+        "price": 25,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Salad & Raita",
+        "id": 51
+    },
+    {
+        "name": "Cuchumbar Salad",
+        "price": 50,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Salad & Raita",
+        "id": 52
+    },
+    {
+        "name": "Chicken Salad",
+        "price": 100,
+        "type": "non-veg",
+        "category": "non-veg-course",
+        "subCategory": "Salad & Raita",
+        "id": 53
+    },
+    {
+        "name": "Mix Raita",
+        "price": 50,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Salad & Raita",
+        "id": 54
+    },
+    {
+        "name": "Onion Raita",
+        "price": 50,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Salad & Raita",
+        "id": 55
+    },
+    {
+        "name": "Boondi Raita",
+        "price": 50,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Salad & Raita",
+        "id": 56
+    },
+    {
+        "name": "Mix Vegetable",
+        "price": 160,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Veg Curry",
+        "id": 57
+    },
+    {
+        "name": "Mushroom (Masala/Kadhai/Dopiyaza/Chilli)",
+        "price": 180,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Veg Curry",
+        "id": 58
+    },
+    {
+        "name": "Paneer (Masala/Kadhai/Dopiyaza/Chilli)",
+        "price": 180,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Veg Curry",
+        "id": 59
+    },
+    {
+        "name": "Veg Manchurian",
+        "price": 150,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Veg Curry",
+        "id": 60
+    },
+    {
+        "name": "Aloo Gobi Masala",
+        "price": 159,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Veg Curry",
+        "id": 61
+    },
+    {
+        "name": "Bhindi Masala / Dopiyaza / Kurkure",
+        "price": 150,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Veg Curry",
+        "id": 62
+    },
+    {
+        "name": "Aloo Bhaji / Mix Bhaji",
+        "price": 120,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Veg Curry",
+        "id": 63
+    },
+    {
+        "name": "Aloo Jeera",
+        "price": 130,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Veg Curry",
+        "id": 64
+    },
+    {
+        "name": "Kalara / Aloo Chips",
+        "price": 120,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Veg Curry",
+        "id": 65
+    },
+    {
+        "name": "Dalma / Santula",
+        "price": 150,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Veg Curry",
+        "id": 66
+    },
+    {
+        "name": "Chana Masala",
+        "price": 150,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Veg Curry",
+        "id": 67
+    },
+    {
+        "name": "Sorisa Baigan",
+        "price": 140,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Veg Curry",
+        "id": 68
+    },
+    {
+        "name": "Dahi Baingan",
+        "price": 120,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Veg Curry",
+        "id": 69
+    },
+    {
+        "name": "Aloo Bharta",
+        "price": 60,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Veg Curry",
+        "id": 70
+    },
+    {
+        "name": "Badi Chura",
+        "price": 60,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Veg Curry",
+        "id": 71
+    },
+    {
+        "name": "Tomato Chutney",
+        "price": 70,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Veg Curry",
+        "id": 72
+    },
+    {
+        "name": "Dahi Pakhala",
+        "price": 90,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Veg Curry",
+        "id": 73
+    },
+    {
+        "name": "Moong Dal",
+        "price": 100,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Veg Curry",
+        "id": 74
+    },
+    {
+        "name": "Aloo Jhuri",
+        "price": 110,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Veg Curry",
+        "id": 75
+    },
+    {
+        "name": "Mutton Curry / Kassa",
+        "price": 300,
+        "type": "non-veg",
+        "category": "non-veg-course",
+        "subCategory": "Non-Veg Curry",
+        "id": 76
+    },
+    {
+        "name": "Prawn Curry / Kassa",
+        "price": 320,
+        "type": "non-veg",
+        "category": "non-veg-course",
+        "subCategory": "Non-Veg Curry",
+        "id": 77
+    },
+    {
+        "name": "Chicken Curry / Kassa",
+        "price": 240,
+        "type": "non-veg",
+        "category": "non-veg-course",
+        "subCategory": "Non-Veg Curry",
+        "id": 78
+    },
+    {
+        "name": "Fish Curry / Tawa / Fry (Bone)",
+        "price": 149,
+        "type": "non-veg",
+        "category": "non-veg-course",
+        "subCategory": "Non-Veg Curry",
+        "id": 79
+    },
+    {
+        "name": "Fish Curry / Tawa / Fry (Boneless)",
+        "price": 199,
+        "type": "non-veg",
+        "category": "non-veg-course",
+        "subCategory": "Non-Veg Curry",
+        "id": 80
+    },
+    {
+        "name": "Machha Chhecha",
+        "price": 149,
+        "type": "non-veg",
+        "category": "non-veg-course",
+        "subCategory": "Non-Veg Curry",
+        "id": 81
+    },
+    {
+        "name": "Egg Masala / Curry / Kassa / Bhurji",
+        "price": 130,
+        "type": "non-veg",
+        "category": "non-veg-course",
+        "subCategory": "Non-Veg Curry",
+        "id": 82
+    },
+    {
+        "name": "Veg Fried Rice (Chili Garlic/Schezwan)",
+        "price": 140,
+        "type": "veg",
+        "category": "rice-roti",
+        "subCategory": "Rice & Noodles",
+        "id": 83
+    },
+    {
+        "name": "Veg Hakka Noodles (Chili Garlic/Schezwan)",
+        "price": 140,
+        "type": "veg",
+        "category": "rice-roti",
+        "subCategory": "Rice & Noodles",
+        "id": 84
+    },
+    {
+        "name": "Chicken Fried Rice (Chili Garlic/Schezwan)",
+        "price": 180,
+        "type": "non-veg",
+        "category": "rice-roti",
+        "subCategory": "Rice & Noodles",
+        "id": 85
+    },
+    {
+        "name": "Chicken Noodles (Chili Garlic/Schezwan)",
+        "price": 180,
+        "type": "non-veg",
+        "category": "rice-roti",
+        "subCategory": "Rice & Noodles",
+        "id": 86
+    },
+    {
+        "name": "Egg Fried Rice (Chili Garlic/Schezwan)",
+        "price": 150,
+        "type": "non-veg",
+        "category": "rice-roti",
+        "subCategory": "Rice & Noodles",
+        "id": 87
+    },
+    {
+        "name": "Egg Noodles (Chili Garlic/Schezwan)",
+        "price": 150,
+        "type": "non-veg",
+        "category": "rice-roti",
+        "subCategory": "Rice & Noodles",
+        "id": 88
+    },
+    {
+        "name": "Prawn Fried Rice (Chili Garlic/Schezwan)",
+        "price": 200,
+        "type": "non-veg",
+        "category": "rice-roti",
+        "subCategory": "Rice & Noodles",
+        "id": 89
+    },
+    {
+        "name": "Prawn Noodles (Chili Garlic/Schezwan)",
+        "price": 200,
+        "type": "non-veg",
+        "category": "rice-roti",
+        "subCategory": "Rice & Noodles",
+        "id": 90
+    },
+    {
+        "name": "Plain Dal",
+        "price": 60,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Dal",
+        "id": 91
+    },
+    {
+        "name": "Dal Fry",
+        "price": 80,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Dal",
+        "id": 92
+    },
+    {
+        "name": "Dal Tadka",
+        "price": 80,
+        "type": "veg",
+        "category": "veg-course",
+        "subCategory": "Dal",
+        "id": 93
+    },
+    {
+        "name": "Egg Dal Tadka",
+        "price": 120,
+        "type": "non-veg",
+        "category": "non-veg-course",
+        "subCategory": "Non-Veg Curry",
+        "id": 94
+    },
+    {
+        "name": "Plain Rice",
+        "price": 60,
+        "type": "veg",
+        "category": "rice-roti",
+        "subCategory": "Rice & Pulao",
+        "id": 95
+    },
+    {
+        "name": "Lemon Rice / Jeera Rice / Veg Pulao",
+        "price": 80,
+        "type": "veg",
+        "category": "rice-roti",
+        "subCategory": "Rice & Pulao",
+        "id": 96
+    },
+    {
+        "name": "Kashmiri Pulao",
+        "price": 90,
+        "type": "veg",
+        "category": "rice-roti",
+        "subCategory": "Rice & Pulao",
+        "id": 97
+    },
+    {
+        "name": "Green Peas Pulao",
+        "price": 90,
+        "type": "veg",
+        "category": "rice-roti",
+        "subCategory": "Rice & Pulao",
+        "id": 98
+    },
+    {
+        "name": "Curd Rice",
+        "price": 80,
+        "type": "veg",
+        "category": "rice-roti",
+        "subCategory": "Rice & Pulao",
+        "id": 99
+    },
+    {
+        "name": "Veg Biriyani",
+        "price": 180,
+        "type": "veg",
+        "category": "rice-roti",
+        "subCategory": "Biryani",
+        "id": 100
+    },
+    {
+        "name": "Chicken Biriyani",
+        "price": 220,
+        "type": "non-veg",
+        "category": "rice-roti",
+        "subCategory": "Biryani",
+        "id": 101
+    },
+    {
+        "name": "Mutton Biriyani",
+        "price": 300,
+        "type": "non-veg",
+        "category": "rice-roti",
+        "subCategory": "Biryani",
+        "id": 102
+    },
+    {
+        "name": "Egg Biriyani",
+        "price": 190,
+        "type": "non-veg",
+        "category": "rice-roti",
+        "subCategory": "Biryani",
+        "id": 103
+    },
+    {
+        "name": "Prawn Biriyani",
+        "price": 380,
+        "type": "non-veg",
+        "category": "rice-roti",
+        "subCategory": "Biryani",
+        "id": 104
+    },
+    {
+        "name": "Chapati",
+        "price": 15,
+        "type": "veg",
+        "category": "rice-roti",
+        "subCategory": "Roti",
+        "id": 105
+    },
+    {
+        "name": "Butter Chapati",
+        "price": 20,
+        "type": "veg",
+        "category": "rice-roti",
+        "subCategory": "Roti",
+        "id": 106
+    },
+    {
+        "name": "Plain Paratha",
+        "price": 30,
+        "type": "veg",
+        "category": "rice-roti",
+        "subCategory": "Roti",
+        "id": 107
+    },
+    {
+        "name": "Lachha Paratha",
+        "price": 40,
+        "type": "veg",
+        "category": "rice-roti",
+        "subCategory": "Roti",
+        "id": 108
+    },
+    {
+        "name": "Hot Gulab Jamun",
+        "price": 50,
+        "type": "veg",
+        "category": "dessert",
+        "subCategory": "Desserts",
+        "id": 109
+    },
+    {
+        "name": "Rassogola",
+        "price": 50,
+        "type": "veg",
+        "category": "dessert",
+        "subCategory": "Desserts",
+        "id": 110
+    },
+    {
+        "name": "Ice Cream (Vanilla/Strawberry)",
+        "price": 70,
+        "type": "veg",
+        "category": "dessert",
+        "subCategory": "Desserts",
+        "id": 111
+    },
+    {
+        "name": "Ice Cream (Butter Scotch/Pista/Chocolate)",
+        "price": 90,
+        "type": "veg",
+        "category": "dessert",
+        "subCategory": "Desserts",
+        "id": 112
+    }
+];
 
+const menuCategories = [
+    {
+        "id": "breakfast-snacks",
+        "name": "\u2615 Breakfast & Snacks",
+        "subs": [
+            "Breakfast",
+            "Snacks"
+        ]
+    },
+    {
+        "id": "soup-beverage",
+        "name": "\ud83e\udd63 Soup & Beverages",
+        "subs": [
+            "Soup",
+            "Beverages"
+        ]
+    },
+    {
+        "id": "veg-course",
+        "name": "\ud83e\udd66 Veg Main Course",
+        "subs": [
+            "Salad & Raita",
+            "Veg Curry",
+            "Dal"
+        ]
+    },
+    {
+        "id": "non-veg-course",
+        "name": "\ud83c\udf57 Non-Veg Main Course",
+        "subs": [
+            "Non-Veg Curry",
+            "Salad & Raita"
+        ]
+    },
+    {
+        "id": "rice-roti",
+        "name": "\ud83c\udf5a Rice, Biryani & Roti",
+        "subs": [
+            "Rice & Noodles",
+            "Rice & Pulao",
+            "Biryani",
+            "Roti"
+        ]
+    },
+    {
+        "id": "dessert",
+        "name": "\ud83c\udf68 Dessert",
+        "subs": [
+            "Desserts"
+        ]
+    }
+];
 
 // State
 let cart = [];
 let currentCategory = "breakfast-snacks";
-let currentSubCategory = "Nawabi Breakfast";
+let currentSubCategory = "Breakfast";
 
 // DOM Elements
 const productContainer = document.getElementById("product-container");
@@ -22,7 +971,6 @@ const cartItemsContainer = document.getElementById("cart-items");
 const cartTotalPrice = document.getElementById("cart-total-price");
 const checkoutBtn = document.getElementById("checkout-btn");
 const bookWhatsappBtn = document.getElementById("book-whatsapp-btn");
-const categoryTabs = document.querySelectorAll(".tab-btn");
 const navbar = document.querySelector(".navbar");
 
 // Initialize App
@@ -32,8 +980,9 @@ function init() {
     
     // Only render menu if on menu.html
     if(productContainer) {
-        renderProducts(currentCategory, currentSubCategory);
+        renderCategories();
         setupMenuListeners();
+        renderProducts(currentCategory, currentSubCategory);
     }
     
     // Global Listeners
@@ -47,6 +996,61 @@ function init() {
     if(bookWhatsappBtn) {
         bookWhatsappBtn.addEventListener("click", processTableBooking);
     }
+}
+
+function renderCategories() {
+    const stickyContainer = document.getElementById("sticky-menu-tabs");
+    if(!stickyContainer) return;
+
+    let catHTML = '<div class="category-tabs" id="category-tabs">';
+    menuCategories.forEach(cat => {
+        catHTML += `<button class="tab-btn ${cat.id === currentCategory ? 'active' : ''}" data-main-category="${cat.id}">${cat.name}</button>`;
+    });
+    catHTML += '</div><div class="sub-category-tabs" id="sub-category-tabs"></div>';
+    
+    stickyContainer.innerHTML = catHTML;
+    
+    const categoryTabs = document.querySelectorAll(".tab-btn");
+    categoryTabs.forEach(tab => {
+        tab.addEventListener("click", (e) => {
+            categoryTabs.forEach(t => t.classList.remove("active"));
+            e.target.classList.add("active");
+            currentCategory = e.target.getAttribute("data-main-category");
+            
+            const catObj = menuCategories.find(c => c.id === currentCategory);
+            currentSubCategory = catObj.subs[0];
+            
+            updateSubTabs();
+            renderProducts(currentCategory, currentSubCategory, document.getElementById("menu-search") ? document.getElementById("menu-search").value : "");
+            
+            // scroll to products to avoid jumping confusion
+            productContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+    });
+    
+    updateSubTabs();
+}
+
+function updateSubTabs() {
+    const subContainer = document.getElementById("sub-category-tabs");
+    if(!subContainer) return;
+    const catObj = menuCategories.find(c => c.id === currentCategory);
+    
+    let subHTML = '';
+    catObj.subs.forEach(sub => {
+        subHTML += `<button class="sub-tab-btn ${sub === currentSubCategory ? 'active' : ''}" data-sub-category="${sub}">${sub}</button>`;
+    });
+    subContainer.innerHTML = subHTML;
+    
+    const newSubTabs = document.querySelectorAll(".sub-tab-btn");
+    newSubTabs.forEach(tab => {
+        tab.addEventListener("click", (e) => {
+            newSubTabs.forEach(t => t.classList.remove("active"));
+            e.target.classList.add("active");
+            currentSubCategory = e.target.getAttribute("data-sub-category");
+            renderProducts(currentCategory, currentSubCategory, document.getElementById("menu-search") ? document.getElementById("menu-search").value : "");
+        });
+    });
 }
 
 // Preloader Logic
@@ -66,6 +1070,7 @@ function handlePreloader() {
 
 // Navbar scroll effect
 function handleNavbarScroll() {
+    if(!navbar) return;
     window.addEventListener("scroll", () => {
         if(window.scrollY > 50) {
             navbar.style.padding = "10px 5%";
@@ -77,103 +1082,11 @@ function handleNavbarScroll() {
             navbar.style.boxShadow = "none";
         }
     });
-    // Trigger once on load to set initial state correctly
-    const subCatContainer = document.getElementById("sub-category-tabs");
-    if(subCatContainer && currentCategory === "breakfast-snacks") {
-        subCatContainer.innerHTML = `
-            <button class="sub-tab-btn active" data-sub-category="Nawabi Breakfast">Nawabi Breakfast</button>
-            <button class="sub-tab-btn" data-sub-category="Snacks/Quick Bites">Snacks/Quick Bites</button>
-            <button class="sub-tab-btn" data-sub-category="Salad & Raita">Salad & Raita</button>
-        `;
-        const newSubTabs = document.querySelectorAll(".sub-tab-btn");
-        newSubTabs.forEach(tab => {
-            tab.addEventListener("click", (e) => {
-                newSubTabs.forEach(t => t.classList.remove("active"));
-                e.target.classList.add("active");
-                currentSubCategory = e.target.getAttribute("data-sub-category");
-                renderProducts(currentCategory, currentSubCategory, document.getElementById("menu-search") ? document.getElementById("menu-search").value : "");
-            });
-        });
-    }
     window.dispatchEvent(new Event('scroll'));
 }
 
-// Menu Specific Listeners
-// Menu Specific Listeners
 function setupMenuListeners() {
-    const subCategoryTabs = document.querySelectorAll(".sub-tab-btn");
-    const subCategoryContainer = document.getElementById("sub-category-tabs");
     const searchInput = document.getElementById("menu-search");
-
-    function updateSubTabs(category) {
-        if(!subCategoryContainer) return;
-        
-        if (category === 'breakfast-snacks') {
-            subCategoryContainer.innerHTML = `
-                <button class="sub-tab-btn active" data-sub-category="Nawabi Breakfast">Nawabi Breakfast</button>
-                <button class="sub-tab-btn" data-sub-category="Snacks/Quick Bites">Snacks/Quick Bites</button>
-                <button class="sub-tab-btn" data-sub-category="Salad & Raita">Salad & Raita</button>
-            `;
-            currentSubCategory = 'Nawabi Breakfast';
-        } else if (category === 'soups-beverages') {
-            subCategoryContainer.innerHTML = `
-                <button class="sub-tab-btn active" data-sub-category="Soup">Soup</button>
-                <button class="sub-tab-btn" data-sub-category="Beverages">Beverages</button>
-            `;
-            currentSubCategory = 'Soup';
-        } else if (category === 'pure-veg') {
-            subCategoryContainer.innerHTML = `
-                <button class="sub-tab-btn active" data-sub-category="Vegetable Stater">Vegetable Stater</button>
-                <button class="sub-tab-btn" data-sub-category="Mashroom/Paneer">Mashroom/Paneer</button>
-                <button class="sub-tab-btn" data-sub-category="Chinese Delicate Main Course">Chinese Delicate</button>
-                <button class="sub-tab-btn" data-sub-category="Odia/Bengali Special (Veg)">Odia/Bengali Special</button>
-                <button class="sub-tab-btn" data-sub-category="Tandoor Khazana">Tandoor Khazana (Veg)</button>
-            `;
-            currentSubCategory = 'Vegetable Stater';
-        } else if (category === 'non-veg') {
-            subCategoryContainer.innerHTML = `
-                <button class="sub-tab-btn active" data-sub-category="Nonveg Stater">Nonveg Stater</button>
-                <button class="sub-tab-btn" data-sub-category="Nonveg (Main)">Nonveg (Main)</button>
-                <button class="sub-tab-btn" data-sub-category="Non-Veg Curry">Non-Veg Curry</button>
-                <button class="sub-tab-btn" data-sub-category="Tandoor Khazana">Tandoor Khazana (Non-Veg)</button>
-            `;
-            currentSubCategory = 'Nonveg Stater';
-        } else if (category === 'rice-thali') {
-            subCategoryContainer.innerHTML = `
-                <button class="sub-tab-btn active" data-sub-category="Rice">Rice</button>
-                <button class="sub-tab-btn" data-sub-category="Combo Special">Combo Special</button>
-                <button class="sub-tab-btn" data-sub-category="Nawabi Thali">Nawabi Thali</button>
-            `;
-            currentSubCategory = 'Rice';
-        }
-        
-        // Re-attach listeners to new sub-tabs
-        const newSubTabs = document.querySelectorAll(".sub-tab-btn");
-        newSubTabs.forEach(tab => {
-            tab.addEventListener("click", (e) => {
-                newSubTabs.forEach(t => t.classList.remove("active"));
-                e.target.classList.add("active");
-                currentSubCategory = e.target.getAttribute("data-sub-category");
-                renderProducts(currentCategory, currentSubCategory, searchInput ? searchInput.value : "");
-            });
-        });
-    }
-
-    categoryTabs.forEach(tab => {
-        tab.addEventListener("click", (e) => {
-            categoryTabs.forEach(t => t.classList.remove("active"));
-            e.target.classList.add("active");
-            currentCategory = e.target.getAttribute("data-main-category");
-            
-            if(subCategoryContainer) {
-                subCategoryContainer.style.display = 'flex';
-                updateSubTabs(currentCategory);
-            }
-            
-            renderProducts(currentCategory, currentSubCategory, searchInput ? searchInput.value : "");
-        });
-    });
-
     if (searchInput) {
         searchInput.addEventListener("input", (e) => {
             renderProducts(currentCategory, currentSubCategory, e.target.value);
@@ -189,13 +1102,7 @@ function renderProducts(mainCategory, subCategory, searchQuery = "") {
     let itemsToRender = [];
     const query = searchQuery.toLowerCase().trim();
     
-    if (mainCategory === 'pure-veg' && subCategory === 'Tandoor Khazana') {
-        itemsToRender = products.filter(p => p.category === 'Tandoor Khazana' && !p.name.match(/Chicken|Mutton|Fish|Prawn|Egg|Tangri|Pomfret/i));
-    } else if (mainCategory === 'non-veg' && subCategory === 'Tandoor Khazana') {
-        itemsToRender = products.filter(p => p.category === 'Tandoor Khazana' && p.name.match(/Chicken|Mutton|Fish|Prawn|Egg|Tangri|Pomfret/i));
-    } else {
-        itemsToRender = products.filter(p => p.category === subCategory);
-    }
+    itemsToRender = products.filter(p => p.category === mainCategory && p.subCategory === subCategory);
 
     if (query) {
         itemsToRender = itemsToRender.filter(p => p.name.toLowerCase().includes(query));
@@ -369,7 +1276,7 @@ function updateCartUI() {
         cartItemEl.innerHTML = `
             <div class="cart-item-info">
                 <h4 style="display:flex; align-items:flex-start;"><span style="margin-top: 4px;">${dietMark}</span><span style="white-space: normal; overflow-wrap: anywhere; word-break: break-word; flex: 1; min-width: 0;">${item.name}</span></h4>
-                <p>\u20B9${item.price} x ${item.quantity}</p>
+                <p>₹${item.price} x ${item.quantity}</p>
             </div>
             <div class="cart-item-controls">
                 <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
@@ -393,7 +1300,7 @@ function updateCartUI() {
     if(stickyCartFooter) {
         stickyCartFooter.style.display = "flex";
         stickyCartCount.textContent = totalItems + (totalItems > 1 ? " Items" : " Item");
-        stickyCartPrice.textContent = "\u20B9" + grandTotal;
+        stickyCartPrice.textContent = "₹" + grandTotal;
     }
 }
 
@@ -443,113 +1350,65 @@ async function processCheckout() {
     // 1. Message ka Text banana
     const crownEmoji = String.fromCodePoint(0x1F451);
 
-    let orderText = `*Puri Sand Hotel Room Service* ${crownEmoji}\n\n`;
+    let orderText = `*Puri Sand Hotel Room Service* ${crownEmoji}
 
-    orderText += `*Customer Details:*\n`;
-    orderText += `- Name: ${custName}\n`;
-    orderText += `- Room Number: ${custRoom}\n`;
-    orderText += `- Phone: ${custAltPhone}\n`;
+`;
 
-    orderText += `\n*Order Items:*\n`;
+    orderText += `*Customer Details:*
+`;
+    orderText += `- Name: ${custName}
+`;
+    orderText += `- Room Number: ${custRoom}
+`;
+    orderText += `- Phone: ${custAltPhone}
+`;
 
+    orderText += `
+*Order Items:*
+`;
 
     // 3. Cart Items
     let subtotal = 0;
 
     // Emoji Unicode
-    const redCircle = String.fromCodePoint(0x1F534);   // ðŸ”´
-    const greenCircle = String.fromCodePoint(0x1F7E2); // ðŸŸ¢
+    const redCircle = String.fromCodePoint(0x1F534);   // 🔴
+    const greenCircle = String.fromCodePoint(0x1F7E2); // 🟢
 
     cart.forEach(item => {
-
         const itemTotal = item.price * item.quantity;
-
         subtotal += itemTotal;
 
-
-        // -----------------------------------------
-        // VEG / NON-VEG DETECTION
-        // -----------------------------------------
-
-        const category = String(item.category || "")
-            .toLowerCase()
-            .replace(/[\s_-]/g, "");
-
-        const itemName = String(item.name || "").toLowerCase();
-
-
-        // Non-Veg keywords
-        const nonVegKeywords = [
-            "nonveg",
-            "nonvegetarian",
-            "chicken",
-            "mutton",
-            "egg",
-            "prawn",
-            "prawns",
-            "fish",
-            "seafood",
-            "biryani"
-        ];
-
-
-        // Check category
-        let isNonVeg = category.includes("nonveg");
-
-
-        // Check item name
-        if (!isNonVeg) {
-            isNonVeg = nonVegKeywords.some(keyword =>
-                itemName.includes(keyword)
-            );
-        }
-
-
-        // -----------------------------------------
-        // RED / GREEN SYMBOL
-        // -----------------------------------------
-
-        const symbol = isNonVeg
-            ? redCircle
-            : greenCircle;
-
-
         // Add item to WhatsApp message
-        orderText += `${symbol} ${item.name} (x${item.quantity}) = \u20B9${itemTotal}\n`;
+        const symbol = item.type === 'non-veg' ? redCircle : greenCircle;
+        orderText += `${symbol} ${item.name} (x${item.quantity}) = ₹${itemTotal}
+`;
     });
-
 
     // 4. GST aur Total Calculation
     const gst = Math.round(subtotal * 0.18);
     const grandTotal = subtotal + gst;
 
+    orderText += `
+------------------
+`;
+    orderText += `Subtotal: ₹${subtotal}
+`;
+    orderText += `GST (18%): ₹${gst}
+`;
+    orderText += `*Grand Total: ₹${grandTotal}*
+`;
+    orderText += `------------------
 
-    orderText += `\n------------------\n`;
-
-    orderText += `Subtotal: \u20B9${subtotal}\n`;
-
-    orderText += `GST (18%): \u20B9${gst}\n`;
-
-    orderText += `*Grand Total: \u20B9${grandTotal}*\n`;
-
-    orderText += `------------------\n\n`;
-
+`;
     orderText += `Please confirm this order as soon as possible.`;
-
 
     // 5. WhatsApp Number
     const whatsappNumber = "919437752000";
 
-
     // 6. Message Encode
     const encodedText = encodeURIComponent(orderText);
 
-
-    // IMPORTANT:
-    // wa.me ki jagah api.whatsapp.com use karo
-    const whatsappUrl =
-        `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedText}`;
-
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedText}`;
 
     // 7. WhatsApp Open
     window.open(whatsappUrl, "_blank");
@@ -567,11 +1426,18 @@ function processTableBooking() {
         return;
     }
     
-    let bookingText = `*Puri Sand Hotel - Table Reservation* \uD83C\uDF7D\uFE0F\n\n`;
-    bookingText += `*Name:* ${bookName}\n`;
-    bookingText += `*Date:* ${bookDate}\n`;
-    bookingText += `*Time:* ${bookTime}\n`;
-    bookingText += `*Guests:* ${bookGuests} People\n\n`;
+    let bookingText = `*Puri Sand Hotel - Table Reservation* 🍽️
+
+`;
+    bookingText += `*Name:* ${bookName}
+`;
+    bookingText += `*Date:* ${bookDate}
+`;
+    bookingText += `*Time:* ${bookTime}
+`;
+    bookingText += `*Guests:* ${bookGuests} People
+
+`;
     bookingText += `Please confirm my table reservation.`;
     
     const whatsappNumber = "919437752000"; 
@@ -583,7 +1449,3 @@ function processTableBooking() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
-
-
-
-
