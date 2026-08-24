@@ -1238,8 +1238,35 @@ function renderProducts(mainCategory, subCategory, searchQuery = "") {
 // Toggle Cart Sidebar
 function toggleCart() {
     if(!cartSidebar) return;
-    cartSidebar.classList.toggle("active");
-    cartOverlay.classList.toggle("active");
+    const isActive = cartSidebar.classList.contains("active");
+    
+    if (isActive) {
+        // Closing cart
+        cartSidebar.classList.remove("active");
+        cartOverlay.classList.remove("active");
+        
+        const mobileNav = document.getElementById("mobile-bottom-nav");
+        if (mobileNav) mobileNav.style.display = "flex";
+        
+        const stickyCart = document.getElementById("sticky-cart-footer");
+        if (stickyCart && cart.length > 0) {
+            stickyCart.style.zIndex = "990";
+            stickyCart.style.display = "flex";
+        }
+    } else {
+        // Opening cart
+        cartSidebar.classList.add("active");
+        cartOverlay.classList.add("active");
+        
+        const mobileNav = document.getElementById("mobile-bottom-nav");
+        if (mobileNav) mobileNav.style.display = "none";
+        
+        const stickyCart = document.getElementById("sticky-cart-footer");
+        if (stickyCart) {
+            stickyCart.style.zIndex = "0";
+            stickyCart.style.display = "none";
+        }
+    }
 }
 
 // Add to Cart
