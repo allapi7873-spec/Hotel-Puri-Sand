@@ -487,7 +487,7 @@
             if (data.success) {
                 showToast(`✅ Order status updated to ${newStatus}`, 'success');
                 // Update text color based on new status
-                selectEl.className = \`bg-black/60 border border-gold/30 rounded-md text-[10px] md:text-xs px-2 py-1 \${newStatus === 'Delivered' ? 'text-green-400' : (newStatus === 'Cancelled' ? 'text-red-400' : 'text-yellow-400')} focus:outline-none focus:border-gold cursor-pointer\`;
+                selectEl.className = `bg-black/60 border border-gold/30 rounded-md text-[10px] md:text-xs px-2 py-1 ${newStatus === 'Delivered' ? 'text-green-400' : (newStatus === 'Cancelled' ? 'text-red-400' : 'text-yellow-400')} focus:outline-none focus:border-gold cursor-pointer`;
             } else {
                 showToast('🔴 Failed to update status', 'error');
                 loadBackendData(); // Revert back
