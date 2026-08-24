@@ -7,16 +7,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
-    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         'luxury-black': '#050505',
-                        'luxury-charcoal': '#121212',
                         'gold': '#D4AF37',
-                        'gold-light': '#F3E5AB',
                     },
                     fontFamily: {
                         'title': ['Cinzel', 'serif'],
@@ -30,57 +27,72 @@
         body { font-family: 'Outfit', sans-serif; background-color: #050505; color: #fff; }
         .font-title { font-family: 'Cinzel', serif; }
         .bg-gold-gradient { background: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C); }
-        .glass-panel { background: rgba(18, 18, 18, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.2); }
+        .glass-panel { background: rgba(18,18,18,0.85); backdrop-filter: blur(12px); border: 1px solid rgba(212,175,55,0.2); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .tab-active { background: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C); color: #000; }
-        .tab-inactive { background: rgba(18, 18, 18, 0.8); border: 1px solid rgba(212, 175, 55, 0.3); color: #D4AF37; }
-        .menu-row:hover { background: rgba(212,175,55,0.05); }
+        .tab-inactive { background: rgba(18,18,18,0.85); border: 1px solid rgba(212,175,55,0.3); color: #D4AF37; }
+        tr:hover td { background: rgba(212,175,55,0.04); }
         .badge-veg { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
         .badge-nonveg { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
-        .cat-btn { border: 1px solid rgba(212,175,55,0.3); color: #D4AF37; transition: all 0.2s; }
-        .cat-btn:hover, .cat-btn.active { background: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728); color: #000; font-weight: 700; border-color: transparent; }
-        input[type=search]::-webkit-search-cancel-button { cursor: pointer; }
+        .filter-btn { border: 1px solid rgba(212,175,55,0.3); color: #D4AF37; transition: all 0.2s; cursor: pointer; }
+        .filter-btn.active, .filter-btn:hover { background: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728); color: #000; font-weight: 700; border-color: transparent; }
+        .login-card { box-shadow: 0 0 80px rgba(212,175,55,0.08); }
     </style>
 </head>
 <body class="min-h-screen">
 
-    <!-- LOGIN SCREEN -->
+    <!-- ===== LOGIN SCREEN ===== -->
     <div id="loginScreen" class="min-h-screen flex items-center justify-center p-4">
-        <div class="glass-panel p-8 rounded-2xl max-w-sm w-full text-center">
-            <i class="fa-solid fa-crown text-gold text-4xl mb-4"></i>
-            <h1 class="font-title text-2xl text-gold mb-1">Admin Login</h1>
-            <p class="text-gray-500 text-xs mb-6">Hotel Puri Sands Management</p>
-            <input type="text" id="adminUsername" placeholder="Enter Username"
-                   class="w-full bg-black/50 border border-gold/30 rounded-lg px-4 py-3 mb-3 text-white focus:outline-none focus:border-gold">
-            <input type="password" id="adminPassword" placeholder="Enter Password"
-                   class="w-full bg-black/50 border border-gold/30 rounded-lg px-4 py-3 mb-4 text-white focus:outline-none focus:border-gold"
-                   onkeydown="if(event.key==='Enter') login()">
-            <button onclick="login()" class="w-full bg-gold-gradient text-black font-bold py-3 rounded-lg hover:opacity-90 transition">
-                <i class="fa-solid fa-right-to-bracket mr-2"></i>Access Dashboard
+        <div class="glass-panel login-card p-8 rounded-2xl w-full max-w-sm text-center">
+            <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-crown text-gold text-2xl"></i>
+            </div>
+            <h1 class="font-title text-2xl text-gold mb-1">Admin Panel</h1>
+            <p class="text-gray-600 text-xs mb-7">Hotel Puri Sands — Secure Access</p>
+
+            <div class="text-left mb-3">
+                <label class="text-xs text-gold/70 uppercase tracking-wider ml-1">Username</label>
+                <input type="text" id="adminUsername" placeholder="Enter username"
+                       autocomplete="off" autocapitalize="none"
+                       class="w-full mt-1 bg-black/60 border border-gold/25 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-gold transition">
+            </div>
+            <div class="text-left mb-5">
+                <label class="text-xs text-gold/70 uppercase tracking-wider ml-1">Password</label>
+                <input type="password" id="adminPassword" placeholder="Enter password"
+                       autocomplete="current-password"
+                       class="w-full mt-1 bg-black/60 border border-gold/25 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-gold transition"
+                       onkeydown="if(event.key==='Enter') doLogin()">
+            </div>
+
+            <button id="loginBtn" onclick="doLogin()"
+                    class="w-full bg-gold-gradient text-black font-bold py-3 rounded-xl hover:opacity-90 transition flex items-center justify-center gap-2 text-sm uppercase tracking-wider">
+                <i class="fa-solid fa-right-to-bracket"></i> Access Dashboard
             </button>
-            <p id="loginError" class="text-red-500 text-sm mt-3 hidden">Incorrect Username or Password!</p>
+            <p id="loginError" class="text-red-400 text-xs mt-4 hidden">
+                <i class="fa-solid fa-circle-exclamation mr-1"></i>Incorrect username or password!
+            </p>
         </div>
     </div>
 
-    <!-- DASHBOARD SCREEN -->
-    <div id="dashboardScreen" class="max-w-6xl mx-auto p-4 md:p-6 hidden">
+    <!-- ===== DASHBOARD ===== -->
+    <div id="dashboardScreen" class="max-w-6xl mx-auto px-4 py-6 hidden">
 
         <!-- Header -->
-        <div class="flex flex-col md:flex-row justify-between items-center mb-6 glass-panel p-5 rounded-2xl">
-            <div class="flex items-center gap-3 mb-3 md:mb-0">
-                <i class="fa-solid fa-crown text-gold text-2xl"></i>
+        <div class="glass-panel p-4 rounded-2xl mb-5 flex flex-col md:flex-row justify-between items-center gap-3">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-crown text-gold text-xl"></i>
                 <div>
-                    <h1 class="font-title text-xl text-gold leading-tight">Admin Dashboard</h1>
-                    <p class="text-gray-500 text-xs">Hotel Puri Sands</p>
+                    <h1 class="font-title text-lg text-gold leading-tight">Admin Dashboard</h1>
+                    <p class="text-gray-600 text-[11px]">Hotel Puri Sands Management</p>
                 </div>
             </div>
-            <div class="flex gap-3 items-center">
-                <span class="text-xs text-green-400 bg-green-400/10 border border-green-400/20 px-3 py-1 rounded-full">
-                    <i class="fa-solid fa-circle text-[8px] mr-1 animate-pulse"></i>Live
+            <div class="flex items-center gap-3">
+                <span class="text-[11px] text-green-400 bg-green-400/10 border border-green-400/20 px-3 py-1 rounded-full flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>Live
                 </span>
-                <button onclick="logout()" class="px-4 py-2 border border-red-500/50 text-red-400 rounded-lg hover:bg-red-500/10 transition text-sm">
-                    <i class="fa-solid fa-power-off mr-2"></i>Logout
+                <button onclick="doLogout()" class="text-sm px-4 py-1.5 border border-red-500/40 text-red-400 rounded-lg hover:bg-red-500/10 transition">
+                    <i class="fa-solid fa-power-off mr-1"></i>Logout
                 </button>
             </div>
         </div>
@@ -88,10 +100,10 @@
         <!-- Tabs -->
         <div class="flex gap-3 mb-5">
             <button onclick="switchTab('orders')" id="tab-orders" class="tab-active px-5 py-2.5 rounded-xl font-bold text-sm transition">
-                <i class="fa-solid fa-receipt mr-2"></i>Food Orders
+                <i class="fa-solid fa-receipt mr-1.5"></i>Food Orders
             </button>
             <button onclick="switchTab('menu')" id="tab-menu" class="tab-inactive px-5 py-2.5 rounded-xl font-bold text-sm transition">
-                <i class="fa-solid fa-utensils mr-2"></i>Food Menu
+                <i class="fa-solid fa-utensils mr-1.5"></i>Food Menu
             </button>
         </div>
 
@@ -99,22 +111,22 @@
         <div id="ordersSection">
             <div id="ordersLoading" class="glass-panel p-12 rounded-2xl text-center">
                 <i class="fa-solid fa-spinner fa-spin text-gold text-2xl"></i>
-                <p class="text-gray-500 mt-3 text-sm">Loading orders...</p>
+                <p class="text-gray-600 mt-3 text-sm">Loading orders...</p>
             </div>
-            <div id="ordersTable" class="glass-panel rounded-2xl overflow-hidden hidden">
-                <div class="p-4 border-b border-gold/10 flex items-center justify-between">
-                    <h2 class="text-gold font-bold"><i class="fa-solid fa-receipt mr-2"></i>All Food Orders</h2>
-                    <span id="orderCount" class="text-xs text-gray-400 bg-white/5 px-3 py-1 rounded-full">0 orders</span>
+            <div id="ordersContent" class="glass-panel rounded-2xl overflow-hidden hidden">
+                <div class="p-4 border-b border-gold/10 flex justify-between items-center">
+                    <h2 class="text-gold font-bold text-sm"><i class="fa-solid fa-receipt mr-2"></i>All Food Orders</h2>
+                    <span id="orderCount" class="text-xs text-gray-500 bg-white/5 px-3 py-1 rounded-full">—</span>
                 </div>
                 <div class="overflow-x-auto no-scrollbar">
                     <table class="w-full text-left">
                         <thead>
-                            <tr class="bg-black/40 text-gold text-xs uppercase tracking-wider">
+                            <tr class="bg-black/40 text-gold text-[11px] uppercase tracking-wider">
                                 <th class="px-4 py-3">#</th>
                                 <th class="px-4 py-3">Time</th>
                                 <th class="px-4 py-3">Customer</th>
-                                <th class="px-4 py-3">Room/Contact</th>
-                                <th class="px-4 py-3">Items Ordered</th>
+                                <th class="px-4 py-3">Room / Contact</th>
+                                <th class="px-4 py-3">Items</th>
                                 <th class="px-4 py-3">Total</th>
                                 <th class="px-4 py-3">Status</th>
                             </tr>
@@ -122,9 +134,9 @@
                         <tbody id="ordersBody" class="text-sm divide-y divide-gold/10"></tbody>
                     </table>
                 </div>
-                <div id="noOrders" class="p-10 text-center text-gray-600 hidden">
-                    <i class="fa-solid fa-plate-wheat text-4xl mb-3"></i>
-                    <p>No orders received yet.</p>
+                <div id="noOrders" class="py-12 text-center text-gray-600 hidden">
+                    <i class="fa-solid fa-plate-wheat text-3xl mb-3 block"></i>
+                    <p class="text-sm">No orders received yet.</p>
                 </div>
             </div>
         </div>
@@ -132,48 +144,45 @@
         <!-- ===== FOOD MENU SECTION ===== -->
         <div id="menuSection" class="hidden">
             <!-- Search + Filters -->
-            <div class="glass-panel p-4 rounded-2xl mb-4">
-                <!-- Search Bar -->
-                <div class="relative mb-4">
-                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gold opacity-70"></i>
+            <div class="glass-panel p-4 rounded-2xl mb-4 space-y-3">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gold/60 text-sm"></i>
                     <input type="search" id="menuSearch" oninput="filterMenu()"
-                           placeholder="Search food items... (e.g. Chicken, Paneer, Rice)"
-                           class="w-full bg-black/50 border border-gold/30 rounded-xl pl-11 pr-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-gold">
+                           placeholder="Search items... (e.g. Chicken, Paneer, Rice)"
+                           class="w-full bg-black/60 border border-gold/25 rounded-xl pl-11 pr-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-gold text-sm transition">
                 </div>
-
-                <!-- Type Filter -->
-                <div class="flex gap-2 mb-4 flex-wrap">
-                    <button onclick="setType('all')" id="type-all" class="cat-btn active text-xs px-4 py-1.5 rounded-full">All Items</button>
-                    <button onclick="setType('veg')" id="type-veg" class="cat-btn text-xs px-4 py-1.5 rounded-full">
-                        <span class="w-2 h-2 inline-block bg-green-400 rounded-full mr-1"></span>Veg Only
-                    </button>
-                    <button onclick="setType('non-veg')" id="type-nonveg" class="cat-btn text-xs px-4 py-1.5 rounded-full">
-                        <span class="w-2 h-2 inline-block bg-red-400 rounded-full mr-1"></span>Non-Veg Only
-                    </button>
-                </div>
-
-                <!-- Category Filter -->
+                <!-- Veg/Non-Veg filter -->
                 <div class="flex gap-2 flex-wrap">
-                    <button onclick="setCategory('all')" id="cat-all" class="cat-btn active text-xs px-3 py-1.5 rounded-full">📋 All</button>
-                    <button onclick="setCategory('breakfast-snacks')" id="cat-breakfast-snacks" class="cat-btn text-xs px-3 py-1.5 rounded-full">🍳 Breakfast & Snacks</button>
-                    <button onclick="setCategory('soup-beverage')" id="cat-soup-beverage" class="cat-btn text-xs px-3 py-1.5 rounded-full">🍵 Soup & Beverages</button>
-                    <button onclick="setCategory('veg-course')" id="cat-veg-course" class="cat-btn text-xs px-3 py-1.5 rounded-full">🥦 Veg Course</button>
-                    <button onclick="setCategory('non-veg-course')" id="cat-non-veg-course" class="cat-btn text-xs px-3 py-1.5 rounded-full">🍗 Non-Veg Course</button>
-                    <button onclick="setCategory('rice-roti')" id="cat-rice-roti" class="cat-btn text-xs px-3 py-1.5 rounded-full">🍚 Rice & Roti</button>
-                    <button onclick="setCategory('dessert')" id="cat-dessert" class="cat-btn text-xs px-3 py-1.5 rounded-full">🍨 Desserts</button>
+                    <button onclick="setType('all')" id="type-all" class="filter-btn active text-xs px-4 py-1.5 rounded-full">All Items</button>
+                    <button onclick="setType('veg')" id="type-veg" class="filter-btn text-xs px-4 py-1.5 rounded-full">
+                        <span class="inline-block w-2 h-2 bg-green-400 rounded-full mr-1"></span>Veg Only
+                    </button>
+                    <button onclick="setType('non-veg')" id="type-nonveg" class="filter-btn text-xs px-4 py-1.5 rounded-full">
+                        <span class="inline-block w-2 h-2 bg-red-400 rounded-full mr-1"></span>Non-Veg Only
+                    </button>
+                </div>
+                <!-- Category filter -->
+                <div class="flex gap-2 flex-wrap">
+                    <button onclick="setCategory('all')" id="cat-all" class="filter-btn active text-xs px-3 py-1.5 rounded-full">📋 All</button>
+                    <button onclick="setCategory('breakfast-snacks')" id="cat-breakfast-snacks" class="filter-btn text-xs px-3 py-1.5 rounded-full">🍳 Breakfast &amp; Snacks</button>
+                    <button onclick="setCategory('soup-beverage')" id="cat-soup-beverage" class="filter-btn text-xs px-3 py-1.5 rounded-full">🍵 Soup &amp; Beverages</button>
+                    <button onclick="setCategory('veg-course')" id="cat-veg-course" class="filter-btn text-xs px-3 py-1.5 rounded-full">🥦 Veg Course</button>
+                    <button onclick="setCategory('non-veg-course')" id="cat-non-veg-course" class="filter-btn text-xs px-3 py-1.5 rounded-full">🍗 Non-Veg Course</button>
+                    <button onclick="setCategory('rice-roti')" id="cat-rice-roti" class="filter-btn text-xs px-3 py-1.5 rounded-full">🍚 Rice &amp; Roti</button>
+                    <button onclick="setCategory('dessert')" id="cat-dessert" class="filter-btn text-xs px-3 py-1.5 rounded-full">🍨 Desserts</button>
                 </div>
             </div>
 
             <!-- Menu Table -->
             <div class="glass-panel rounded-2xl overflow-hidden">
                 <div class="p-4 border-b border-gold/10 flex justify-between items-center">
-                    <h2 class="text-gold font-bold"><i class="fa-solid fa-utensils mr-2"></i>Food Menu List</h2>
-                    <span id="menuCount" class="text-xs text-gray-400 bg-white/5 px-3 py-1 rounded-full">112 items</span>
+                    <h2 class="text-gold font-bold text-sm"><i class="fa-solid fa-utensils mr-2"></i>Food Menu</h2>
+                    <span id="menuCount" class="text-xs text-gray-500 bg-white/5 px-3 py-1 rounded-full">112 items</span>
                 </div>
                 <div class="overflow-x-auto no-scrollbar">
                     <table class="w-full text-left">
                         <thead>
-                            <tr class="bg-black/40 text-gold text-xs uppercase tracking-wider">
+                            <tr class="bg-black/40 text-gold text-[11px] uppercase tracking-wider">
                                 <th class="px-4 py-3">#</th>
                                 <th class="px-4 py-3">Item Name</th>
                                 <th class="px-4 py-3">Category</th>
@@ -185,166 +194,189 @@
                         <tbody id="menuBody" class="text-sm divide-y divide-gold/10"></tbody>
                     </table>
                 </div>
-                <div id="noMenuResults" class="p-10 text-center text-gray-600 hidden">
-                    <i class="fa-solid fa-face-sad-tear text-4xl mb-3"></i>
-                    <p>No items found for your search.</p>
+                <div id="noMenuResults" class="py-12 text-center text-gray-600 hidden">
+                    <i class="fa-solid fa-face-sad-tear text-3xl mb-3 block"></i>
+                    <p class="text-sm">No items found.</p>
                 </div>
             </div>
         </div>
-
     </div>
 
-    <!-- Load products from food-script.js -->
-    <script src="./food-script.js"></script>
     <script>
-        // ======================= CONFIG =======================
-        const BACKEND_URL = 'http://localhost:5000'; // Change to Render URL after hosting
+    // ====================== CONFIG ======================
+    // Change this to your Render URL after hosting:
+    // const BACKEND_URL = 'https://hotel-puri-sand-backend.onrender.com';
+    const BACKEND_URL = 'http://localhost:5000';
 
-        // ======================= STATE =======================
-        let currentType = 'all';
-        let currentCategory = 'all';
+    // ====================== PRODUCTS (from food-script.js) ======================
+    const products = [{"name":"Bread Toast with Butter & Jam","price":50,"type":"veg","category":"breakfast-snacks","subCategory":"Breakfast","id":1},{"name":"Veg Sandwich","price":60,"type":"veg","category":"breakfast-snacks","subCategory":"Breakfast","id":2},{"name":"Chicken Sandwich","price":70,"type":"non-veg","category":"breakfast-snacks","subCategory":"Breakfast","id":3},{"name":"Cheese Sandwich","price":80,"type":"veg","category":"breakfast-snacks","subCategory":"Breakfast","id":4},{"name":"Poori Bhaji","price":70,"type":"veg","category":"breakfast-snacks","subCategory":"Breakfast","id":5},{"name":"Aloo Paratha (Served with Curd & Pickle)","price":70,"type":"veg","category":"breakfast-snacks","subCategory":"Breakfast","id":6},{"name":"Gobi Paratha (Served with Curd & Pickle)","price":70,"type":"veg","category":"breakfast-snacks","subCategory":"Breakfast","id":7},{"name":"Paneer Paratha (Served with Curd & Pickle)","price":90,"type":"veg","category":"breakfast-snacks","subCategory":"Breakfast","id":8},{"name":"Plain Paratha with Aloo Dum","price":80,"type":"veg","category":"breakfast-snacks","subCategory":"Breakfast","id":9},{"name":"Idly / Poha (Served with Sambar & Chutney)","price":70,"type":"veg","category":"breakfast-snacks","subCategory":"Breakfast","id":10},{"name":"Cereals with Hot & Cold Milk","price":80,"type":"veg","category":"breakfast-snacks","subCategory":"Breakfast","id":11},{"name":"Eggs to Order (Omlete/Boiled/Bread Omlete)","price":80,"type":"non-veg","category":"breakfast-snacks","subCategory":"Breakfast","id":12},{"name":"Paneer Chilli","price":180,"type":"veg","category":"breakfast-snacks","subCategory":"Snacks","id":13},{"name":"Mushroom Chilli","price":180,"type":"veg","category":"breakfast-snacks","subCategory":"Snacks","id":14},{"name":"Chicken Chilli","price":220,"type":"non-veg","category":"breakfast-snacks","subCategory":"Snacks","id":15},{"name":"Assorted Veg Pakoda","price":100,"type":"veg","category":"breakfast-snacks","subCategory":"Snacks","id":16},{"name":"Chicken Pakoda","price":150,"type":"non-veg","category":"breakfast-snacks","subCategory":"Snacks","id":17},{"name":"Prawn Pakoda","price":160,"type":"non-veg","category":"breakfast-snacks","subCategory":"Snacks","id":18},{"name":"Veg Spring Roll","price":100,"type":"veg","category":"breakfast-snacks","subCategory":"Snacks","id":19},{"name":"Chicken Spring Roll","price":140,"type":"non-veg","category":"breakfast-snacks","subCategory":"Snacks","id":20},{"name":"French Fries","price":80,"type":"veg","category":"breakfast-snacks","subCategory":"Snacks","id":21},{"name":"Samosa (2 Pcs)","price":30,"type":"veg","category":"breakfast-snacks","subCategory":"Snacks","id":22},{"name":"Bread Omelette","price":80,"type":"non-veg","category":"breakfast-snacks","subCategory":"Snacks","id":23},{"name":"Masala Dosa","price":90,"type":"veg","category":"breakfast-snacks","subCategory":"Snacks","id":24},{"name":"Plain Dosa","price":70,"type":"veg","category":"breakfast-snacks","subCategory":"Snacks","id":25},{"name":"Upma","price":60,"type":"veg","category":"breakfast-snacks","subCategory":"Snacks","id":26},{"name":"Tom Yam Soup (Veg)","price":100,"type":"veg","category":"soup-beverage","subCategory":"Soup","id":27},{"name":"Tom Yam Soup (Chicken)","price":130,"type":"non-veg","category":"soup-beverage","subCategory":"Soup","id":28},{"name":"Tom Yam Soup (Prawn)","price":150,"type":"non-veg","category":"soup-beverage","subCategory":"Soup","id":29},{"name":"Sweet Corn Soup (Veg)","price":80,"type":"veg","category":"soup-beverage","subCategory":"Soup","id":30},{"name":"Sweet Corn Soup (Chicken)","price":100,"type":"non-veg","category":"soup-beverage","subCategory":"Soup","id":31},{"name":"Manchow Soup (Veg)","price":80,"type":"veg","category":"soup-beverage","subCategory":"Soup","id":32},{"name":"Manchow Soup (Chicken)","price":100,"type":"non-veg","category":"soup-beverage","subCategory":"Soup","id":33},{"name":"Hot & Sour Soup (Veg)","price":80,"type":"veg","category":"soup-beverage","subCategory":"Soup","id":34},{"name":"Hot & Sour Soup (Chicken)","price":100,"type":"non-veg","category":"soup-beverage","subCategory":"Soup","id":35},{"name":"Tea","price":20,"type":"veg","category":"soup-beverage","subCategory":"Beverages","id":36},{"name":"Coffee","price":30,"type":"veg","category":"soup-beverage","subCategory":"Beverages","id":37},{"name":"Lemon Tea","price":25,"type":"veg","category":"soup-beverage","subCategory":"Beverages","id":38},{"name":"Cold Coffee","price":60,"type":"veg","category":"soup-beverage","subCategory":"Beverages","id":39},{"name":"Milk","price":30,"type":"veg","category":"soup-beverage","subCategory":"Beverages","id":40},{"name":"Lassi (Sweet/Salted)","price":60,"type":"veg","category":"soup-beverage","subCategory":"Beverages","id":41},{"name":"Fresh Lime Soda / Juice","price":50,"type":"veg","category":"soup-beverage","subCategory":"Beverages","id":42},{"name":"Mango Shake","price":80,"type":"veg","category":"soup-beverage","subCategory":"Beverages","id":43},{"name":"Banana Shake","price":70,"type":"veg","category":"soup-beverage","subCategory":"Beverages","id":44},{"name":"Mineral Water","price":20,"type":"veg","category":"soup-beverage","subCategory":"Beverages","id":45},{"name":"Soft Drinks (Coke/Sprite/Limca/Thums Up)","price":40,"type":"veg","category":"soup-beverage","subCategory":"Beverages","id":46},{"name":"Veg Soup (Mixed)","price":70,"type":"veg","category":"soup-beverage","subCategory":"Soup","id":47},{"name":"Chicken Soup (Mixed)","price":90,"type":"non-veg","category":"soup-beverage","subCategory":"Soup","id":48},{"name":"Prawn Soup (Mixed)","price":90,"type":"non-veg","category":"soup-beverage","subCategory":"Soup","id":49},{"name":"Garden Fresh Green Salad","price":50,"type":"veg","category":"veg-course","subCategory":"Salad & Raita","id":50},{"name":"Onion Salad","price":25,"type":"veg","category":"veg-course","subCategory":"Salad & Raita","id":51},{"name":"Cuchumbar Salad","price":50,"type":"veg","category":"veg-course","subCategory":"Salad & Raita","id":52},{"name":"Chicken Salad","price":100,"type":"non-veg","category":"non-veg-course","subCategory":"Salad & Raita","id":53},{"name":"Mix Raita","price":50,"type":"veg","category":"veg-course","subCategory":"Salad & Raita","id":54},{"name":"Onion Raita","price":50,"type":"veg","category":"veg-course","subCategory":"Salad & Raita","id":55},{"name":"Boondi Raita","price":50,"type":"veg","category":"veg-course","subCategory":"Salad & Raita","id":56},{"name":"Mix Vegetable","price":160,"type":"veg","category":"veg-course","subCategory":"Veg Curry","id":57},{"name":"Mushroom (Masala/Kadhai/Dopiyaza/Chilli)","price":180,"type":"veg","category":"veg-course","subCategory":"Veg Curry","id":58},{"name":"Paneer (Masala/Kadhai/Dopiyaza/Chilli)","price":180,"type":"veg","category":"veg-course","subCategory":"Veg Curry","id":59},{"name":"Veg Manchurian","price":150,"type":"veg","category":"veg-course","subCategory":"Veg Curry","id":60},{"name":"Aloo Gobi Masala","price":159,"type":"veg","category":"veg-course","subCategory":"Veg Curry","id":61},{"name":"Bhindi Masala / Dopiyaza / Kurkure","price":150,"type":"veg","category":"veg-course","subCategory":"Veg Curry","id":62},{"name":"Aloo Bhaji / Mix Bhaji","price":120,"type":"veg","category":"veg-course","subCategory":"Veg Curry","id":63},{"name":"Aloo Jeera","price":130,"type":"veg","category":"veg-course","subCategory":"Veg Curry","id":64},{"name":"Kalara / Aloo Chips","price":120,"type":"veg","category":"veg-course","subCategory":"Veg Curry","id":65},{"name":"Dalma / Santula","price":150,"type":"veg","category":"veg-course","subCategory":"Veg Curry","id":66},{"name":"Chana Masala","price":150,"type":"veg","category":"veg-course","subCategory":"Veg Curry","id":67},{"name":"Sorisa Baigan","price":140,"type":"veg","category":"veg-course","subCategory":"Veg Curry","id":68},{"name":"Dahi Baingan","price":120,"type":"veg","category":"veg-course","subCategory":"Veg Curry","id":69},{"name":"Aloo Bharta","price":60,"type":"veg","category":"veg-course","subCategory":"Veg Curry","id":70},{"name":"Badi Chura","price":60,"type":"veg","category":"veg-course","subCategory":"Veg Curry","id":71},{"name":"Tomato Chutney","price":70,"type":"veg","category":"veg-course","subCategory":"Veg Curry","id":72},{"name":"Dahi Pakhala","price":90,"type":"veg","category":"veg-course","subCategory":"Veg Curry","id":73},{"name":"Moong Dal","price":100,"type":"veg","category":"veg-course","subCategory":"Veg Curry","id":74},{"name":"Aloo Jhuri","price":110,"type":"veg","category":"veg-course","subCategory":"Veg Curry","id":75},{"name":"Mutton Curry / Kassa","price":300,"type":"non-veg","category":"non-veg-course","subCategory":"Non-Veg Curry","id":76},{"name":"Prawn Curry / Kassa","price":320,"type":"non-veg","category":"non-veg-course","subCategory":"Non-Veg Curry","id":77},{"name":"Chicken Curry / Kassa","price":240,"type":"non-veg","category":"non-veg-course","subCategory":"Non-Veg Curry","id":78},{"name":"Fish Curry / Tawa / Fry (Bone)","price":149,"type":"non-veg","category":"non-veg-course","subCategory":"Non-Veg Curry","id":79},{"name":"Fish Curry / Tawa / Fry (Boneless)","price":199,"type":"non-veg","category":"non-veg-course","subCategory":"Non-Veg Curry","id":80},{"name":"Machha Chhecha","price":149,"type":"non-veg","category":"non-veg-course","subCategory":"Non-Veg Curry","id":81},{"name":"Egg Masala / Curry / Kassa / Bhurji","price":130,"type":"non-veg","category":"non-veg-course","subCategory":"Non-Veg Curry","id":82},{"name":"Veg Fried Rice (Chili Garlic/Schezwan)","price":140,"type":"veg","category":"rice-roti","subCategory":"Rice & Noodles","id":83},{"name":"Veg Hakka Noodles (Chili Garlic/Schezwan)","price":140,"type":"veg","category":"rice-roti","subCategory":"Rice & Noodles","id":84},{"name":"Chicken Fried Rice (Chili Garlic/Schezwan)","price":180,"type":"non-veg","category":"rice-roti","subCategory":"Rice & Noodles","id":85},{"name":"Chicken Noodles (Chili Garlic/Schezwan)","price":180,"type":"non-veg","category":"rice-roti","subCategory":"Rice & Noodles","id":86},{"name":"Egg Fried Rice (Chili Garlic/Schezwan)","price":150,"type":"non-veg","category":"rice-roti","subCategory":"Rice & Noodles","id":87},{"name":"Egg Noodles (Chili Garlic/Schezwan)","price":150,"type":"non-veg","category":"rice-roti","subCategory":"Rice & Noodles","id":88},{"name":"Prawn Fried Rice (Chili Garlic/Schezwan)","price":200,"type":"non-veg","category":"rice-roti","subCategory":"Rice & Noodles","id":89},{"name":"Prawn Noodles (Chili Garlic/Schezwan)","price":200,"type":"non-veg","category":"rice-roti","subCategory":"Rice & Noodles","id":90},{"name":"Plain Dal","price":60,"type":"veg","category":"veg-course","subCategory":"Dal","id":91},{"name":"Dal Fry","price":80,"type":"veg","category":"veg-course","subCategory":"Dal","id":92},{"name":"Dal Tadka","price":80,"type":"veg","category":"veg-course","subCategory":"Dal","id":93},{"name":"Egg Dal Tadka","price":120,"type":"non-veg","category":"non-veg-course","subCategory":"Non-Veg Curry","id":94},{"name":"Plain Rice","price":60,"type":"veg","category":"rice-roti","subCategory":"Rice & Pulao","id":95},{"name":"Lemon Rice / Jeera Rice / Veg Pulao","price":80,"type":"veg","category":"rice-roti","subCategory":"Rice & Pulao","id":96},{"name":"Kashmiri Pulao","price":90,"type":"veg","category":"rice-roti","subCategory":"Rice & Pulao","id":97},{"name":"Green Peas Pulao","price":90,"type":"veg","category":"rice-roti","subCategory":"Rice & Pulao","id":98},{"name":"Curd Rice","price":80,"type":"veg","category":"rice-roti","subCategory":"Rice & Pulao","id":99},{"name":"Veg Biriyani","price":180,"type":"veg","category":"rice-roti","subCategory":"Biryani","id":100},{"name":"Chicken Biriyani","price":220,"type":"non-veg","category":"rice-roti","subCategory":"Biryani","id":101},{"name":"Mutton Biriyani","price":300,"type":"non-veg","category":"rice-roti","subCategory":"Biryani","id":102},{"name":"Egg Biriyani","price":190,"type":"non-veg","category":"rice-roti","subCategory":"Biryani","id":103},{"name":"Prawn Biriyani","price":380,"type":"non-veg","category":"rice-roti","subCategory":"Biryani","id":104},{"name":"Chapati","price":15,"type":"veg","category":"rice-roti","subCategory":"Roti","id":105},{"name":"Butter Chapati","price":20,"type":"veg","category":"rice-roti","subCategory":"Roti","id":106},{"name":"Plain Paratha","price":30,"type":"veg","category":"rice-roti","subCategory":"Roti","id":107},{"name":"Lachha Paratha","price":40,"type":"veg","category":"rice-roti","subCategory":"Roti","id":108},{"name":"Hot Gulab Jamun","price":50,"type":"veg","category":"dessert","subCategory":"Desserts","id":109},{"name":"Rassogola","price":50,"type":"veg","category":"dessert","subCategory":"Desserts","id":110},{"name":"Ice Cream (Vanilla/Strawberry)","price":70,"type":"veg","category":"dessert","subCategory":"Desserts","id":111},{"name":"Ice Cream (Butter Scotch/Pista/Chocolate)","price":90,"type":"veg","category":"dessert","subCategory":"Desserts","id":112}];
 
-        // ======================= LOGIN =======================
-        function login() {
-            const user = document.getElementById('adminUsername').value.trim();
-            const pwd = document.getElementById('adminPassword').value;
+    // ====================== STATE ======================
+    let currentType = 'all';
+    let currentCategory = 'all';
+
+    const catNames = {
+        'breakfast-snacks': '🍳 Breakfast & Snacks',
+        'soup-beverage': '🍵 Soup & Beverages',
+        'veg-course': '🥦 Veg Course',
+        'non-veg-course': '🍗 Non-Veg Course',
+        'rice-roti': '🍚 Rice & Roti',
+        'dessert': '🍨 Desserts'
+    };
+
+    // ====================== LOGIN ======================
+    function doLogin() {
+        const user = document.getElementById('adminUsername').value.trim();
+        const pwd  = document.getElementById('adminPassword').value;
+        const btn  = document.getElementById('loginBtn');
+        const err  = document.getElementById('loginError');
+
+        err.classList.add('hidden');
+
+        if (!user || !pwd) {
+            err.innerHTML = '<i class="fa-solid fa-circle-exclamation mr-1"></i>Please fill in both fields!';
+            err.classList.remove('hidden');
+            return;
+        }
+
+        // Show loading spinner on button
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>Verifying...';
+
+        setTimeout(() => {
             if (user === 'admin' && pwd === 'admin') {
                 document.getElementById('loginScreen').classList.add('hidden');
                 document.getElementById('dashboardScreen').classList.remove('hidden');
                 fetchOrders();
-                renderMenu();
+                filterMenu();
             } else {
-                document.getElementById('loginError').classList.remove('hidden');
+                err.innerHTML = '<i class="fa-solid fa-circle-exclamation mr-1"></i>Incorrect username or password!';
+                err.classList.remove('hidden');
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Access Dashboard';
             }
-        }
+        }, 700);
+    }
 
-        function logout() {
-            document.getElementById('adminUsername').value = '';
-            document.getElementById('adminPassword').value = '';
-            document.getElementById('loginError').classList.add('hidden');
-            document.getElementById('loginScreen').classList.remove('hidden');
-            document.getElementById('dashboardScreen').classList.add('hidden');
-        }
+    function doLogout() {
+        document.getElementById('adminUsername').value = '';
+        document.getElementById('adminPassword').value = '';
+        document.getElementById('loginBtn').disabled = false;
+        document.getElementById('loginBtn').innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Access Dashboard';
+        document.getElementById('loginError').classList.add('hidden');
+        document.getElementById('loginScreen').classList.remove('hidden');
+        document.getElementById('dashboardScreen').classList.add('hidden');
+    }
 
-        // ======================= TABS =======================
-        function switchTab(tab) {
-            const tabs = ['orders', 'menu'];
-            tabs.forEach(t => {
-                document.getElementById(`tab-${t}`).className = t === tab
-                    ? 'tab-active px-5 py-2.5 rounded-xl font-bold text-sm transition'
-                    : 'tab-inactive px-5 py-2.5 rounded-xl font-bold text-sm transition';
-                const section = t === 'orders' ? 'ordersSection' : 'menuSection';
-                document.getElementById(section).classList.toggle('hidden', t !== tab);
-            });
-        }
-
-        // ======================= ORDERS =======================
-        async function fetchOrders() {
-            try {
-                const res = await fetch(`${BACKEND_URL}/api/orders`);
-                const data = await res.json();
-                document.getElementById('ordersLoading').classList.add('hidden');
-                document.getElementById('ordersTable').classList.remove('hidden');
-
-                const tbody = document.getElementById('ordersBody');
-                tbody.innerHTML = '';
-
-                if (data.success && data.orders.length > 0) {
-                    document.getElementById('orderCount').textContent = `${data.orders.length} orders`;
-                    data.orders.forEach((order, i) => {
-                        const date = new Date(order.createdAt).toLocaleString('en-IN');
-                        const itemsHtml = order.items.map(x => `${x.name} <span class="text-gold">x${x.quantity}</span>`).join('<br>');
-                        tbody.innerHTML += `
-                            <tr class="menu-row transition">
-                                <td class="px-4 py-3 text-gray-500">${i + 1}</td>
-                                <td class="px-4 py-3 text-gray-400 whitespace-nowrap text-xs">${date}</td>
-                                <td class="px-4 py-3 font-semibold">${order.customerName}</td>
-                                <td class="px-4 py-3 text-gray-300">Room: <span class="text-gold">${order.deliveryAddress}</span><br><span class="text-xs text-gray-500">${order.contactNumber}</span></td>
-                                <td class="px-4 py-3 text-xs text-gray-300 leading-relaxed">${itemsHtml}</td>
-                                <td class="px-4 py-3 font-bold text-gold">₹${order.totalAmount}</td>
-                                <td class="px-4 py-3"><span class="px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-400 text-xs">${order.orderStatus}</span></td>
-                            </tr>`;
-                    });
-                } else {
-                    document.getElementById('noOrders').classList.remove('hidden');
-                }
-            } catch (err) {
-                document.getElementById('ordersLoading').innerHTML = `<div class="p-8 text-center text-red-400"><i class="fa-solid fa-triangle-exclamation text-2xl mb-2"></i><p class="text-sm">Backend offline. Please start the backend server.</p></div>`;
+    // ====================== TABS ======================
+    function switchTab(tab) {
+        ['orders','menu'].forEach(t => {
+            const btn = document.getElementById(`tab-${t}`);
+            const sec = document.getElementById(`${t}Section`);
+            if (t === tab) {
+                btn.className = 'tab-active px-5 py-2.5 rounded-xl font-bold text-sm transition';
+                sec.classList.remove('hidden');
+            } else {
+                btn.className = 'tab-inactive px-5 py-2.5 rounded-xl font-bold text-sm transition';
+                sec.classList.add('hidden');
             }
-        }
+        });
+    }
 
-        // ======================= FOOD MENU =======================
-        const categoryNames = {
-            'breakfast-snacks': '🍳 Breakfast & Snacks',
-            'soup-beverage': '🍵 Soup & Beverages',
-            'veg-course': '🥦 Veg Course',
-            'non-veg-course': '🍗 Non-Veg Course',
-            'rice-roti': '🍚 Rice & Roti',
-            'dessert': '🍨 Desserts'
-        };
+    // ====================== ORDERS ======================
+    async function fetchOrders() {
+        try {
+            const res  = await fetch(`${BACKEND_URL}/api/orders`);
+            const data = await res.json();
 
-        function renderMenu() {
-            filterMenu();
-        }
+            document.getElementById('ordersLoading').classList.add('hidden');
+            document.getElementById('ordersContent').classList.remove('hidden');
 
-        function setCategory(cat) {
-            currentCategory = cat;
-            document.querySelectorAll('[id^="cat-"]').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`cat-${cat}`).classList.add('active');
-            filterMenu();
-        }
-
-        function setType(type) {
-            currentType = type;
-            document.querySelectorAll('[id^="type-"]').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(`type-${type === 'all' ? 'all' : type === 'veg' ? 'veg' : 'nonveg'}`).classList.add('active');
-            filterMenu();
-        }
-
-        function filterMenu() {
-            const query = document.getElementById('menuSearch').value.toLowerCase().trim();
-            let filtered = products;
-
-            if (currentCategory !== 'all') {
-                filtered = filtered.filter(p => p.category === currentCategory);
-            }
-            if (currentType !== 'all') {
-                filtered = filtered.filter(p => p.type === currentType);
-            }
-            if (query) {
-                filtered = filtered.filter(p =>
-                    p.name.toLowerCase().includes(query) ||
-                    p.subCategory.toLowerCase().includes(query) ||
-                    categoryNames[p.category].toLowerCase().includes(query)
-                );
-            }
-
-            document.getElementById('menuCount').textContent = `${filtered.length} items`;
-            const tbody = document.getElementById('menuBody');
+            const tbody = document.getElementById('ordersBody');
             tbody.innerHTML = '';
 
-            if (filtered.length === 0) {
-                document.getElementById('noMenuResults').classList.remove('hidden');
-            } else {
-                document.getElementById('noMenuResults').classList.add('hidden');
-                filtered.forEach((item, i) => {
-                    const isVeg = item.type === 'veg';
+            if (data.success && data.orders.length > 0) {
+                document.getElementById('orderCount').textContent = `${data.orders.length} orders`;
+                data.orders.forEach((o, i) => {
+                    const date  = new Date(o.createdAt).toLocaleString('en-IN');
+                    const items = o.items.map(x => `${x.name} <span class="text-gold">x${x.quantity}</span>`).join('<br>');
                     tbody.innerHTML += `
-                        <tr class="menu-row transition">
-                            <td class="px-4 py-3 text-gray-600 text-xs">${i + 1}</td>
-                            <td class="px-4 py-3 font-medium">${item.name}</td>
-                            <td class="px-4 py-3 text-xs text-gray-400">${categoryNames[item.category] || item.category}</td>
-                            <td class="px-4 py-3 text-xs text-gray-400">${item.subCategory}</td>
-                            <td class="px-4 py-3">
-                                <span class="px-2 py-0.5 rounded-full text-xs font-bold ${isVeg ? 'badge-veg' : 'badge-nonveg'}">
-                                    ${isVeg ? '🟢 Veg' : '🔴 Non-Veg'}
-                                </span>
-                            </td>
-                            <td class="px-4 py-3 font-bold text-gold">₹${item.price}</td>
+                        <tr>
+                            <td class="px-4 py-3 text-gray-600 text-xs">${i+1}</td>
+                            <td class="px-4 py-3 text-gray-500 text-xs whitespace-nowrap">${date}</td>
+                            <td class="px-4 py-3 font-semibold">${o.customerName}</td>
+                            <td class="px-4 py-3 text-sm text-gray-300">Room: <span class="text-gold">${o.deliveryAddress}</span><br><span class="text-xs text-gray-600">${o.contactNumber}</span></td>
+                            <td class="px-4 py-3 text-xs text-gray-300 leading-relaxed">${items}</td>
+                            <td class="px-4 py-3 font-bold text-gold">₹${o.totalAmount}</td>
+                            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full bg-yellow-500/15 text-yellow-400 text-xs">${o.orderStatus}</span></td>
                         </tr>`;
                 });
+            } else {
+                document.getElementById('noOrders').classList.remove('hidden');
             }
+        } catch (e) {
+            document.getElementById('ordersLoading').innerHTML = `
+                <div class="p-10 text-center">
+                    <i class="fa-solid fa-plug-circle-xmark text-red-500 text-3xl mb-3 block"></i>
+                    <p class="text-red-400 text-sm">Backend server offline.<br><span class="text-gray-600 text-xs">Start backend first: <code>node server.js</code></span></p>
+                </div>`;
         }
+    }
+
+    // ====================== FOOD MENU ======================
+    function setType(type) {
+        currentType = type;
+        document.querySelectorAll('[id^="type-"]').forEach(b => b.classList.remove('active'));
+        const idMap = { all:'type-all', veg:'type-veg', 'non-veg':'type-nonveg' };
+        document.getElementById(idMap[type]).classList.add('active');
+        filterMenu();
+    }
+
+    function setCategory(cat) {
+        currentCategory = cat;
+        document.querySelectorAll('[id^="cat-"]').forEach(b => b.classList.remove('active'));
+        document.getElementById(`cat-${cat}`).classList.add('active');
+        filterMenu();
+    }
+
+    function filterMenu() {
+        const q = (document.getElementById('menuSearch')?.value || '').toLowerCase().trim();
+        let list = products;
+
+        if (currentCategory !== 'all') list = list.filter(p => p.category === currentCategory);
+        if (currentType !== 'all')     list = list.filter(p => p.type === currentType);
+        if (q) list = list.filter(p =>
+            p.name.toLowerCase().includes(q) ||
+            p.subCategory.toLowerCase().includes(q) ||
+            (catNames[p.category]||'').toLowerCase().includes(q)
+        );
+
+        document.getElementById('menuCount').textContent = `${list.length} items`;
+        const tbody = document.getElementById('menuBody');
+        tbody.innerHTML = '';
+
+        if (list.length === 0) {
+            document.getElementById('noMenuResults').classList.remove('hidden');
+        } else {
+            document.getElementById('noMenuResults').classList.add('hidden');
+            list.forEach((p, i) => {
+                const veg = p.type === 'veg';
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="px-4 py-3 text-gray-600 text-xs">${i+1}</td>
+                        <td class="px-4 py-3 font-medium">${p.name}</td>
+                        <td class="px-4 py-3 text-xs text-gray-500">${catNames[p.category]||p.category}</td>
+                        <td class="px-4 py-3 text-xs text-gray-500">${p.subCategory}</td>
+                        <td class="px-4 py-3">
+                            <span class="px-2 py-0.5 rounded-full text-xs font-semibold ${veg?'badge-veg':'badge-nonveg'}">
+                                ${veg?'🟢 Veg':'🔴 Non-Veg'}
+                            </span>
+                        </td>
+                        <td class="px-4 py-3 font-bold text-gold">₹${p.price}</td>
+                    </tr>`;
+            });
+        }
+    }
     </script>
 </body>
 </html>
