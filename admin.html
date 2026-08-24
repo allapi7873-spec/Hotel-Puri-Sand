@@ -553,10 +553,20 @@
             pill.innerHTML = `<span class="pill-dot"></span>${newState ? 'ON' : 'OFF'}`;
         }
         if (row) {
-            row.className = newState ? '' : 'opacity-40';
-            // Also update item name strikethrough
+            if (newState) {
+                row.classList.remove('opacity-40');
+            } else {
+                row.classList.add('opacity-40');
+            }
+            
             const nameTd = row.querySelector('td:nth-child(2)');
-            if (nameTd) nameTd.className = `px-4 py-3 font-medium ${newState ? '' : 'line-through text-gray-500'}`;
+            if (nameTd) {
+                if (newState) {
+                    nameTd.classList.remove('line-through', 'text-gray-500');
+                } else {
+                    nameTd.classList.add('line-through', 'text-gray-500');
+                }
+            }
         }
 
         // 4. Show success toast (localStorage always works)
