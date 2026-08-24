@@ -1533,7 +1533,8 @@ _Please confirm my order ASAP._`;
     // 4. WhatsApp Number (Your Hotel number)
     const hotelNumber = "919090623235";
     
-    const whatsappUrl = `https://wa.me/${hotelNumber}?text=${encodedText}`;
+    // Use deep link to force opening the app directly without intermediate web page
+    const whatsappUrl = `whatsapp://send?phone=${hotelNumber}&text=${encodedText}`;
 
     // Mobile fallback handling for popups
     setTimeout(() => {
@@ -1579,7 +1580,8 @@ function processTableBooking() {
     const whatsappNumber = "919437752000"; 
     
     const encodedText = encodeURIComponent(bookingText);
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedText}`;
+    // Use deep link to force opening the app directly without intermediate web page
+    const whatsappUrl = `whatsapp://send?phone=${whatsappNumber}&text=${encodedText}`;
     
     window.location.href = whatsappUrl;
 }
