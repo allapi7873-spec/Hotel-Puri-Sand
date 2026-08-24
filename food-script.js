@@ -1420,6 +1420,11 @@ document.addEventListener("DOMContentLoaded", () => {
             cartSlider.style.transform = "translateX(0)";
         });
     }
+    
+    const checkoutFinalBtn = document.getElementById("checkout-btn");
+    if (checkoutFinalBtn) {
+        checkoutFinalBtn.addEventListener("click", processCheckout);
+    }
 });
 
 // Process WhatsApp Checkout
@@ -1446,10 +1451,13 @@ async function processCheckout() {
         return;
     }
 
-    const orderButton = document.querySelector("#checkout-form button");
-    const originalText = orderButton.innerHTML;
-    orderButton.innerHTML = "<i class='fa-solid fa-spinner fa-spin'></i> Processing...";
-    orderButton.disabled = true;
+    const orderButton = document.getElementById("checkout-btn");
+    let originalText = "Place Order via WhatsApp";
+    if (orderButton) {
+        originalText = orderButton.innerHTML;
+        orderButton.innerHTML = "<i class='fa-solid fa-spinner fa-spin'></i> Processing...";
+        orderButton.disabled = true;
+    }
 
     // Calculate total amount
     const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -1529,11 +1537,13 @@ _Please confirm my order ASAP._`;
 
     // Mobile fallback handling for popups
     setTimeout(() => {
-        orderButton.innerHTML = originalText;
-        orderButton.disabled = false;
+        if (orderButton) {
+            orderButton.innerHTML = originalText;
+            orderButton.disabled = false;
+        }
         toggleCart();
         cart = [];
-        updateCart();
+        updateCartUI();
     }, 1000);
     
     // Switch to current window location href for mobile compatibility
