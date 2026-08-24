@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Optimization -->
+    <title>Puri Sand Hotel Menu | Room Service & Food Ordering</title>
+    <meta name="description" content="Explore the majestic menu of Puri Sand Hotel. Authentic Indian, Mughlai, and Odia dishes available for Room Service.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="./main logo.png" type="image/png">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="food-style.css">
+</head>
+<body class="loading">
+
+    <!-- Royal Preloader -->
+    <div id="preloader">
+        <div class="door door-left"></div>
+        <div class="door door-right"></div>
+        <div class="preloader-content">
+            <img src="./main logo.png" alt="Puri Sand Logo" class="preloader-logo" onerror="this.style.display='none'">
+        </div>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="navbar page-header">
+        <div class="logo">
+            <a href="/">
+                <img src="./main logo.png" alt="Puri Sand Hotel" class="nav-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <h1 style="display:none; color: var(--primary-gold); font-size: 1.5rem;">Puri Sand Hotel</h1>
+            </a>
+        </div>
+        <nav class="desktop-nav">
+            <a href="/">Home</a>
+            <a href="about">About</a>
+            <a href="rooms">Rooms</a>
+            <a href="amenities">Amenities</a>
+            <a href="food" class="active">Food Menu</a>
+        </nav>
+        <div class="nav-right">
+            <button class="cart-btn" id="open-cart-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                <span id="cart-badge" class="badge">0</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="page-title-header">
+        <h2>Royal Menu</h2>
+        <p>Order from our 170+ authentic dishes</p>
+    </div>
+
+    <!-- Menu Section -->
+    <main id="menu" class="menu-section" style="padding-top: 20px;">
+        
+
+
+                                <!-- Sticky Menu Tabs -->
+        <div class="sticky-menu-tabs">
+            <div class="category-tabs" id="category-tabs">
+                <button class="tab-btn active" data-main-category="breakfast-snacks">Breakfast & Snacks</button>
+                <button class="tab-btn" data-main-category="soups-beverages">Soups & Beverages</button>
+                <button class="tab-btn" data-main-category="pure-veg">Pure Veg</button>
+                <button class="tab-btn" data-main-category="non-veg">Non-Veg</button>
+                <button class="tab-btn" data-main-category="rice-thali">Rice & Thali</button>
+            </div>
+    
+            <div class="sub-category-tabs" id="sub-category-tabs">
+                <!-- Updated dynamically in script.js -->
+            </div>
+        </div>
+
+        <div class="menu-list-container" id="product-container">
+            <!-- Products will be injected by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Sticky Cart Footer (Blinkit Style) -->
+    <div class="sticky-cart-footer" id="sticky-cart-footer" style="display: none;">
+        <div class="sticky-cart-info">
+            <span id="sticky-cart-count">1 Item</span> | <span id="sticky-cart-price">&#8377;0</span>
+        </div>
+        <button class="sticky-view-cart-btn" onclick="toggleCart()">
+            View Cart <span>&#10095;</span>
+        </button>
+    </div>
+
+    <!-- WhatsApp Cart Sidebar / Modal -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-slider" id="cart-slider">
+            <!-- STEP 1: CART ITEMS -->
+            <div class="cart-step cart-step-1">
+                <div class="cart-header">
+                    <h2>Your Royal Cart</h2>
+                    <button class="close-btn" id="close-cart-btn">&times;</button>
+                </div>
+                <div class="cart-body" id="cart-items">
+                    <div class="empty-cart-msg">Aapka cart abhi khaali hai!</div>
+                </div>
+                <div class="cart-footer">
+                    <div class="total-row subtotal">
+                        <span>Subtotal:</span>
+                        <span class="total-price">&#8377;<span id="cart-subtotal-price">0</span></span>
+                    </div>
+                    <div class="total-row gst">
+                        <span>GST (18%):</span>
+                        <span class="total-price">&#8377;<span id="cart-gst-price">0</span></span>
+                    </div>
+                    <div class="total-row grand-total">
+                        <span>Grand Total:</span>
+                        <span class="total-price">&#8377;<span id="cart-total-price">0</span></span>
+                    </div>
+                    
+                    <button class="btn-whatsapp proceed-btn" id="proceed-checkout-btn">
+                        Proceed to Checkout
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 2: CHECKOUT DETAILS -->
+            <div class="cart-step cart-step-2">
+                <div class="cart-header">
+                    <button class="back-btn" id="back-to-cart-btn" style="background:none; border:none; color:white; font-size:1.2rem; cursor:pointer; font-weight:bold;">&#8592; Back</button>
+                    <h2 style="font-size: 1.2rem;">Customer Details</h2>
+                    <button class="close-btn" onclick="toggleCart()">&times;</button>
+                </div>
+                <div class="cart-body">
+                    <div class="checkout-form" id="checkout-form-container">
+                        <input type="text" id="cust-name" placeholder="Full Name" required>
+                        <input type="text" id="cust-room" placeholder="Room Number" required>
+                        <input type="tel" id="cust-alt-phone" placeholder="Mobile Number" required>
+                        <div id="checkout-error" style="color: #d9534f; font-size: 0.85rem; text-align: center; display: none; margin-top: 5px; font-weight: bold;"></div>
+                        <p style="font-size: 0.85rem; color: #666; margin-top: 5px; text-align: center;">
+                            &#128205; Your food will be delivered directly to your room.
+                        </p>
+                    </div>
+                </div>
+                <div class="cart-footer">
+                    <button class="btn-whatsapp" id="checkout-btn">
+                        Place Order via WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Footer Nav (Bottom Bar) -->
+    <div class="mobile-bottom-nav">
+        <a href="/" class="nav-item">
+            <span class="icon">&#127968;</span>
+            <span>Home</span>
+        </a>
+        <a href="/menu" class="nav-item active">
+            <span class="icon">&#127869;</span>
+            <span>Menu</span>
+        </a>
+        <a href="/about" class="nav-item">
+            <span class="icon">&#11088;</span>
+            <span>About</span>
+        </a>
+        <a href="/contact" class="nav-item">
+            <span class="icon">&#128222;</span>
+            <span>Contact</span>
+        </a>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js?v=45"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
