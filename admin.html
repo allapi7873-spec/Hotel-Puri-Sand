@@ -372,7 +372,7 @@
                 loadBackendData().then(() => filterMenu());
                 fetchOrders();
                 if (!orderPollInterval) {
-                    orderPollInterval = setInterval(() => fetchOrders(true), 10000);
+                    orderPollInterval = setInterval(() => fetchOrders(true), 3000);
                 }
             } else {
                 err.innerHTML = '<i class="fa-solid fa-circle-exclamation mr-1"></i>Incorrect username or password!';
@@ -900,7 +900,7 @@
             loadBackendData().then(() => filterMenu());
             fetchOrders();
             if (!orderPollInterval) {
-                orderPollInterval = setInterval(() => fetchOrders(true), 10000);
+                orderPollInterval = setInterval(() => fetchOrders(true), 3000);
             }
         }
     });
