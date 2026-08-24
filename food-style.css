@@ -720,6 +720,8 @@ body:not(.loading) .preloader-content { opacity: 0; }
 }
 .cart-item-controls.in-menu span {
     padding: 0 10px;
+    color: var(--primary-dark-gold);
+    font-weight: bold;
 }
 
 /* --- Royal Gallery Section --- */
