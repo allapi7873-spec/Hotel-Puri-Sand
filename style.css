@@ -20,7 +20,7 @@
 
 html, body {
   width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
   position: relative;
   background-color: var(--color-luxury-white);
 }

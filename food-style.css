@@ -24,7 +24,7 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-html, 
+html, body { overflow-x: clip; }
 
 img {
     max-width: 100%;
@@ -458,12 +458,17 @@ body:not(.loading) .preloader-content { opacity: 0; }
 /* Menu List */
 .sticky-menu-tabs {
     position: sticky;
-    top: 65px; /* Matches navbar height after scroll */
+    top: 0; /* Mobile sticks to top */
     z-index: 90;
     background: #050508;
     padding-top: 10px;
     margin-bottom: 10px;
     border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+@media (min-width: 769px) {
+    .sticky-menu-tabs {
+        top: 65px;
+    }
 }
 .category-tabs {
     display: flex; justify-content: flex-start; flex-wrap: nowrap; gap: 8px; margin-bottom: 5px; width: 100%; overflow-x: auto;
@@ -896,7 +901,12 @@ body:not(.loading) .preloader-content { opacity: 0; }
     .hero-buttons a { margin: 0 !important; width: 100%; }
 
     /* App-like Menu List */
-    .category-tabs {
+    @media (min-width: 769px) {
+    .sticky-menu-tabs {
+        top: 65px;
+    }
+}
+.category-tabs {
         flex-wrap: nowrap;
         justify-content: flex-start;
         padding: 5px 10px;
