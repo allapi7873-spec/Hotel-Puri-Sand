@@ -959,6 +959,11 @@ const menuCategories = [
 let cart = [];
 let currentCategory = "breakfast-snacks";
 let currentSubCategory = "Breakfast";
+let productAvailability = {}; // { productId: true/false } — from backend
+
+// Backend URL — change to Render URL after hosting
+// const BACKEND_URL = 'https://hotel-puri-sand-backend.onrender.com';
+const BACKEND_URL = 'http://localhost:5000';
 
 // DOM Elements
 const productContainer = document.getElementById("product-container");
@@ -975,17 +980,29 @@ const bookWhatsappBtn = document.getElementById("book-whatsapp-btn");
 const navbar = document.querySelector(".navbar");
 
 // Initialize App
-function init() {
+async function init() {
     handlePreloader();
     handleNavbarScroll();
-    
-    // Only render menu if on menu.html
+
+    // Only run menu logic on food.html
     if(productContainer) {
+        // 1. Fetch initial availability from backend (silently ignore if offline)
+        try {
+            const res = await fetch(`${BACKEND_URL}/api/product-status`);
+            const data = await res.json();
+            if (data.success) productAvailability = data.statuses;
+        } catch(e) {
+            console.warn('Backend offline, all items shown as available.');
+        }
+
         renderCategories();
         setupMenuListeners();
         renderProducts(currentCategory, currentSubCategory);
+
+        // 2. Connect to SSE for real-time updates
+        connectSSE();
     }
-    
+
     // Global Listeners
     if(openCartBtn && cartSidebar) {
         openCartBtn.addEventListener("click", toggleCart);
@@ -996,6 +1013,33 @@ function init() {
 
     if(bookWhatsappBtn) {
         bookWhatsappBtn.addEventListener("click", processTableBooking);
+    }
+}
+
+// Connect to SSE (Server-Sent Events) for live updates
+function connectSSE() {
+    try {
+        const eventSource = new EventSource(`${BACKEND_URL}/api/events`);
+
+        eventSource.onmessage = (event) => {
+            try {
+                const msg = JSON.parse(event.data);
+                if (msg.type === 'PRODUCT_STATUS_CHANGE') {
+                    // Update local availability map
+                    productAvailability[msg.productId] = msg.isAvailable;
+                    // Re-render current view to reflect change instantly
+                    renderProducts(currentCategory, currentSubCategory,
+                        document.getElementById('menu-search') ? document.getElementById('menu-search').value : '');
+                }
+            } catch(e) {}
+        };
+
+        eventSource.onerror = () => {
+            // Auto-reconnect handled by browser
+            console.warn('SSE disconnected, will auto-retry...');
+        };
+    } catch(e) {
+        console.warn('SSE not supported or backend offline.');
     }
 }
 
@@ -1126,10 +1170,16 @@ function renderProducts(mainCategory, subCategory, searchQuery = "") {
         const isNonVeg = product.type === 'non-veg';
         const dietMark = isNonVeg ? '<span class="diet-mark non-veg" title="Non-Vegetarian"></span>' : '<span class="diet-mark veg" title="Vegetarian"></span>';
 
+        // Check availability — default true if not set
+        const isAvailable = productAvailability[product.id] !== false;
+
         const cartItem = cart.find(i => i.id === product.id);
-        
+
         let actionHTML = '';
-        if (cartItem) {
+        if (!isAvailable) {
+            // Item OFF by admin — show unavailable badge
+            actionHTML = `<span style="font-size:11px; color:#ff6b6b; border:1px solid #ff6b6b44; padding:4px 10px; border-radius:20px; background:rgba(255,107,107,0.08);">Not Available</span>`;
+        } else if (cartItem) {
             actionHTML = `
                 <div class="cart-item-controls in-menu">
                     <button class="qty-btn" onclick="updateQuantity(${product.id}, -1)">-</button>
@@ -1143,6 +1193,10 @@ function renderProducts(mainCategory, subCategory, searchQuery = "") {
 
         const productEl = document.createElement("div");
         productEl.classList.add("menu-list-item");
+        if (!isAvailable) {
+            productEl.style.opacity = '0.45';
+            productEl.style.filter = 'grayscale(60%)';
+        }
         productEl.innerHTML = `
             <div class="item-details">
                 <h4 style="display:flex; align-items:flex-start; margin-bottom:5px; margin-top:0;">${dietMark}<span style="white-space: normal; overflow-wrap: anywhere; word-break: break-word; flex: 1; min-width: 0;">${product.name}</span></h4>
