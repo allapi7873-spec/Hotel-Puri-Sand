@@ -12,8 +12,8 @@ app.use(express.json());
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('✅ Connected to MongoDB successfully!'))
-  .catch(err => console.error('❌ MongoDB connection error:', err));
+  .then(() => console.log('âœ… Connected to MongoDB successfully!'))
+  .catch(err => console.error('âŒ MongoDB connection error:', err));
 
 // --- Mongoose Models ---
 
@@ -25,7 +25,7 @@ const OrderSchema = new mongoose.Schema({
     items: [{
         name: String,
         price: Number,
-        quantity: Number
+        quantity: Number, type: String
     }],
     totalAmount: { type: Number, required: true },
     orderStatus: { type: String, default: 'Pending' },
@@ -74,14 +74,14 @@ function broadcastToClients(data) {
     sseClients.forEach(client => {
         try { client.res.write(msg); } catch(e) {}
     });
-    console.log(`📡 Broadcast to ${sseClients.length} client(s):`, data);
+    console.log(`ðŸ“¡ Broadcast to ${sseClients.length} client(s):`, data);
 }
 
 // --- API Routes ---
 
 // Health Check
 app.get('/', (req, res) => {
-    res.send('Hotel Puri Sand Backend is running! 🚀');
+    res.send('Hotel Puri Sand Backend is running! ðŸš€');
 });
 
 // SSE: Real-time event stream
@@ -94,7 +94,7 @@ app.get('/api/events', (req, res) => {
 
     const clientId = Date.now();
     sseClients.push({ id: clientId, res });
-    console.log(`🔌 SSE client connected: ${clientId} (total: ${sseClients.length})`);
+    console.log(`ðŸ”Œ SSE client connected: ${clientId} (total: ${sseClients.length})`);
 
     // Send heartbeat every 25s to keep connection alive
     const heartbeat = setInterval(() => {
@@ -104,7 +104,7 @@ app.get('/api/events', (req, res) => {
     req.on('close', () => {
         clearInterval(heartbeat);
         sseClients = sseClients.filter(c => c.id !== clientId);
-        console.log(`🔌 SSE client disconnected: ${clientId} (total: ${sseClients.length})`);
+        console.log(`ðŸ”Œ SSE client disconnected: ${clientId} (total: ${sseClients.length})`);
     });
 });
 
@@ -281,7 +281,7 @@ app.get('/api/bookings', async (req, res) => {
 // Start Server (Local only)
 if (process.env.NODE_ENV !== 'production') {
     app.listen(PORT, () => {
-        console.log(`🚀 Server is running on http://localhost:${PORT}`);
+        console.log(`ðŸš€ Server is running on http://localhost:${PORT}`);
     });
 }
 
