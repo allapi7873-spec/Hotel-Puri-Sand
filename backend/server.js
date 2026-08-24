@@ -54,6 +54,18 @@ const ProductStatusSchema = new mongoose.Schema({
 });
 const ProductStatus = mongoose.model('ProductStatus', ProductStatusSchema);
 
+// 4. Custom Products Schema (Added by Admin)
+const CustomProductSchema = new mongoose.Schema({
+    id: { type: Number, required: true, unique: true },
+    name: { type: String, required: true },
+    price: { type: Number, required: true },
+    type: { type: String, required: true }, // 'veg' or 'non-veg'
+    category: { type: String, required: true },
+    subCategory: { type: String, default: 'Specials' },
+    createdAt: { type: Date, default: Date.now }
+});
+const CustomProduct = mongoose.model('CustomProduct', CustomProductSchema);
+
 // --- SSE: Connected Clients List ---
 let sseClients = [];
 
@@ -155,6 +167,45 @@ app.put('/api/product-price/:id', async (req, res) => {
     } catch (error) {
         console.error('Price Update Error:', error);
         res.status(500).json({ success: false, message: 'Failed to update price.' });
+    }
+});
+
+// GET custom products
+app.get('/api/custom-products', async (req, res) => {
+    try {
+        const products = await CustomProduct.find();
+        res.status(200).json({ success: true, products });
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Failed to fetch custom products.' });
+    }
+});
+
+// POST new custom product (Admin action)
+app.post('/api/custom-products', async (req, res) => {
+    try {
+        const { name, price, type, category, subCategory } = req.body;
+        // Generate a unique ID (starting from 200 to avoid conflicts with 1-112 hardcoded items)
+        const count = await CustomProduct.countDocuments();
+        const newId = 200 + count + Math.floor(Math.random() * 1000); // Random offset for safety
+
+        const newProduct = new CustomProduct({
+            id: newId,
+            name,
+            price: Number(price),
+            type,
+            category,
+            subCategory: subCategory || 'Specials'
+        });
+
+        await newProduct.save();
+
+        // Broadcast real-time update to all connected SSE clients
+        broadcastToClients({ type: 'NEW_PRODUCT_ADDED', product: newProduct });
+
+        res.status(201).json({ success: true, product: newProduct });
+    } catch (error) {
+        console.error('Add Product Error:', error);
+        res.status(500).json({ success: false, message: 'Failed to add new product.' });
     }
 });
 

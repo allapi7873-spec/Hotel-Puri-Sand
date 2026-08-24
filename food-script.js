@@ -3,7 +3,7 @@
 // =========================================
 
 // Full Menu Data
-const products = [
+let products = [
     {
         "name": "Bread Toast with Butter & Jam",
         "price": 50,
@@ -999,6 +999,16 @@ async function init() {
         try {
             const controller = new AbortController();
             setTimeout(() => controller.abort(), 3000);
+            
+            // Load custom products first
+            const prodRes = await fetch(`${BACKEND_URL}/api/custom-products`, { signal: controller.signal });
+            const prodData = await prodRes.json();
+            if (prodData.success && prodData.products) {
+                const newIds = new Set(prodData.products.map(p => p.id));
+                products = products.filter(p => !newIds.has(p.id));
+                products = [...products, ...prodData.products];
+            }
+
             const res = await fetch(`${BACKEND_URL}/api/product-status`, { signal: controller.signal });
             const data = await res.json();
             if (data.success) {
@@ -1085,6 +1095,13 @@ function connectSSE() {
                     renderProducts(currentCategory, currentSubCategory,
                         document.getElementById('menu-search') ? document.getElementById('menu-search').value : '');
                     updateCartUI();
+                } else if (msg.type === 'NEW_PRODUCT_ADDED') {
+                    // Update frontend dynamically
+                    products.push(msg.product);
+                    productAvailability[msg.product.id] = true;
+                    productPrices[msg.product.id] = msg.product.price;
+                    renderProducts(currentCategory, currentSubCategory,
+                        document.getElementById('menu-search') ? document.getElementById('menu-search').value : '');
                 }
             } catch(e) {}
         };
