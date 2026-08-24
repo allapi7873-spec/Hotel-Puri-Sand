@@ -183,7 +183,8 @@
                                 <th class="px-2 md:px-4 py-3 hidden md:table-cell">#</th>
                                 <th class="px-2 md:px-4 py-3 hidden md:table-cell">Time</th>
                                 <th class="px-2 md:px-4 py-3 hidden md:table-cell">Customer</th>
-                                <th class="px-2 md:px-4 py-3">Room/Contact</th>
+                                <th class="px-2 md:px-4 py-3 hidden md:table-cell">Room/Contact</th>
+                                <th class="px-2 md:px-4 py-3 md:hidden">Cust. Details</th>
                                 <th class="px-2 md:px-4 py-3">Items</th>
                                 <th class="px-2 md:px-4 py-3">Total</th>
                                 <th class="px-2 md:px-4 py-3 text-center">Status</th>
@@ -486,7 +487,12 @@
                             <td class="px-2 md:px-4 py-3 text-gray-600 text-xs hidden md:table-cell">${i+1}</td>
                             <td class="px-2 md:px-4 py-3 text-gray-500 text-xs whitespace-nowrap hidden md:table-cell">${date}</td>
                             <td class="px-2 md:px-4 py-3 font-semibold text-[13px] md:text-sm whitespace-nowrap hidden md:table-cell">${o.customerName}</td>
-                            <td class="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-300"><span class="text-gold font-bold whitespace-nowrap">${o.deliveryAddress}</span><br><span class="text-[10px] md:text-xs text-gray-600">${o.contactNumber}</span></td>
+                            <td class="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-300 hidden md:table-cell"><span class="text-gold font-bold whitespace-nowrap">${o.deliveryAddress}</span><br><span class="text-[10px] md:text-xs text-gray-600">${o.contactNumber}</span></td>
+                            <td class="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-300 md:hidden">
+                                <span class="text-white font-bold block mb-1">${o.customerName}</span>
+                                <span class="text-gold font-bold block">Room: ${o.deliveryAddress}</span>
+                                <span class="text-[10px] text-gray-500 block">${o.contactNumber}</span>
+                            </td>
                             <td class="px-2 md:px-4 py-3 text-[11px] md:text-xs text-gray-300 leading-relaxed">
                                 <span class="hidden md:inline">${items}</span>
                                 <button onclick="viewOrderModalOpen(${i})" class="md:hidden bg-gold/20 text-gold px-3 py-1.5 rounded text-[11px] font-bold border border-gold/30 hover:bg-gold/30"><i class="fa-solid fa-eye mr-1"></i>View</button>
