@@ -365,15 +365,15 @@ body:not(.loading) .preloader-content { opacity: 0; }
 /* WhatsApp Cart Sidebar */
 .cart-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.5); z-index: 2000;
+    background: rgba(0, 0, 0, 0.6); z-index: 99998;
     visibility: hidden; opacity: 0; transition: var(--transition);
 }
 .cart-overlay.active { visibility: visible; opacity: 1; }
 
 .cart-sidebar {
     position: fixed; top: 0; right: -400px; width: 100%; max-width: 400px;
-    height: 100vh; background: var(--bg-dark); /* DARK BG */ z-index: 2001;
-    box-shadow: -5px 0 30px rgba(0,0,0,0.1);
+    height: 100vh; background: var(--bg-dark); /* DARK BG */ z-index: 99999;
+    box-shadow: -5px 0 30px rgba(0,0,0,0.5);
     transition: right 0.3s ease;
     overflow: hidden;
 }
