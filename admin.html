@@ -174,7 +174,7 @@
                     <span id="orderCount" class="text-xs text-gray-500 bg-white/5 px-3 py-1 rounded-full">—</span>
                 </div>
                 <div class="overflow-x-auto no-scrollbar">
-                    <table class="w-full text-left">
+                    <table class="w-full text-left min-w-[700px] md:min-w-full">
                         <thead>
                             <tr class="bg-black/40 text-gold text-[11px] uppercase tracking-wider">
                                 <th class="px-2 md:px-4 py-3 hidden md:table-cell">#</th>
@@ -240,7 +240,7 @@
                     </div>
                 </div>
                 <div class="overflow-x-auto no-scrollbar">
-                    <table class="w-full text-left">
+                    <table class="w-full text-left min-w-[600px] md:min-w-full">
                         <thead class="hidden md:table-header-group">
                             <tr class="bg-black/40 text-gold text-[11px] uppercase tracking-wider">
                                 <th class="px-4 py-3">#</th>
@@ -448,10 +448,10 @@
                         <tr class="border-b border-gold/10">
                             <td class="px-2 md:px-4 py-3 text-gray-600 text-xs hidden md:table-cell">${i+1}</td>
                             <td class="px-2 md:px-4 py-3 text-gray-500 text-xs whitespace-nowrap hidden md:table-cell">${date}</td>
-                            <td class="px-2 md:px-4 py-3 font-semibold text-[13px] md:text-sm">${o.customerName}</td>
-                            <td class="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-300"><span class="text-gold font-bold">${o.deliveryAddress}</span><br><span class="text-[10px] md:text-xs text-gray-600">${o.contactNumber}</span></td>
-                            <td class="px-2 md:px-4 py-3 text-[11px] md:text-xs text-gray-300 leading-relaxed">${items}</td>
-                            <td class="px-2 md:px-4 py-3 font-bold text-gold text-[13px] md:text-sm">₹${o.totalAmount}</td>
+                            <td class="px-2 md:px-4 py-3 font-semibold text-[13px] md:text-sm whitespace-nowrap">${o.customerName}</td>
+                            <td class="px-2 md:px-4 py-3 text-xs md:text-sm text-gray-300 whitespace-nowrap"><span class="text-gold font-bold">${o.deliveryAddress}</span><br><span class="text-[10px] md:text-xs text-gray-600">${o.contactNumber}</span></td>
+                            <td class="px-2 md:px-4 py-3 text-[11px] md:text-xs text-gray-300 leading-relaxed min-w-[200px]">${items}</td>
+                            <td class="px-2 md:px-4 py-3 font-bold text-gold text-[13px] md:text-sm whitespace-nowrap">₹${o.totalAmount}</td>
                             <td class="px-2 md:px-4 py-3 text-center">
                                 <select onchange="updateOrderStatus('${o._id}', this)" class="bg-black/60 border border-gold/30 rounded-md text-[10px] md:text-xs px-2 py-1 ${o.orderStatus === 'Delivered' ? 'text-green-400' : (o.orderStatus === 'Cancelled' ? 'text-red-400' : 'text-yellow-400')} focus:outline-none focus:border-gold cursor-pointer">
                                     <option value="Pending" ${o.orderStatus === 'Pending' ? 'selected' : ''} class="text-yellow-400">Pending</option>
