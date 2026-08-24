@@ -49,6 +49,7 @@ const Booking = mongoose.model('Booking', BookingSchema);
 const ProductStatusSchema = new mongoose.Schema({
     productId: { type: Number, required: true, unique: true },
     isAvailable: { type: Boolean, default: true },
+    price: { type: Number },
     updatedAt: { type: Date, default: Date.now }
 });
 const ProductStatus = mongoose.model('ProductStatus', ProductStatusSchema);
@@ -95,14 +96,19 @@ app.get('/api/events', (req, res) => {
     });
 });
 
-// GET all product availability statuses
+// GET all product availability statuses and custom prices
 app.get('/api/product-status', async (req, res) => {
     try {
         const statuses = await ProductStatus.find();
-        // Return as an object: { productId: isAvailable }
         const statusMap = {};
-        statuses.forEach(s => { statusMap[s.productId] = s.isAvailable; });
-        res.status(200).json({ success: true, statuses: statusMap });
+        const pricesMap = {};
+        statuses.forEach(s => { 
+            statusMap[s.productId] = s.isAvailable; 
+            if (s.price !== undefined && s.price !== null) {
+                pricesMap[s.productId] = s.price;
+            }
+        });
+        res.status(200).json({ success: true, statuses: statusMap, prices: pricesMap });
     } catch (error) {
         res.status(500).json({ success: false, message: 'Failed to fetch statuses.' });
     }
@@ -127,6 +133,28 @@ app.put('/api/product-status/:id', async (req, res) => {
     } catch (error) {
         console.error('Toggle Error:', error);
         res.status(500).json({ success: false, message: 'Failed to update status.' });
+    }
+});
+
+// PUT update product price (Admin action)
+app.put('/api/product-price/:id', async (req, res) => {
+    try {
+        const productId = parseInt(req.params.id);
+        const { price } = req.body;
+
+        const updated = await ProductStatus.findOneAndUpdate(
+            { productId },
+            { price: Number(price), updatedAt: new Date() },
+            { upsert: true, new: true }
+        );
+
+        // Broadcast real-time update to all connected SSE clients
+        broadcastToClients({ type: 'PRODUCT_PRICE_CHANGE', productId, price: Number(price) });
+
+        res.status(200).json({ success: true, status: updated });
+    } catch (error) {
+        console.error('Price Update Error:', error);
+        res.status(500).json({ success: false, message: 'Failed to update price.' });
     }
 });
 

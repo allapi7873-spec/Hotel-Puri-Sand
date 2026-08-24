@@ -960,6 +960,7 @@ let cart = [];
 let currentCategory = "breakfast-snacks";
 let currentSubCategory = "Breakfast";
 let productAvailability = {}; // { productId: true/false } — from backend
+let productPrices = {}; // { productId: price } — from backend
 
 // Backend URL — change to Render URL after hosting
 // const BACKEND_URL = 'https://hotel-puri-sand-backend.onrender.com';
@@ -990,6 +991,8 @@ async function init() {
         try {
             const saved = localStorage.getItem('puriSandMenuStatus');
             if (saved) productAvailability = JSON.parse(saved);
+            const savedPrices = localStorage.getItem('puriSandMenuPrices');
+            if (savedPrices) productPrices = JSON.parse(savedPrices);
         } catch(e) {}
 
         // 2. Try backend (if online, overrides localStorage)
@@ -1000,8 +1003,10 @@ async function init() {
             const data = await res.json();
             if (data.success) {
                 productAvailability = { ...productAvailability, ...data.statuses };
+                if (data.prices) productPrices = { ...productPrices, ...data.prices };
                 // Keep localStorage in sync
                 localStorage.setItem('puriSandMenuStatus', JSON.stringify(productAvailability));
+                localStorage.setItem('puriSandMenuPrices', JSON.stringify(productPrices));
             }
         } catch(e) {
             console.warn('Backend offline — using localStorage data.');
@@ -1013,12 +1018,28 @@ async function init() {
 
         // 3. Listen to localStorage changes (cross-tab: admin changes reflect here instantly!)
         window.addEventListener('storage', (e) => {
+            let changed = false;
             if (e.key === 'puriSandMenuStatus' && e.newValue) {
                 try {
                     productAvailability = JSON.parse(e.newValue);
-                    renderProducts(currentCategory, currentSubCategory,
-                        document.getElementById('menu-search') ? document.getElementById('menu-search').value : '');
+                    changed = true;
                 } catch(ex) {}
+            }
+            if (e.key === 'puriSandMenuPrices' && e.newValue) {
+                try {
+                    productPrices = JSON.parse(e.newValue);
+                    // Update cart prices
+                    cart.forEach(item => {
+                        if (productPrices[item.id] !== undefined) {
+                            item.price = productPrices[item.id];
+                        }
+                    });
+                    changed = true;
+                } catch(ex) {}
+            }
+            if (changed) {
+                renderProducts(currentCategory, currentSubCategory, document.getElementById('menu-search') ? document.getElementById('menu-search').value : '');
+                updateCartUI();
             }
         });
 
@@ -1053,6 +1074,17 @@ function connectSSE() {
                     localStorage.setItem('puriSandMenuStatus', JSON.stringify(productAvailability));
                     renderProducts(currentCategory, currentSubCategory,
                         document.getElementById('menu-search') ? document.getElementById('menu-search').value : '');
+                } else if (msg.type === 'PRODUCT_PRICE_CHANGE') {
+                    productPrices[msg.productId] = msg.price;
+                    localStorage.setItem('puriSandMenuPrices', JSON.stringify(productPrices));
+                    
+                    // Update cart if item is there
+                    const cartItem = cart.find(i => i.id === msg.productId);
+                    if (cartItem) cartItem.price = msg.price;
+                    
+                    renderProducts(currentCategory, currentSubCategory,
+                        document.getElementById('menu-search') ? document.getElementById('menu-search').value : '');
+                    updateCartUI();
                 }
             } catch(e) {}
         };
@@ -1194,6 +1226,7 @@ function renderProducts(mainCategory, subCategory, searchQuery = "") {
 
         // Check availability — default true if not set
         const isAvailable = productAvailability[product.id] !== false;
+        const actualPrice = productPrices[product.id] !== undefined ? productPrices[product.id] : product.price;
 
         const cartItem = cart.find(i => i.id === product.id);
 
@@ -1222,7 +1255,7 @@ function renderProducts(mainCategory, subCategory, searchQuery = "") {
         productEl.innerHTML = `
             <div class="item-details">
                 <h4 style="display:flex; align-items:flex-start; margin-bottom:5px; margin-top:0;">${dietMark}<span style="white-space: normal; overflow-wrap: anywhere; word-break: break-word; flex: 1; min-width: 0;">${product.name}</span></h4>
-                <div class="item-price">${product.price === "MRP" ? "MRP" : "₹" + product.price}</div>
+                <div class="item-price">${actualPrice === "MRP" ? "MRP" : "₹" + actualPrice}</div>
             </div>
             <div class="item-actions" data-id="${product.id}">
                 ${actionHTML}
@@ -1273,11 +1306,13 @@ function toggleCart() {
 window.addToCart = function(productId) {
     const product = products.find(p => p.id === productId);
     const existingItem = cart.find(item => item.id === productId);
+    const actualPrice = productPrices[productId] !== undefined ? productPrices[productId] : product.price;
     
     if (existingItem) {
         existingItem.quantity += 1;
+        existingItem.price = actualPrice; // Ensure price is up-to-date
     } else {
-        cart.push({ ...product, quantity: 1 });
+        cart.push({ ...product, price: actualPrice, quantity: 1 });
     }
     
     updateCartUI();

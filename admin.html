@@ -282,6 +282,7 @@
     let currentType = 'all';
     let currentCategory = 'all';
     let productStatusMap = {};
+    let productPriceMap = {};
 
     const catNames = {
         'breakfast-snacks': '🍳 Breakfast & Snacks',
@@ -445,7 +446,12 @@
                                 <span class="hidden md:inline">${veg?'🟢 Veg':'🔴 Non-Veg'}</span>
                             </span>
                         </td>
-                        <td class="w-[50%] md:w-auto px-1 md:px-4 py-1 md:py-3 font-bold text-gold text-[13px] md:text-sm flex items-center md:table-cell text-center">₹${p.price}</td>
+                        <td class="w-[50%] md:w-auto px-1 md:px-4 py-1 md:py-3 font-bold text-gold text-[13px] md:text-sm flex items-center md:table-cell text-center">
+                            ₹<input type="number" id="price-${p.id}" value="${productPriceMap[p.id] !== undefined ? productPriceMap[p.id] : p.price}" 
+                                onblur="updatePrice(${p.id}, this.value)" 
+                                onkeypress="if(event.key==='Enter') this.blur()" 
+                                class="w-12 md:w-16 bg-transparent border-b border-gold/30 text-gold text-center focus:outline-none focus:border-gold ml-1 px-1 transition-colors">
+                        </td>
                         <td class="w-[50%] md:w-auto px-1 md:px-4 py-1 md:py-3 flex justify-end items-center md:table-cell text-center">
                             <button
                                 id="pill-${p.id}"
@@ -462,19 +468,20 @@
 
     // ========== localStorage helpers ==========
     const LS_KEY = 'puriSandMenuStatus';
+    const LS_PRICE_KEY = 'puriSandMenuPrices';
 
     function saveToLocalStorage() {
         localStorage.setItem(LS_KEY, JSON.stringify(productStatusMap));
+        localStorage.setItem(LS_PRICE_KEY, JSON.stringify(productPriceMap));
     }
 
     function loadFromLocalStorage() {
         try {
             const saved = localStorage.getItem(LS_KEY);
-            if (saved) {
-                const parsed = JSON.parse(saved);
-                // Merge: localStorage override
-                Object.assign(productStatusMap, parsed);
-            }
+            if (saved) Object.assign(productStatusMap, JSON.parse(saved));
+            
+            const savedPrices = localStorage.getItem(LS_PRICE_KEY);
+            if (savedPrices) Object.assign(productPriceMap, JSON.parse(savedPrices));
         } catch(e) {}
     }
 
@@ -492,11 +499,39 @@
             if (data.success) {
                 // Backend data wins over localStorage
                 productStatusMap = { ...productStatusMap, ...data.statuses };
+                if (data.prices) productPriceMap = { ...productPriceMap, ...data.prices };
                 // Sync localStorage with backend data
                 saveToLocalStorage();
             }
         } catch(e) {
             console.warn('Backend offline — using localStorage data.');
+        }
+    }
+
+    async function updatePrice(productId, newPriceStr) {
+        const newPrice = parseInt(newPriceStr);
+        if (isNaN(newPrice) || newPrice <= 0) return;
+        
+        const oldPrice = productPriceMap[productId] !== undefined ? productPriceMap[productId] : products.find(p => p.id === productId).price;
+        if (newPrice === oldPrice) return;
+
+        productPriceMap[productId] = newPrice;
+        saveToLocalStorage();
+
+        const inp = document.getElementById(`price-${productId}`);
+        if (inp) {
+            inp.classList.add('text-green-400');
+            setTimeout(() => inp.classList.remove('text-green-400'), 1000);
+        }
+
+        try {
+            await fetch(`${BACKEND_URL}/api/product-price/${productId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ price: newPrice })
+            });
+        } catch (e) {
+            console.error('Failed to update price on backend', e);
         }
     }
 
