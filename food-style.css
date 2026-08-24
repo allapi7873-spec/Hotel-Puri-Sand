@@ -619,6 +619,7 @@ body:not(.loading) .preloader-content { opacity: 0; }
 .menu-list-item {
     background: var(--bg-card); padding: 20px;
     border-radius: 16px; box-shadow: var(--shadow-light);
+    border: 1px solid rgba(212, 175, 55, 0.5);
     display: flex; justify-content: space-between; align-items: center;
 }
 .item-details {
