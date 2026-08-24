@@ -278,7 +278,12 @@ app.get('/api/bookings', async (req, res) => {
     }
 });
 
-// Start Server
-app.listen(PORT, () => {
-    console.log(`🚀 Server is running on http://localhost:${PORT}`);
-});
+// Start Server (Local only)
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`🚀 Server is running on http://localhost:${PORT}`);
+    });
+}
+
+// Export for Vercel Serverless
+module.exports = app;
