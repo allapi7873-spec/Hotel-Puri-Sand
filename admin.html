@@ -91,6 +91,9 @@
 </head>
 <body class="min-h-screen">
 
+<!-- Audio for new order -->
+<audio id="newOrderSound" src="mixkit-radio-static-fx-2561.wav" preload="auto"></audio>
+
 <!-- Toast Notification -->
 <div id="adminToast"></div>
 
@@ -331,6 +334,8 @@
     let currentCategory = 'all';
     let productStatusMap = {};
     let productPriceMap = {};
+    let previousOrderCount = -1;
+    let orderPollInterval = null;
 
     const catNames = {
         'breakfast-snacks': '🍳 Breakfast & Snacks',
@@ -366,6 +371,9 @@
                 document.getElementById('dashboardScreen').classList.remove('hidden');
                 loadBackendData().then(() => filterMenu());
                 fetchOrders();
+                if (!orderPollInterval) {
+                    orderPollInterval = setInterval(() => fetchOrders(true), 10000);
+                }
             } else {
                 err.innerHTML = '<i class="fa-solid fa-circle-exclamation mr-1"></i>Incorrect username or password!';
                 err.classList.remove('hidden');
@@ -377,6 +385,11 @@
 
     function doLogout() {
         localStorage.removeItem('adminLoggedIn');
+        if (orderPollInterval) {
+            clearInterval(orderPollInterval);
+            orderPollInterval = null;
+        }
+        previousOrderCount = -1;
         document.getElementById('adminUsername').value = '';
         document.getElementById('adminPassword').value = '';
         document.getElementById('loginBtn').disabled = false;
@@ -431,20 +444,33 @@
         }
     }
 
-    async function fetchOrders() {
+    async function fetchOrders(isBackground = false) {
         try {
             const res  = await fetch(`${BACKEND_URL}/api/orders`);
             const data = await res.json();
 
-            document.getElementById('ordersLoading').classList.add('hidden');
-            document.getElementById('ordersContent').classList.remove('hidden');
-
-            const tbody = document.getElementById('ordersBody');
-            tbody.innerHTML = '';
+            if (!isBackground) {
+                document.getElementById('ordersLoading').classList.add('hidden');
+                document.getElementById('ordersContent').classList.remove('hidden');
+            }
 
             if (data.success && data.orders.length > 0) {
+                if (previousOrderCount !== -1 && data.orders.length > previousOrderCount) {
+                    const sound = document.getElementById('newOrderSound');
+                    if (sound) {
+                        sound.currentTime = 0;
+                        sound.play().catch(e => console.log('Audio play blocked:', e));
+                    }
+                    showToast('🔔 New Order Arrived!', 'success');
+                }
+                previousOrderCount = data.orders.length;
+
                 window.globalOrders = data.orders;
                 document.getElementById('orderCount').textContent = `${data.orders.length} orders`;
+                
+                const tbody = document.getElementById('ordersBody');
+                tbody.innerHTML = '';
+                
                 data.orders.forEach((o, i) => {
                     const date  = new Date(o.createdAt).toLocaleString('en-IN');
                     const items = o.items.map(x => `${x.name} <span class="text-gold">x${x.quantity}</span>`).join('<br>');
@@ -470,14 +496,18 @@
                         </tr>`;
                 });
             } else {
-                document.getElementById('noOrders').classList.remove('hidden');
+                if (!isBackground) {
+                    document.getElementById('noOrders').classList.remove('hidden');
+                }
             }
         } catch (e) {
-            document.getElementById('ordersLoading').innerHTML = `
-                <div class="p-10 text-center">
-                    <i class="fa-solid fa-plug-circle-xmark text-red-500 text-3xl mb-3 block"></i>
-                    <p class="text-red-400 text-sm">Backend server offline.<br><span class="text-gray-600 text-xs">Start backend first: <code>node server.js</code></span></p>
-                </div>`;
+            if (!isBackground) {
+                document.getElementById('ordersLoading').innerHTML = `
+                    <div class="p-10 text-center">
+                        <i class="fa-solid fa-plug-circle-xmark text-red-500 text-3xl mb-3 block"></i>
+                        <p class="text-red-400 text-sm">Backend server offline.<br><span class="text-gray-600 text-xs">Start backend first: <code>node server.js</code></span></p>
+                    </div>`;
+            }
         }
     }
 
@@ -869,6 +899,9 @@
             document.getElementById('dashboardScreen').classList.remove('hidden');
             loadBackendData().then(() => filterMenu());
             fetchOrders();
+            if (!orderPollInterval) {
+                orderPollInterval = setInterval(() => fetchOrders(true), 10000);
+            }
         }
     });
     </script>
