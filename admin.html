@@ -362,7 +362,7 @@
             if (user === 'admin' && pwd === 'admin') {
                 document.getElementById('loginScreen').classList.add('hidden');
                 document.getElementById('dashboardScreen').classList.remove('hidden');
-                loadAllStatuses().then(() => filterMenu());
+                loadBackendData().then(() => filterMenu());
                 fetchOrders();
             } else {
                 err.innerHTML = '<i class="fa-solid fa-circle-exclamation mr-1"></i>Incorrect username or password!';
