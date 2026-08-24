@@ -1531,7 +1531,7 @@ _Please confirm my order ASAP._`;
     const encodedText = encodeURIComponent(orderText);
     
     // 4. WhatsApp Number (Your Hotel number)
-    const hotelNumber = "919090623235";
+    const hotelNumber = "919437752000";
     
     // Use deep link to force opening the app directly without intermediate web page
     const whatsappUrl = `whatsapp://send?phone=${hotelNumber}&text=${encodedText}`;
