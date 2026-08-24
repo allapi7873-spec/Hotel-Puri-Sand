@@ -325,7 +325,8 @@ async function sendWhatsAppBooking() {
 
       // Note: Change this URL to your Render/Vercel URL once hosted
       // Example: const BACKEND_URL = "https://hotel-puri-sand-backend.onrender.com";
-      const BACKEND_URL = `http://${window.location.hostname}:5000`; 
+      const isLocalCheck = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname.startsWith('192.168.') || window.location.hostname.startsWith('10.');
+      const BACKEND_URL = isLocalCheck ? `http://${window.location.hostname}:5000` : 'https://hotel-puri-sand-backend.onrender.com';
       
       const response = await fetch(`${BACKEND_URL}/api/bookings`, {
           method: 'POST',
