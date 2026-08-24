@@ -986,20 +986,43 @@ async function init() {
 
     // Only run menu logic on food.html
     if(productContainer) {
-        // 1. Fetch initial availability from backend (silently ignore if offline)
+        // 1. Load from localStorage FIRST (instant, works offline)
         try {
-            const res = await fetch(`${BACKEND_URL}/api/product-status`);
+            const saved = localStorage.getItem('puriSandMenuStatus');
+            if (saved) productAvailability = JSON.parse(saved);
+        } catch(e) {}
+
+        // 2. Try backend (if online, overrides localStorage)
+        try {
+            const controller = new AbortController();
+            setTimeout(() => controller.abort(), 3000);
+            const res = await fetch(`${BACKEND_URL}/api/product-status`, { signal: controller.signal });
             const data = await res.json();
-            if (data.success) productAvailability = data.statuses;
+            if (data.success) {
+                productAvailability = { ...productAvailability, ...data.statuses };
+                // Keep localStorage in sync
+                localStorage.setItem('puriSandMenuStatus', JSON.stringify(productAvailability));
+            }
         } catch(e) {
-            console.warn('Backend offline, all items shown as available.');
+            console.warn('Backend offline — using localStorage data.');
         }
 
         renderCategories();
         setupMenuListeners();
         renderProducts(currentCategory, currentSubCategory);
 
-        // 2. Connect to SSE for real-time updates
+        // 3. Listen to localStorage changes (cross-tab: admin changes reflect here instantly!)
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'puriSandMenuStatus' && e.newValue) {
+                try {
+                    productAvailability = JSON.parse(e.newValue);
+                    renderProducts(currentCategory, currentSubCategory,
+                        document.getElementById('menu-search') ? document.getElementById('menu-search').value : '');
+                } catch(ex) {}
+            }
+        });
+
+        // 4. Try SSE for real-time (when backend is online)
         connectSSE();
     }
 
@@ -1016,7 +1039,7 @@ async function init() {
     }
 }
 
-// Connect to SSE (Server-Sent Events) for live updates
+// Connect to SSE (Server-Sent Events) for live updates (backend must be online)
 function connectSSE() {
     try {
         const eventSource = new EventSource(`${BACKEND_URL}/api/events`);
@@ -1025,9 +1048,9 @@ function connectSSE() {
             try {
                 const msg = JSON.parse(event.data);
                 if (msg.type === 'PRODUCT_STATUS_CHANGE') {
-                    // Update local availability map
                     productAvailability[msg.productId] = msg.isAvailable;
-                    // Re-render current view to reflect change instantly
+                    // Also sync to localStorage
+                    localStorage.setItem('puriSandMenuStatus', JSON.stringify(productAvailability));
                     renderProducts(currentCategory, currentSubCategory,
                         document.getElementById('menu-search') ? document.getElementById('menu-search').value : '');
                 }
@@ -1035,7 +1058,6 @@ function connectSSE() {
         };
 
         eventSource.onerror = () => {
-            // Auto-reconnect handled by browser
             console.warn('SSE disconnected, will auto-retry...');
         };
     } catch(e) {

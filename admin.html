@@ -439,13 +439,43 @@
         }
     }
 
-    async function loadAllStatuses() {
+    // ========== localStorage helpers ==========
+    const LS_KEY = 'puriSandMenuStatus';
+
+    function saveToLocalStorage() {
+        localStorage.setItem(LS_KEY, JSON.stringify(productStatusMap));
+    }
+
+    function loadFromLocalStorage() {
         try {
-            const res = await fetch(`${BACKEND_URL}/api/product-status`);
+            const saved = localStorage.getItem(LS_KEY);
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                // Merge: localStorage override
+                Object.assign(productStatusMap, parsed);
+            }
+        } catch(e) {}
+    }
+
+    async function loadAllStatuses() {
+        // Step 1: Load from localStorage first (instant, works offline)
+        loadFromLocalStorage();
+
+        // Step 2: Try backend (if online, it overrides localStorage)
+        try {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 3000); // 3s timeout
+            const res = await fetch(`${BACKEND_URL}/api/product-status`, { signal: controller.signal });
+            clearTimeout(timeout);
             const data = await res.json();
-            if (data.success) productStatusMap = data.statuses;
+            if (data.success) {
+                // Backend data wins over localStorage
+                productStatusMap = { ...productStatusMap, ...data.statuses };
+                // Sync localStorage with backend data
+                saveToLocalStorage();
+            }
         } catch(e) {
-            console.warn('Could not load product statuses.');
+            console.warn('Backend offline — using localStorage data.');
         }
     }
 
@@ -453,34 +483,46 @@
         const currentState = productStatusMap[productId] !== false;
         const newState = !currentState;
 
-        // Optimistic UI update
+        // 1. Update local state
         productStatusMap[productId] = newState;
+
+        // 2. Save to localStorage IMMEDIATELY (works offline too)
+        saveToLocalStorage();
+
+        // 3. Update UI instantly
         const pill = document.getElementById(`pill-${productId}`);
         const row  = document.getElementById(`row-${productId}`);
         if (pill) {
             pill.className = `pill-btn ${newState ? 'pill-btn-on' : 'pill-btn-off'}`;
             pill.innerHTML = `<span class="pill-dot"></span>${newState ? 'ON' : 'OFF'}`;
         }
-        if (row) row.className = newState ? '' : 'opacity-40';
+        if (row) {
+            row.className = newState ? '' : 'opacity-40';
+            // Also update item name strikethrough
+            const nameTd = row.querySelector('td:nth-child(2)');
+            if (nameTd) nameTd.className = `px-4 py-3 font-medium ${newState ? '' : 'line-through text-gray-500'}`;
+        }
 
+        // 4. Show success toast (localStorage always works)
+        showToast(newState ? '✅ Item is now AVAILABLE' : '🔴 Item marked UNAVAILABLE', newState ? 'success' : 'error');
+
+        // 5. Also try to sync to backend (silently, non-blocking)
         try {
+            const controller = new AbortController();
+            setTimeout(() => controller.abort(), 4000);
             const res = await fetch(`${BACKEND_URL}/api/product-status/${productId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ isAvailable: newState })
+                body: JSON.stringify({ isAvailable: newState }),
+                signal: controller.signal
             });
             const data = await res.json();
-            if (!data.success) throw new Error('Backend error');
-            showToast(newState ? '✅ Item is now AVAILABLE on menu' : '❌ Item marked UNAVAILABLE', newState ? 'success' : 'error');
-        } catch(e) {
-            // Silently revert without alert
-            productStatusMap[productId] = currentState;
-            if (pill) {
-                pill.className = `pill-btn ${currentState ? 'pill-btn-on' : 'pill-btn-off'}`;
-                pill.innerHTML = `<span class="pill-dot"></span>${currentState ? 'ON' : 'OFF'}`;
+            if (data.success) {
+                console.log('✅ Synced to backend');
             }
-            if (row) row.className = currentState ? '' : 'opacity-40';
-            showToast('⚠️ Backend offline — changes not saved', 'error');
+        } catch(e) {
+            // Backend offline — localStorage already saved, no revert!
+            console.warn('Backend offline — saved to localStorage only.');
         }
     }
 
