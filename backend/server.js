@@ -245,6 +245,29 @@ app.get('/api/orders', async (req, res) => {
     }
 });
 
+// PUT: Update Food Order Status (Admin)
+app.put('/api/orders/:id/status', async (req, res) => {
+    try {
+        const orderId = req.params.id;
+        const { status } = req.body;
+        
+        const updatedOrder = await Order.findByIdAndUpdate(
+            orderId,
+            { orderStatus: status },
+            { new: true }
+        );
+        
+        if (!updatedOrder) {
+            return res.status(404).json({ success: false, message: 'Order not found.' });
+        }
+        
+        res.status(200).json({ success: true, order: updatedOrder });
+    } catch (error) {
+        console.error('Order Status Update Error:', error);
+        res.status(500).json({ success: false, message: 'Failed to update order status.' });
+    }
+});
+
 // GET: All Bookings (Admin)
 app.get('/api/bookings', async (req, res) => {
     try {
