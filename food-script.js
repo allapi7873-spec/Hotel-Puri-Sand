@@ -1312,8 +1312,6 @@ function updateCartUI() {
     const cartBadge = document.getElementById("cart-badge");
 const mobileCartBadge = document.getElementById("mobile-cart-badge");
     const cartItemsContainer = document.getElementById("cart-items");
-    const cartSubtotalPrice = document.getElementById("cart-subtotal-price");
-    const cartGstPrice = document.getElementById("cart-gst-price");
     const cartTotalPrice = document.getElementById("cart-total-price");
     const stickyCartFooter = document.getElementById("sticky-cart-footer");
     const stickyCartCount = document.getElementById("sticky-cart-count");
@@ -1329,8 +1327,6 @@ const mobileCartBadge = document.getElementById("mobile-cart-badge");
     // Update List
     if (cart.length === 0) {
         cartItemsContainer.innerHTML = '<div class="empty-cart-msg">Aapka cart abhi khaali hai! Kuch swadisht add karein.</div>';
-        if(cartSubtotalPrice) cartSubtotalPrice.textContent = "0";
-        if(cartGstPrice) cartGstPrice.textContent = "0";
         if(cartTotalPrice) cartTotalPrice.textContent = "0";
         if(stickyCartFooter) stickyCartFooter.style.display = "none";
         
@@ -1366,20 +1362,17 @@ const mobileCartBadge = document.getElementById("mobile-cart-badge");
         cartItemsContainer.appendChild(cartItemEl);
     });
     
-    // Calculate GST
-    const gstAmount = Math.round(subtotalAmount * 0.18);
-    const grandTotal = subtotalAmount + gstAmount;
+    // Total = item prices only (no GST)
+    const grandTotal = subtotalAmount;
 
-    // Update Totals
-    if(cartSubtotalPrice) cartSubtotalPrice.textContent = subtotalAmount;
-    if(cartGstPrice) cartGstPrice.textContent = gstAmount;
+    // Update Total
     if(cartTotalPrice) cartTotalPrice.textContent = grandTotal;
 
     // Update Sticky Footer
     if(stickyCartFooter) {
         stickyCartFooter.style.display = "flex";
         stickyCartCount.textContent = totalItems + (totalItems > 1 ? " Items" : " Item");
-        stickyCartPrice.textContent = "₹" + grandTotal;
+        stickyCartPrice.textContent = "\u20b9" + grandTotal;
     }
 }
 
@@ -1431,6 +1424,9 @@ async function processCheckout() {
     orderButton.innerHTML = "<i class='fa-solid fa-spinner fa-spin'></i> Processing...";
     orderButton.disabled = true;
 
+    // Calculate total amount
+    const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
     // 1. Send Order to Backend
     try {
         const orderData = {
@@ -1442,7 +1438,7 @@ async function processCheckout() {
                 price: item.price,
                 quantity: item.quantity
             })),
-            totalAmount: cartTotal
+            totalAmount: totalAmount
         };
 
         // Note: Change this URL to your Render/Vercel URL once hosted
@@ -1491,7 +1487,7 @@ async function processCheckout() {
     });
 
     orderText += `
-*Total Amount:* ₹${cartTotal}
+*Total Amount:* ₹${totalAmount}
 `;
     orderText += `
 _Please confirm my order ASAP._`;
