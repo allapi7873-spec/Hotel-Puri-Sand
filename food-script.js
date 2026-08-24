@@ -985,6 +985,33 @@ async function init() {
     handlePreloader();
     handleNavbarScroll();
 
+    // Check for QR Code Room Param
+    const urlParams = new URLSearchParams(window.location.search);
+    const roomParam = urlParams.get('room');
+    if (roomParam) {
+        // Digital Menu Mode Active
+        const mainHeader = document.getElementById('main-header');
+        if (mainHeader) mainHeader.style.display = 'none';
+        
+        const mainFooter = document.getElementById('main-footer');
+        if (mainFooter) mainFooter.style.display = 'none';
+
+        // Hide non-cart mobile nav elements
+        ['mobile-nav-home', 'mobile-nav-rooms', 'mobile-nav-food', 'mobile-nav-map'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        });
+
+        // Pre-fill and lock room number in checkout
+        const roomInput = document.getElementById('cust-room');
+        if (roomInput) {
+            roomInput.value = roomParam;
+            roomInput.readOnly = true;
+            roomInput.style.backgroundColor = 'rgba(0,0,0,0.5)';
+            roomInput.style.color = '#d4af37';
+        }
+    }
+
     // Only run menu logic on food.html
     if(productContainer) {
         // 1. Load from localStorage FIRST (instant, works offline)

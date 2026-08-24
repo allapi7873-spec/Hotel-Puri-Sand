@@ -157,6 +157,9 @@
             <button onclick="switchTab('menu')" id="tab-menu" class="tab-inactive px-5 py-2.5 rounded-xl font-bold text-sm transition">
                 <i class="fa-solid fa-utensils mr-1.5"></i>Food Menu
             </button>
+            <button onclick="switchTab('qr')" id="tab-qr" class="tab-inactive px-5 py-2.5 rounded-xl font-bold text-sm transition">
+                <i class="fa-solid fa-qrcode mr-1.5"></i>QR Generator
+            </button>
         </div>
 
         <!-- ===== ORDERS SECTION ===== -->
@@ -259,6 +262,32 @@
             </div>
         </div>
         
+        <!-- ===== QR GENERATOR SECTION ===== -->
+        <div id="qrSection" class="hidden pb-20">
+            <div class="glass-panel rounded-2xl overflow-hidden p-6 md:p-8 max-w-lg mx-auto mt-10 text-center">
+                <h2 class="text-gold font-bold text-xl mb-2"><i class="fa-solid fa-qrcode mr-2"></i>Generate Digital Menu QR</h2>
+                <p class="text-gray-400 text-sm mb-6">Create a QR code for a specific room. Scanning it opens a pure digital menu for ordering.</p>
+                
+                <div class="space-y-4 text-left">
+                    <div>
+                        <label class="block text-[11px] font-bold text-gold uppercase tracking-wider mb-2">Room Number</label>
+                        <input type="text" id="qrRoomInput" placeholder="e.g. 101, 102, 205" class="w-full bg-[#0a0a0f] border border-gold/20 rounded-xl px-4 py-3 text-sm focus:border-gold focus:outline-none text-gray-200">
+                    </div>
+                    
+                    <button onclick="generateQRCode()" id="btnGenerateQR" class="w-full py-3 rounded-xl bg-gold-gradient text-black font-bold text-sm uppercase tracking-widest hover:shadow-gold-glow transition">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2"></i> Generate QR Code
+                    </button>
+
+                    <div id="qrResultContainer" class="hidden flex-col items-center justify-center mt-6 p-6 border-2 border-dashed border-gold/30 rounded-xl bg-black/40">
+                        <img id="qrImage" src="" alt="QR Code" class="w-48 h-48 bg-white p-2 rounded-lg mb-4" crossorigin="anonymous">
+                        <button onclick="downloadQRCode()" class="text-sm px-5 py-2.5 border border-green-500/40 text-green-400 rounded-lg hover:bg-green-500/10 transition">
+                            <i class="fa-solid fa-download mr-2"></i>Download Image
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <!-- Mobile Only Bottom Navigation Bar -->
         <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#050508] backdrop-blur-md border-t border-gold/20 shadow-2xl flex justify-around items-center py-2 px-1">
             <button onclick="switchTab('orders')" id="mobile-tab-orders" class="flex flex-col items-center justify-center text-[10px] flex-1 py-1 transition text-gold font-bold">
@@ -268,6 +297,10 @@
             <button onclick="switchTab('menu')" id="mobile-tab-menu" class="flex flex-col items-center justify-center text-[10px] text-gray-400 flex-1 py-1 transition">
                 <i class="fa-solid fa-utensils text-xl mb-1"></i>
                 <span>Menu</span>
+            </button>
+            <button onclick="switchTab('qr')" id="mobile-tab-qr" class="flex flex-col items-center justify-center text-[10px] text-gray-400 flex-1 py-1 transition">
+                <i class="fa-solid fa-qrcode text-xl mb-1"></i>
+                <span>QR Gen</span>
             </button>
             <button onclick="openAddItemModal()" class="flex flex-col items-center justify-center text-[10px] text-green-400 flex-1 py-1 transition">
                 <i class="fa-solid fa-circle-plus text-xl mb-1"></i>
@@ -347,7 +380,7 @@
 
     // ====================== TABS ======================
     function switchTab(tab) {
-        ['orders','menu'].forEach(t => {
+        ['orders','menu','qr'].forEach(t => {
             const btn = document.getElementById(`tab-${t}`);
             const mBtn = document.getElementById(`mobile-tab-${t}`);
             const sec = document.getElementById(`${t}Section`);
@@ -684,6 +717,61 @@
         toast.textContent = msg;
         toast.className = `show toast-${type}`;
         setTimeout(() => { toast.className = ''; }, 3000);
+    }
+
+    // ====================== QR GENERATOR ======================
+    function generateQRCode() {
+        const roomInput = document.getElementById('qrRoomInput').value.trim();
+        const btn = document.getElementById('btnGenerateQR');
+        if(!roomInput) {
+            showToast('⚠️ Please enter a Room Number', 'error');
+            return;
+        }
+
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Generating...';
+        btn.disabled = true;
+
+        // Base domain: change this to the production domain when live
+        const baseDomain = window.location.origin; // Dynamically uses current domain
+        const targetUrl = `${baseDomain}/food.html?room=${encodeURIComponent(roomInput)}`;
+        
+        // Use a free QR generator API
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(targetUrl)}&color=050508&bgcolor=ffffff`;
+
+        const qrImg = document.getElementById('qrImage');
+        qrImg.onload = () => {
+            document.getElementById('qrResultContainer').classList.remove('hidden');
+            document.getElementById('qrResultContainer').classList.add('flex');
+            btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles mr-2"></i> Generate QR Code';
+            btn.disabled = false;
+        };
+        qrImg.onerror = () => {
+            showToast('🔴 Failed to load QR Code', 'error');
+            btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles mr-2"></i> Generate QR Code';
+            btn.disabled = false;
+        };
+        qrImg.src = qrUrl;
+    }
+
+    function downloadQRCode() {
+        const qrImg = document.getElementById('qrImage');
+        if (!qrImg.src) return;
+        
+        const room = document.getElementById('qrRoomInput').value.trim() || 'Menu';
+        
+        fetch(qrImg.src)
+            .then(res => res.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = `QR_Room_${room}.png`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(() => showToast('🔴 Error downloading image', 'error'));
     }
     </script>
     <!-- Add Item Modal -->
