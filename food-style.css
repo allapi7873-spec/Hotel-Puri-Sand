@@ -24,15 +24,7 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-html, body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: clip; /* clip allows position: sticky to work while preventing horizontal scroll */
-    font-family: var(--font-body);
-    background-color: var(--bg-dark);
-    color: var(--text-light);
-    line-height: 1.6;
-}
+html, 
 
 img {
     max-width: 100%;
@@ -40,18 +32,7 @@ img {
 }
 
 /* --- Preloader (Royal Door) --- */
-#preloader {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100vh;
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
-    overflow: hidden;
-    transition: visibility 0s 1.5s;
-}
+
 
 .door {
     position: absolute;
@@ -68,7 +49,7 @@ img {
 
 body:not(.loading) .door-left { transform: translateX(-100%); }
 body:not(.loading) .door-right { transform: translateX(100%); }
-body:not(.loading) #preloader { visibility: hidden; }
+body:not(.loading) 
 
 .preloader-content {
     position: relative;
@@ -193,21 +174,7 @@ body:not(.loading) .preloader-content { opacity: 0; }
 }
 
 /* --- Header / Navbar (Desktop) --- */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 5%;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(10px);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 100;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-    transition: padding 0.3s;
-}
+
 .nav-logo { height: 75px; }
 .desktop-nav a {
     color: var(--text-light);
@@ -278,7 +245,7 @@ body:not(.loading) .preloader-content { opacity: 0; }
 }
 
 /* Page Headers */
-.page-header { background: #FFFFFF; }
+
 .page-title-header {
     background: linear-gradient(to bottom, #FDFBF7, #F5F2EB);
     padding: 120px 20px 50px;
@@ -428,7 +395,7 @@ body:not(.loading) .preloader-content { opacity: 0; }
 .cart-header h2 { font-family: var(--font-heading); margin: 0; font-size: 1.5rem; }
 .close-btn { background: none; border: none; color: #FFFFFF; font-size: 2rem; cursor: pointer; }
 
-.cart-body { flex-grow: 1; overflow-y: auto; padding: 20px; }
+.cart-
 .cart-item {
     display: flex; justify-content: space-between; align-items: center;
     padding-bottom: 15px; border-bottom: 1px solid #EEEEEE; margin-bottom: 15px;
@@ -891,13 +858,10 @@ body:not(.loading) .preloader-content { opacity: 0; }
 ========================================= */
 @media (max-width: 768px) {
     /* Base Resets */
-    html, body {
-        width: 100vw; /* Strict viewport lock */
-        overflow-x: clip; /* clip allows position: sticky */
-    }
+    html, 
 
     /* Hide entire navbar on mobile, show mobile bottom nav */
-    .navbar { display: none !important; }
+    
     
     .mobile-bottom-nav {
         display: flex;
