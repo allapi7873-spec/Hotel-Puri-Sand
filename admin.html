@@ -128,7 +128,7 @@
     </div>
 
     <!-- ===== DASHBOARD ===== -->
-    <div id="dashboardScreen" class="max-w-6xl mx-auto px-4 py-6 hidden">
+    <div id="dashboardScreen" class="max-w-6xl mx-auto px-4 py-6 pb-24 md:pb-6 hidden">
 
         <!-- Header -->
         <div class="glass-panel p-4 rounded-2xl mb-5 flex flex-col md:flex-row justify-between items-center gap-3">
@@ -150,7 +150,7 @@
         </div>
 
         <!-- Tabs -->
-        <div class="flex gap-3 mb-5">
+        <div class="hidden md:flex gap-3 mb-5">
             <button onclick="switchTab('orders')" id="tab-orders" class="tab-active px-5 py-2.5 rounded-xl font-bold text-sm transition">
                 <i class="fa-solid fa-receipt mr-1.5"></i>Food Orders
             </button>
@@ -253,6 +253,22 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Mobile Only Bottom Navigation Bar -->
+        <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#050508] backdrop-blur-md border-t border-gold/20 shadow-2xl flex justify-around items-center py-2 px-1">
+            <button onclick="switchTab('orders')" id="mobile-tab-orders" class="flex flex-col items-center justify-center text-[10px] flex-1 py-1 transition text-gold font-bold">
+                <i class="fa-solid fa-receipt text-xl mb-1"></i>
+                <span>Orders</span>
+            </button>
+            <button onclick="switchTab('menu')" id="mobile-tab-menu" class="flex flex-col items-center justify-center text-[10px] text-gray-400 flex-1 py-1 transition">
+                <i class="fa-solid fa-utensils text-xl mb-1"></i>
+                <span>Menu</span>
+            </button>
+            <button onclick="doLogout()" class="flex flex-col items-center justify-center text-[10px] text-red-400/80 flex-1 py-1 transition">
+                <i class="fa-solid fa-power-off text-xl mb-1"></i>
+                <span>Logout</span>
+            </button>
+        </div>
     </div>
 
     <script>
@@ -323,13 +339,17 @@
     function switchTab(tab) {
         ['orders','menu'].forEach(t => {
             const btn = document.getElementById(`tab-${t}`);
+            const mBtn = document.getElementById(`mobile-tab-${t}`);
             const sec = document.getElementById(`${t}Section`);
+            
             if (t === tab) {
-                btn.className = 'tab-active px-5 py-2.5 rounded-xl font-bold text-sm transition';
-                sec.classList.remove('hidden');
+                if (btn) btn.className = 'tab-active px-5 py-2.5 rounded-xl font-bold text-sm transition';
+                if (mBtn) mBtn.className = 'flex flex-col items-center justify-center text-[10px] flex-1 py-1 transition text-gold font-bold';
+                if (sec) sec.classList.remove('hidden');
             } else {
-                btn.className = 'tab-inactive px-5 py-2.5 rounded-xl font-bold text-sm transition';
-                sec.classList.add('hidden');
+                if (btn) btn.className = 'tab-inactive px-5 py-2.5 rounded-xl font-bold text-sm transition';
+                if (mBtn) mBtn.className = 'flex flex-col items-center justify-center text-[10px] text-gray-400 flex-1 py-1 transition';
+                if (sec) sec.classList.add('hidden');
             }
         });
     }
