@@ -1327,7 +1327,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Process WhatsApp Checkout
-function processCheckout() {
+async function processCheckout() {
     if (cart.length === 0) {
         alert("Bhai, cart khaali hai. Pehle kuch items add karein!");
         return;
@@ -1350,70 +1350,94 @@ function processCheckout() {
         return;
     }
 
-    // 1. Message ka Text banana
-    const crownEmoji = String.fromCodePoint(0x1F451);
+    const orderButton = document.querySelector("#checkout-form button");
+    const originalText = orderButton.innerHTML;
+    orderButton.innerHTML = "<i class='fa-solid fa-spinner fa-spin'></i> Processing...";
+    orderButton.disabled = true;
 
+    // 1. Send Order to Backend
+    try {
+        const orderData = {
+            customerName: custName,
+            contactNumber: custAltPhone,
+            deliveryAddress: custRoom,
+            items: cart.map(item => ({
+                name: item.name,
+                price: item.price,
+                quantity: item.quantity
+            })),
+            totalAmount: cartTotal
+        };
+
+        // Note: Change this URL to your Render/Vercel URL once hosted
+        // Example: const BACKEND_URL = "https://hotel-puri-sand-backend.onrender.com";
+        const BACKEND_URL = "http://localhost:5000"; 
+        
+        const response = await fetch(`${BACKEND_URL}/api/orders`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderData)
+        });
+        
+        const result = await response.json();
+        
+        if (!response.ok || !result.success) {
+            console.error("Backend Error:", result);
+            // Optionally show error but still send WhatsApp
+        }
+    } catch (err) {
+        console.error("Failed to save order to database. Proceeding to WhatsApp.", err);
+    }
+
+    // 2. Message ka Text banana (WhatsApp Redirect)
+    const crownEmoji = String.fromCodePoint(0x1F451);
     let orderText = `*Puri Sand Hotel Room Service* ${crownEmoji}
 
 `;
-
     orderText += `*Customer Details:*
 `;
     orderText += `- Name: ${custName}
 `;
     orderText += `- Room Number: ${custRoom}
 `;
-    orderText += `- Phone: ${custAltPhone}
+    orderText += `- Alt Phone: ${custAltPhone}
+
+`;
+    orderText += `*Order Items:*
 `;
 
-    orderText += `
-*Order Items:*
-`;
-
-    // 3. Cart Items
-    let subtotal = 0;
-
-    // Emoji Unicode
-    const redCircle = String.fromCodePoint(0x1F534);   // 🔴
-    const greenCircle = String.fromCodePoint(0x1F7E2); // 🟢
-
-    cart.forEach(item => {
-        const itemTotal = item.price * item.quantity;
-        subtotal += itemTotal;
-
-        // Add item to WhatsApp message
-        const symbol = item.type === 'non-veg' ? redCircle : greenCircle;
-        orderText += `${symbol} ${item.name} (x${item.quantity}) = ₹${itemTotal}
+    cart.forEach((item, index) => {
+        orderText += `${index + 1}. ${item.name}
+   ${item.quantity} x ₹${item.price} = ₹${item.quantity * item.price}
 `;
     });
 
-    // 4. GST aur Total Calculation
-    const gst = Math.round(subtotal * 0.18);
-    const grandTotal = subtotal + gst;
-
     orderText += `
-------------------
+*Total Amount:* ₹${cartTotal}
 `;
-    orderText += `Subtotal: ₹${subtotal}
-`;
-    orderText += `GST (18%): ₹${gst}
-`;
-    orderText += `*Grand Total: ₹${grandTotal}*
-`;
-    orderText += `------------------
+    orderText += `
+_Please confirm my order ASAP._`;
 
-`;
-    orderText += `Please confirm this order as soon as possible.`;
-
-    // 5. WhatsApp Number
-    const whatsappNumber = "919437752000";
-
-    // 6. Message Encode
+    // 3. Link Encode karna (Encode URL properly)
     const encodedText = encodeURIComponent(orderText);
+    
+    // 4. WhatsApp Number (Your Hotel number)
+    const hotelNumber = "919090623235";
+    
+    const whatsappUrl = `https://wa.me/${hotelNumber}?text=${encodedText}`;
 
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedText}`;
-
-    // 7. WhatsApp Open
+    // Mobile fallback handling for popups
+    setTimeout(() => {
+        orderButton.innerHTML = originalText;
+        orderButton.disabled = false;
+        toggleCart();
+        cart = [];
+        updateCart();
+    }, 1000);
+    
+    // Switch to current window location href for mobile compatibility
     window.location.href = whatsappUrl;
 }
 

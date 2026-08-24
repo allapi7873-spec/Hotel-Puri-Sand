@@ -1,0 +1,100 @@
+require('dotenv').config();
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// MongoDB Connection
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('✅ Connected to MongoDB successfully!'))
+  .catch(err => console.error('❌ MongoDB connection error:', err));
+
+// --- Mongoose Models ---
+
+// 1. Food Order Schema
+const OrderSchema = new mongoose.Schema({
+    customerName: { type: String, required: true },
+    contactNumber: { type: String, required: true },
+    deliveryAddress: { type: String, default: 'Room Delivery' },
+    items: [{
+        name: String,
+        price: Number,
+        quantity: Number
+    }],
+    totalAmount: { type: Number, required: true },
+    orderStatus: { type: String, default: 'Pending' },
+    createdAt: { type: Date, default: Date.now }
+});
+const Order = mongoose.model('Order', OrderSchema);
+
+// 2. Room Booking Schema
+const BookingSchema = new mongoose.Schema({
+    customerName: { type: String, required: true },
+    checkIn: { type: String, required: true },
+    checkOut: { type: String, required: true },
+    roomCategory: { type: String, required: true },
+    bookingDesk: { type: String, default: 'Website' },
+    bookingStatus: { type: String, default: 'Pending' },
+    createdAt: { type: Date, default: Date.now }
+});
+const Booking = mongoose.model('Booking', BookingSchema);
+
+// --- API Routes ---
+
+// Health Check Route
+app.get('/', (req, res) => {
+    res.send('Hotel Puri Sand Backend is running!');
+});
+
+// Create a Food Order
+app.post('/api/orders', async (req, res) => {
+    try {
+        const { customerName, contactNumber, deliveryAddress, items, totalAmount } = req.body;
+        
+        const newOrder = new Order({
+            customerName,
+            contactNumber,
+            deliveryAddress,
+            items,
+            totalAmount
+        });
+
+        await newOrder.save();
+        res.status(201).json({ success: true, message: 'Order placed successfully!', order: newOrder });
+    } catch (error) {
+        console.error('Order Error:', error);
+        res.status(500).json({ success: false, message: 'Failed to place order.' });
+    }
+});
+
+// Create a Room Booking
+app.post('/api/bookings', async (req, res) => {
+    try {
+        const { customerName, checkIn, checkOut, roomCategory, bookingDesk } = req.body;
+        
+        const newBooking = new Booking({
+            customerName,
+            checkIn,
+            checkOut,
+            roomCategory,
+            bookingDesk
+        });
+
+        await newBooking.save();
+        res.status(201).json({ success: true, message: 'Booking requested successfully!', booking: newBooking });
+    } catch (error) {
+        console.error('Booking Error:', error);
+        res.status(500).json({ success: false, message: 'Failed to request booking.' });
+    }
+});
+
+// Start Server
+app.listen(PORT, () => {
+    console.log(`🚀 Server is running on http://localhost:${PORT}`);
+});
