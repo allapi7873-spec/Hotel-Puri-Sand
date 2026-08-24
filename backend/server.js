@@ -94,6 +94,28 @@ app.post('/api/bookings', async (req, res) => {
     }
 });
 
+// Get all Food Orders (for Admin Panel)
+app.get('/api/orders', async (req, res) => {
+    try {
+        const orders = await Order.find().sort({ createdAt: -1 });
+        res.status(200).json({ success: true, orders });
+    } catch (error) {
+        console.error('Error fetching orders:', error);
+        res.status(500).json({ success: false, message: 'Failed to fetch orders.' });
+    }
+});
+
+// Get all Room Bookings (for Admin Panel)
+app.get('/api/bookings', async (req, res) => {
+    try {
+        const bookings = await Booking.find().sort({ createdAt: -1 });
+        res.status(200).json({ success: true, bookings });
+    } catch (error) {
+        console.error('Error fetching bookings:', error);
+        res.status(500).json({ success: false, message: 'Failed to fetch bookings.' });
+    }
+});
+
 // Start Server
 app.listen(PORT, () => {
     console.log(`🚀 Server is running on http://localhost:${PORT}`);
