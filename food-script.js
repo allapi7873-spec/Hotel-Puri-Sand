@@ -967,6 +967,7 @@ const cartSidebar = document.getElementById("cart-sidebar");
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartBadge = document.getElementById("cart-badge");
+const mobileCartBadge = document.getElementById("mobile-cart-badge");
 const cartItemsContainer = document.getElementById("cart-items");
 const cartTotalPrice = document.getElementById("cart-total-price");
 const checkoutBtn = document.getElementById("checkout-btn");
@@ -1233,6 +1234,7 @@ function updateCartUI() {
     updateMenuButtons();
 
     const cartBadge = document.getElementById("cart-badge");
+const mobileCartBadge = document.getElementById("mobile-cart-badge");
     const cartItemsContainer = document.getElementById("cart-items");
     const cartSubtotalPrice = document.getElementById("cart-subtotal-price");
     const cartGstPrice = document.getElementById("cart-gst-price");
@@ -1245,7 +1247,8 @@ function updateCartUI() {
     
     // Update Badge
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    cartBadge.textContent = totalItems;
+    if(cartBadge) cartBadge.textContent = totalItems;
+    if(mobileCartBadge) mobileCartBadge.textContent = totalItems;
     
     // Update List
     if (cart.length === 0) {

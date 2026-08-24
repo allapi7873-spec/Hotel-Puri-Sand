@@ -852,63 +852,7 @@ body:not(.loading) .preloader-content { opacity: 0; }
 /* =========================================
    SCROLLBAR & MISC
 ========================================= */
-.mobile-bottom-nav { display: none; } /* Hidden by default on desktop */
 
-/* =========================================
-   APP-LIKE MOBILE UI (CRITICAL)
-========================================= */
-@media (max-width: 768px) {
-    /* Base Resets */
-    html, body { overflow-x: hidden; }
-
-    /* Hide entire navbar on mobile, show mobile bottom nav */
-    
-    
-    .mobile-bottom-nav {
-        display: flex;
-        position: fixed;
-        bottom: 12px; /* Lowered it slightly */
-        left: 5%; 
-        width: 90%; /* Pill shape */
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 240, 240, 0.85));
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.8);
-        border-radius: 40px; /* Fully rounded pill */
-        z-index: 1000;
-        justify-content: space-around;
-        padding: 8px 10px; /* Reduced height */
-        box-shadow: 
-            0 10px 25px rgba(0, 0, 0, 0.1), /* Slightly smaller shadow for smaller pill */
-            0 5px 15px rgba(0, 0, 0, 0.05),
-            inset 0 2px 5px rgba(255, 255, 255, 1), /* 3D top highlight */
-            inset 0 -3px 5px rgba(0, 0, 0, 0.05); /* 3D bottom shade */
-    }
-    .nav-item {
-        color: #888;
-        font-size: 0.7rem; /* Slightly smaller text */
-        font-weight: 700;
-        display: flex; 
-        flex-direction: column; 
-        align-items: center; 
-        gap: 3px; /* Tighter gap */
-        position: relative;
-        text-decoration: none;
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .nav-item .icon {
-        font-size: 1.25rem; /* Slightly smaller icon */
-        transition: transform 0.3s ease;
-        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); /* 3D pop for emojis */
-    }
-
-    .sticky-menu-tabs {
-        top: 0; /* Stick flush to the top since header is hidden */
-        padding-top: 5px; /* Small breather */
-    }
-    .nav-item.active { 
-        color: var(--primary-dark-gold); 
-        transform: translateY(-8px); /* Pop up */
-    }
     .nav-item.active .icon {
         transform: scale(1.15);
         filter: drop-shadow(0 5px 8px rgba(212, 175, 55, 0.5));
