@@ -361,6 +361,7 @@
 
         setTimeout(() => {
             if (user === 'admin' && pwd === 'admin') {
+                localStorage.setItem('adminLoggedIn', 'true');
                 document.getElementById('loginScreen').classList.add('hidden');
                 document.getElementById('dashboardScreen').classList.remove('hidden');
                 loadBackendData().then(() => filterMenu());
@@ -375,6 +376,7 @@
     }
 
     function doLogout() {
+        localStorage.removeItem('adminLoggedIn');
         document.getElementById('adminUsername').value = '';
         document.getElementById('adminPassword').value = '';
         document.getElementById('loginBtn').disabled = false;
@@ -859,6 +861,16 @@
         document.getElementById('viewOrderModal').classList.add('hidden');
         document.getElementById('viewOrderModal').classList.remove('flex');
     }
+
+    // Check login state on load
+    window.addEventListener('DOMContentLoaded', () => {
+        if (localStorage.getItem('adminLoggedIn') === 'true') {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('dashboardScreen').classList.remove('hidden');
+            loadBackendData().then(() => filterMenu());
+            fetchOrders();
+        }
+    });
     </script>
     
     <!-- View Order Modal (Mobile) -->
