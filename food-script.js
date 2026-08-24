@@ -1499,33 +1499,31 @@ async function processCheckout() {
     }
 
     // 2. Message ka Text banana (WhatsApp Redirect)
-    const crownEmoji = String.fromCodePoint(0x1F451);
-    let orderText = `*Puri Sand Hotel Room Service* ${crownEmoji}
-
-`;
-    orderText += `*Customer Details:*
-`;
-    orderText += `- Name: ${custName}
-`;
-    orderText += `- Room Number: ${custRoom}
-`;
-    orderText += `- Alt Phone: ${custAltPhone}
-
-`;
-    orderText += `*Order Items:*
+    let orderText = `*PURI SAND HOTEL* 👑
+_Room Service Order_
+━━━━━━━━━━━━━━━━━━━━━
+👤 *GUEST INFORMATION*
+🔹 *Name:* ${custName}
+🔹 *Room No:* ${custRoom}
+🔹 *Contact:* ${custAltPhone}
+━━━━━━━━━━━━━━━━━━━━━
+🍽️ *ORDER DETAILS*
 `;
 
     cart.forEach((item, index) => {
-        orderText += `${index + 1}. ${item.name}
-   ${item.quantity} x ₹${item.price} = ₹${item.quantity * item.price}
+        orderText += `
+▪️ *${item.name}*
+   Qty: ${item.quantity}  |  Price: ₹${item.price}
+   *Subtotal: ₹${item.quantity * item.price}*
 `;
     });
 
     orderText += `
-*Total Amount:* ₹${totalAmount}
-`;
-    orderText += `
-_Please confirm my order ASAP._`;
+━━━━━━━━━━━━━━━━━━━━━
+💰 *GRAND TOTAL: ₹${totalAmount}*
+━━━━━━━━━━━━━━━━━━━━━
+⏳ _Please confirm this order._
+🙏 _Thank you!_`;
 
     // 3. Link Encode karna (Encode URL properly)
     const encodedText = encodeURIComponent(orderText);
@@ -1563,19 +1561,17 @@ function processTableBooking() {
         return;
     }
     
-    let bookingText = `*Puri Sand Hotel - Table Reservation* 🍽️
-
-`;
-    bookingText += `*Name:* ${bookName}
-`;
-    bookingText += `*Date:* ${bookDate}
-`;
-    bookingText += `*Time:* ${bookTime}
-`;
-    bookingText += `*Guests:* ${bookGuests} People
-
-`;
-    bookingText += `Please confirm my table reservation.`;
+    let bookingText = `*PURI SAND HOTEL* 👑
+_Table Reservation Request_
+━━━━━━━━━━━━━━━━━━━━━
+📅 *BOOKING DETAILS*
+🔹 *Name:* ${bookName}
+🔹 *Date:* ${bookDate}
+🔹 *Time:* ${bookTime}
+🔹 *Guests:* ${bookGuests} People
+━━━━━━━━━━━━━━━━━━━━━
+⏳ _Please confirm my table reservation._
+🙏 _Thank you!_`;
     
     const whatsappNumber = "919437752000"; 
     
