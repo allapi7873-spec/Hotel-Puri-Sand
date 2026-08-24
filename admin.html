@@ -31,6 +31,39 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .tab-active { background: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C); color: #000; }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Puri Sands - Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'luxury-black': '#050505',
+                        'gold': '#D4AF37',
+                    },
+                    fontFamily: {
+                        'title': ['Cinzel', 'serif'],
+                        'body': ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Outfit', sans-serif; background-color: #050505; color: #fff; }
+        .font-title { font-family: 'Cinzel', serif; }
+        .bg-gold-gradient { background: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C); }
+        .glass-panel { background: rgba(18,18,18,0.85); backdrop-filter: blur(12px); border: 1px solid rgba(212,175,55,0.2); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .tab-active { background: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C); color: #000; }
         .tab-inactive { background: rgba(18,18,18,0.85); border: 1px solid rgba(212,175,55,0.3); color: #D4AF37; }
         tr:hover td { background: rgba(212,175,55,0.04); }
         .badge-veg { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
@@ -38,9 +71,28 @@
         .filter-btn { border: 1px solid rgba(212,175,55,0.3); color: #D4AF37; transition: all 0.2s; cursor: pointer; }
         .filter-btn.active, .filter-btn:hover { background: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728); color: #000; font-weight: 700; border-color: transparent; }
         .login-card { box-shadow: 0 0 80px rgba(212,175,55,0.08); }
+
+        /* Premium ON/OFF Pill Button */
+        .pill-btn { display:inline-flex; align-items:center; gap:6px; padding:5px 14px 5px 10px; border-radius:999px; font-size:11px; font-weight:700; letter-spacing:.05em; cursor:pointer; border:none; outline:none; transition:all .25s cubic-bezier(.4,0,.2,1); user-select:none; }
+        .pill-btn-on { background:linear-gradient(135deg,#22c55e,#16a34a); color:#fff; box-shadow:0 0 12px rgba(34,197,94,.35); }
+        .pill-btn-off { background:rgba(239,68,68,.15); color:#f87171; border:1px solid rgba(239,68,68,.3); }
+        .pill-btn:hover { transform:scale(1.07); }
+        .pill-btn-on:hover { box-shadow:0 0 20px rgba(34,197,94,.5); }
+        .pill-dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
+        .pill-btn-on .pill-dot { background:#fff; }
+        .pill-btn-off .pill-dot { background:#f87171; }
+
+        /* Toast notification */
+        #adminToast { position:fixed; bottom:24px; right:24px; z-index:9999; padding:10px 18px; border-radius:12px; font-size:13px; font-weight:600; opacity:0; transform:translateY(10px); transition:all .3s; pointer-events:none; }
+        #adminToast.show { opacity:1; transform:translateY(0); }
+        #adminToast.toast-success { background:rgba(34,197,94,.15); border:1px solid rgba(34,197,94,.4); color:#4ade80; }
+        #adminToast.toast-error { background:rgba(239,68,68,.15); border:1px solid rgba(239,68,68,.4); color:#f87171; }
     </style>
 </head>
 <body class="min-h-screen">
+
+<!-- Toast Notification -->
+<div id="adminToast"></div>
 
     <!-- ===== LOGIN SCREEN ===== -->
     <div id="loginScreen" class="min-h-screen flex items-center justify-center p-4">
@@ -362,7 +414,7 @@
                 const veg = p.type === 'veg';
                 const isAvail = productStatusMap[p.id] !== false;
                 tbody.innerHTML += `
-                    <tr class="${isAvail ? '' : 'opacity-50'}">
+                    <tr class="${isAvail ? '' : 'opacity-40'}" id="row-${p.id}">
                         <td class="px-4 py-3 text-gray-600 text-xs">${i+1}</td>
                         <td class="px-4 py-3 font-medium ${isAvail ? '' : 'line-through text-gray-500'}">${p.name}</td>
                         <td class="px-4 py-3 text-xs text-gray-500">${catNames[p.category]||p.category}</td>
@@ -373,14 +425,14 @@
                             </span>
                         </td>
                         <td class="px-4 py-3 font-bold text-gold">₹${p.price}</td>
-                        <td class="px-4 py-3">
-                            <div class="flex items-center justify-center">
-                                <label class="toggle">
-                                    <input type="checkbox" ${isAvail ? 'checked' : ''} onchange="toggleProduct(${p.id}, this.checked)">
-                                    <span class="slider"></span>
-                                </label>
-                                <span class="avail-label ${isAvail ? 'avail-on' : 'avail-off'}" id="lbl-${p.id}">${isAvail ? 'ON' : 'OFF'}</span>
-                            </div>
+                        <td class="px-4 py-3 text-center">
+                            <button
+                                id="pill-${p.id}"
+                                onclick="toggleProduct(${p.id})"
+                                class="pill-btn ${isAvail ? 'pill-btn-on' : 'pill-btn-off'}">
+                                <span class="pill-dot"></span>
+                                ${isAvail ? 'ON' : 'OFF'}
+                            </button>
                         </td>
                     </tr>`;
             });
@@ -397,24 +449,46 @@
         }
     }
 
-    async function toggleProduct(productId, isAvailable) {
-        productStatusMap[productId] = isAvailable;
-        const lbl = document.getElementById(`lbl-${productId}`);
-        if (lbl) {
-            lbl.textContent = isAvailable ? 'ON' : 'OFF';
-            lbl.className = `avail-label ${isAvailable ? 'avail-on' : 'avail-off'}`;
+    async function toggleProduct(productId) {
+        const currentState = productStatusMap[productId] !== false;
+        const newState = !currentState;
+
+        // Optimistic UI update
+        productStatusMap[productId] = newState;
+        const pill = document.getElementById(`pill-${productId}`);
+        const row  = document.getElementById(`row-${productId}`);
+        if (pill) {
+            pill.className = `pill-btn ${newState ? 'pill-btn-on' : 'pill-btn-off'}`;
+            pill.innerHTML = `<span class="pill-dot"></span>${newState ? 'ON' : 'OFF'}`;
         }
+        if (row) row.className = newState ? '' : 'opacity-40';
+
         try {
-            await fetch(`${BACKEND_URL}/api/product-status/${productId}`, {
+            const res = await fetch(`${BACKEND_URL}/api/product-status/${productId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ isAvailable })
+                body: JSON.stringify({ isAvailable: newState })
             });
+            const data = await res.json();
+            if (!data.success) throw new Error('Backend error');
+            showToast(newState ? '✅ Item is now AVAILABLE on menu' : '❌ Item marked UNAVAILABLE', newState ? 'success' : 'error');
         } catch(e) {
-            productStatusMap[productId] = !isAvailable;
-            filterMenu();
-            alert('Failed to update.');
+            // Silently revert without alert
+            productStatusMap[productId] = currentState;
+            if (pill) {
+                pill.className = `pill-btn ${currentState ? 'pill-btn-on' : 'pill-btn-off'}`;
+                pill.innerHTML = `<span class="pill-dot"></span>${currentState ? 'ON' : 'OFF'}`;
+            }
+            if (row) row.className = currentState ? '' : 'opacity-40';
+            showToast('⚠️ Backend offline — changes not saved', 'error');
         }
+    }
+
+    function showToast(msg, type) {
+        const toast = document.getElementById('adminToast');
+        toast.textContent = msg;
+        toast.className = `show toast-${type}`;
+        setTimeout(() => { toast.className = ''; }, 3000);
     }
     </script>
 </body>
