@@ -1296,12 +1296,12 @@ function toggleCart() {
         cartOverlay.classList.remove("active");
         
         const mobileNav = document.getElementById("mobile-bottom-nav");
-        if (mobileNav) mobileNav.style.display = "flex";
+        if (mobileNav) mobileNav.style.display = "";
         
         const stickyCart = document.getElementById("sticky-cart-footer");
         if (stickyCart && cart.length > 0) {
             stickyCart.style.zIndex = "990";
-            stickyCart.style.display = "flex";
+            stickyCart.style.display = "";
         }
     } else {
         // Opening cart
