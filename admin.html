@@ -204,24 +204,24 @@
                            class="w-full bg-black/60 border border-gold/25 rounded-xl pl-11 pr-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-gold text-sm transition">
                 </div>
                 <!-- Veg/Non-Veg filter -->
-                <div class="flex gap-2 flex-wrap">
-                    <button onclick="setType('all')" id="type-all" class="filter-btn active text-xs px-4 py-1.5 rounded-full">All Items</button>
-                    <button onclick="setType('veg')" id="type-veg" class="filter-btn text-xs px-4 py-1.5 rounded-full">
+                <div class="flex gap-2 overflow-x-auto no-scrollbar flex-nowrap pb-1">
+                    <button onclick="setType('all')" id="type-all" class="filter-btn active text-xs px-4 py-1.5 rounded-full whitespace-nowrap shrink-0">All Items</button>
+                    <button onclick="setType('veg')" id="type-veg" class="filter-btn text-xs px-4 py-1.5 rounded-full whitespace-nowrap shrink-0">
                         <span class="inline-block w-2 h-2 bg-green-400 rounded-full mr-1"></span>Veg Only
                     </button>
-                    <button onclick="setType('non-veg')" id="type-nonveg" class="filter-btn text-xs px-4 py-1.5 rounded-full">
+                    <button onclick="setType('non-veg')" id="type-nonveg" class="filter-btn text-xs px-4 py-1.5 rounded-full whitespace-nowrap shrink-0">
                         <span class="inline-block w-2 h-2 bg-red-400 rounded-full mr-1"></span>Non-Veg Only
                     </button>
                 </div>
                 <!-- Category filter -->
-                <div class="flex gap-2 flex-wrap">
-                    <button onclick="setCategory('all')" id="cat-all" class="filter-btn active text-xs px-3 py-1.5 rounded-full">📋 All</button>
-                    <button onclick="setCategory('breakfast-snacks')" id="cat-breakfast-snacks" class="filter-btn text-xs px-3 py-1.5 rounded-full">🍳 Breakfast &amp; Snacks</button>
-                    <button onclick="setCategory('soup-beverage')" id="cat-soup-beverage" class="filter-btn text-xs px-3 py-1.5 rounded-full">🍵 Soup &amp; Beverages</button>
-                    <button onclick="setCategory('veg-course')" id="cat-veg-course" class="filter-btn text-xs px-3 py-1.5 rounded-full">🥦 Veg Course</button>
-                    <button onclick="setCategory('non-veg-course')" id="cat-non-veg-course" class="filter-btn text-xs px-3 py-1.5 rounded-full">🍗 Non-Veg Course</button>
-                    <button onclick="setCategory('rice-roti')" id="cat-rice-roti" class="filter-btn text-xs px-3 py-1.5 rounded-full">🍚 Rice &amp; Roti</button>
-                    <button onclick="setCategory('dessert')" id="cat-dessert" class="filter-btn text-xs px-3 py-1.5 rounded-full">🍨 Desserts</button>
+                <div class="flex gap-2 overflow-x-auto no-scrollbar flex-nowrap pb-1">
+                    <button onclick="setCategory('all')" id="cat-all" class="filter-btn active text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">📋 All</button>
+                    <button onclick="setCategory('breakfast-snacks')" id="cat-breakfast-snacks" class="filter-btn text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">🍳 Breakfast &amp; Snacks</button>
+                    <button onclick="setCategory('soup-beverage')" id="cat-soup-beverage" class="filter-btn text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">🍵 Soup &amp; Beverages</button>
+                    <button onclick="setCategory('veg-course')" id="cat-veg-course" class="filter-btn text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">🥦 Veg Course</button>
+                    <button onclick="setCategory('non-veg-course')" id="cat-non-veg-course" class="filter-btn text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">🍗 Non-Veg Course</button>
+                    <button onclick="setCategory('rice-roti')" id="cat-rice-roti" class="filter-btn text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">🍚 Rice &amp; Roti</button>
+                    <button onclick="setCategory('dessert')" id="cat-dessert" class="filter-btn text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">🍨 Desserts</button>
                 </div>
             </div>
 
