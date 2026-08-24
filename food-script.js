@@ -1327,7 +1327,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Process WhatsApp Checkout
-async function processCheckout() {
+function processCheckout() {
     if (cart.length === 0) {
         alert("Bhai, cart khaali hai. Pehle kuch items add karein!");
         return;
@@ -1414,7 +1414,7 @@ async function processCheckout() {
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedText}`;
 
     // 7. WhatsApp Open
-    window.open(whatsappUrl, "_blank");
+    window.location.href = whatsappUrl;
 }
 
 // Process Table Booking
@@ -1448,7 +1448,7 @@ function processTableBooking() {
     const encodedText = encodeURIComponent(bookingText);
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedText}`;
     
-    window.open(whatsappUrl, '_blank');
+    window.location.href = whatsappUrl;
 }
 
 document.addEventListener("DOMContentLoaded", init);
