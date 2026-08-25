@@ -1551,7 +1551,8 @@ async function processCheckout() {
             items: cart.map(item => ({
                 name: item.name,
                 price: item.price,
-                quantity: item.quantity
+                quantity: item.quantity,
+                type: item.type
             })),
             totalAmount: totalAmount
         };
