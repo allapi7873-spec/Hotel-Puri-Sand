@@ -104,7 +104,7 @@
                 <i class="fa-solid fa-crown text-gold text-2xl"></i>
             </div>
             <h1 class="font-title text-2xl text-gold mb-1">Admin Panel</h1>
-            <p class="text-gray-600 text-xs mb-7">Hotel Puri Sands â€” Secure Access</p>
+            <p class="text-gray-600 text-xs mb-7">Hotel Puri Sands — Secure Access</p>
 
             <div class="text-left mb-3">
                 <label class="text-xs text-gold/70 uppercase tracking-wider ml-1">Username</label>
@@ -174,7 +174,7 @@
             <div id="ordersContent" class="glass-panel rounded-2xl overflow-hidden hidden">
                 <div class="p-4 border-b border-gold/10 flex justify-between items-center">
                     <h2 class="text-gold font-bold text-sm"><i class="fa-solid fa-receipt mr-2"></i>All Food Orders</h2>
-                    <span id="orderCount" class="text-xs text-gray-500 bg-white/5 px-3 py-1 rounded-full">â€”</span>
+                    <span id="orderCount" class="text-xs text-gray-500 bg-white/5 px-3 py-1 rounded-full">—</span>
                 </div>
                 <div class="overflow-x-auto no-scrollbar">
                     <table class="w-full text-left">
@@ -222,13 +222,13 @@
                 </div>
                 <!-- Category filter -->
                 <div class="flex gap-2 overflow-x-auto no-scrollbar flex-nowrap pb-1">
-                    <button onclick="setCategory('all')" id="cat-all" class="filter-btn active text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">ðŸ“‹ All</button>
-                    <button onclick="setCategory('breakfast-snacks')" id="cat-breakfast-snacks" class="filter-btn text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">ðŸ³ Breakfast &amp; Snacks</button>
-                    <button onclick="setCategory('soup-beverage')" id="cat-soup-beverage" class="filter-btn text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">ðŸµ Soup &amp; Beverages</button>
-                    <button onclick="setCategory('veg-course')" id="cat-veg-course" class="filter-btn text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">ðŸ¥¦ Veg Course</button>
-                    <button onclick="setCategory('non-veg-course')" id="cat-non-veg-course" class="filter-btn text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">ðŸ— Non-Veg Course</button>
-                    <button onclick="setCategory('rice-roti')" id="cat-rice-roti" class="filter-btn text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">ðŸš Rice &amp; Roti</button>
-                    <button onclick="setCategory('dessert')" id="cat-dessert" class="filter-btn text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">ðŸ¨ Desserts</button>
+                    <button onclick="setCategory('all')" id="cat-all" class="filter-btn active text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">📋 All</button>
+                    <button onclick="setCategory('breakfast-snacks')" id="cat-breakfast-snacks" class="filter-btn text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">🍳 Breakfast &amp; Snacks</button>
+                    <button onclick="setCategory('soup-beverage')" id="cat-soup-beverage" class="filter-btn text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">🍵 Soup &amp; Beverages</button>
+                    <button onclick="setCategory('veg-course')" id="cat-veg-course" class="filter-btn text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">🥦 Veg Course</button>
+                    <button onclick="setCategory('non-veg-course')" id="cat-non-veg-course" class="filter-btn text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">🍗 Non-Veg Course</button>
+                    <button onclick="setCategory('rice-roti')" id="cat-rice-roti" class="filter-btn text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">🍚 Rice &amp; Roti</button>
+                    <button onclick="setCategory('dessert')" id="cat-dessert" class="filter-btn text-xs px-3 py-1.5 rounded-full whitespace-nowrap shrink-0">🍨 Desserts</button>
                 </div>
             </div>
 
@@ -357,12 +357,12 @@
     let lastRenderedOrdersJSON = '';
 
     const catNames = {
-        'breakfast-snacks': 'ðŸ³ Breakfast & Snacks',
-        'soup-beverage': 'ðŸµ Soup & Beverages',
-        'veg-course': 'ðŸ¥¦ Veg Course',
-        'non-veg-course': 'ðŸ— Non-Veg Course',
-        'rice-roti': 'ðŸš Rice & Roti',
-        'dessert': 'ðŸ¨ Desserts'
+        'breakfast-snacks': '🍳 Breakfast & Snacks',
+        'soup-beverage': '🍵 Soup & Beverages',
+        'veg-course': '🥦 Veg Course',
+        'non-veg-course': '🍗 Non-Veg Course',
+        'rice-roti': '🍚 Rice & Roti',
+        'dessert': '🍨 Desserts'
     };
 
     // ====================== LOGIN ======================
@@ -459,7 +459,7 @@
                 saveToLocalStorage();
             }
         } catch(e) {
-            console.warn('Backend offline â€” using localStorage data.');
+            console.warn('Backend offline — using localStorage data.');
         }
     }
 
@@ -486,7 +486,7 @@
                         sound.currentTime = 0;
                         sound.play().catch(e => console.log('Audio play blocked:', e));
                     }
-                    showToast('ðŸ”” New Order Arrived!', 'success');
+                    showToast('🔔 New Order Arrived!', 'success');
                 }
                 previousOrderCount = data.orders.length;
 
@@ -514,7 +514,7 @@
                                 <span class="hidden md:inline">${items}</span>
                                 <button onclick="viewOrderModalOpen(${i})" class="md:hidden bg-gold/20 text-gold px-3 py-1.5 rounded text-[11px] font-bold border border-gold/30 hover:bg-gold/30"><i class="fa-solid fa-eye mr-1"></i>View</button>
                             </td>
-                            <td class="px-2 md:px-4 py-3 font-bold text-gold text-[13px] md:text-sm whitespace-nowrap">â‚¹${o.totalAmount}</td>
+                            <td class="px-2 md:px-4 py-3 font-bold text-gold text-[13px] md:text-sm whitespace-nowrap">₹${o.totalAmount}</td>
                             <td class="px-1 md:px-4 py-3 text-center">
                                 <select onchange="updateOrderStatus('${o._id}', this)" class="bg-black/60 border border-gold/30 rounded-md text-[9px] md:text-xs px-1 py-0.5 md:px-2 md:py-1 ${o.orderStatus === 'Delivered' ? 'text-green-400' : (o.orderStatus === 'Cancelled' ? 'text-red-400' : 'text-yellow-400')} focus:outline-none focus:border-gold cursor-pointer appearance-none text-center">
                                     <option value="Pending" ${o.orderStatus === 'Pending' ? 'selected' : ''} class="text-yellow-400">Pending</option>
@@ -552,15 +552,15 @@
             });
             const data = await res.json();
             if (data.success) {
-                showToast(`âœ… Order status updated to ${newStatus}`, 'success');
+                showToast(`✅ Order status updated to ${newStatus}`, 'success');
                 // Update text color based on new status
                 selectEl.className = `bg-black/60 border border-gold/30 rounded-md text-[10px] md:text-xs px-2 py-1 ${newStatus === 'Delivered' ? 'text-green-400' : (newStatus === 'Cancelled' ? 'text-red-400' : 'text-yellow-400')} focus:outline-none focus:border-gold cursor-pointer`;
             } else {
-                showToast('ðŸ”´ Failed to update status', 'error');
+                showToast('🔴 Failed to update status', 'error');
                 loadBackendData(); // Revert back
             }
         } catch (e) {
-            showToast('ðŸ”´ Error communicating with server', 'error');
+            showToast('🔴 Error communicating with server', 'error');
             loadBackendData(); // Revert back
         } finally {
             selectEl.disabled = false;
@@ -614,12 +614,12 @@
                         <td class="hidden md:table-cell px-4 py-3 text-xs text-gray-500">${p.subCategory}</td>
                         <td class="w-[15%] md:w-auto px-1 md:px-4 py-1 md:py-3 flex justify-end md:table-cell text-center">
                             <span class="px-1.5 md:px-2 py-0.5 rounded-full text-[10px] md:text-xs font-semibold ${veg?'badge-veg':'badge-nonveg'}">
-                                <span class="md:hidden">${veg?'ðŸŸ¢':'ðŸ”´'}</span>
-                                <span class="hidden md:inline">${veg?'ðŸŸ¢ Veg':'ðŸ”´ Non-Veg'}</span>
+                                <span class="md:hidden">${veg?'🟢':'🔴'}</span>
+                                <span class="hidden md:inline">${veg?'🟢 Veg':'🔴 Non-Veg'}</span>
                             </span>
                         </td>
                         <td class="w-[50%] md:w-auto px-1 md:px-4 py-1 md:py-3 font-bold text-gold text-[13px] md:text-sm flex items-center md:table-cell text-center">
-                            â‚¹<input type="number" id="price-${p.id}" value="${productPriceMap[p.id] !== undefined ? productPriceMap[p.id] : p.price}" 
+                            ₹<input type="number" id="price-${p.id}" value="${productPriceMap[p.id] !== undefined ? productPriceMap[p.id] : p.price}" 
                                 onblur="updatePrice(${p.id}, this.value)" 
                                 onkeypress="if(event.key==='Enter') this.blur()" 
                                 class="w-12 md:w-16 bg-transparent border-b border-gold/30 text-gold text-center focus:outline-none focus:border-gold ml-1 px-1 transition-colors">
@@ -676,7 +676,7 @@
                 saveToLocalStorage();
             }
         } catch(e) {
-            console.warn('Backend offline â€” using localStorage data.');
+            console.warn('Backend offline — using localStorage data.');
         }
     }
 
@@ -742,7 +742,7 @@
         }
 
         // 4. Show success toast (localStorage always works)
-        showToast(newState ? 'âœ… Item is now AVAILABLE' : 'ðŸ”´ Item marked UNAVAILABLE', newState ? 'success' : 'error');
+        showToast(newState ? '✅ Item is now AVAILABLE' : '🔴 Item marked UNAVAILABLE', newState ? 'success' : 'error');
 
         // 5. Also try to sync to backend (silently, non-blocking)
         try {
@@ -756,11 +756,11 @@
             });
             const data = await res.json();
             if (data.success) {
-                console.log('âœ… Synced to backend');
+                console.log('✅ Synced to backend');
             }
         } catch(e) {
-            // Backend offline â€” localStorage already saved, no revert!
-            console.warn('Backend offline â€” saved to localStorage only.');
+            // Backend offline — localStorage already saved, no revert!
+            console.warn('Backend offline — saved to localStorage only.');
         }
     }
 
@@ -797,7 +797,7 @@
             const data = await res.json();
             
             if (data.success) {
-                showToast('âœ… Item added successfully!', 'success');
+                showToast('✅ Item added successfully!', 'success');
                 // Add to local array and re-render
                 products.push(data.product);
                 productStatusMap[data.product.id] = true; // available by default
@@ -806,11 +806,11 @@
                 filterMenu(); // Re-render table
                 closeAddItemModal();
             } else {
-                showToast('ðŸ”´ Failed to add item: ' + data.message, 'error');
+                showToast('🔴 Failed to add item: ' + data.message, 'error');
             }
         } catch (error) {
             console.error(error);
-            showToast('ðŸ”´ Error adding item. Check server connection.', 'error');
+            showToast('🔴 Error adding item. Check server connection.', 'error');
         } finally {
             btn.innerHTML = 'Save Item';
             btn.disabled = false;
@@ -881,7 +881,7 @@
                 a.click();
                 window.URL.revokeObjectURL(url);
             })
-            .catch(() => showToast('ðŸ”´ Error downloading image', 'error'));
+            .catch(() => showToast('🔴 Error downloading image', 'error'));
     }
 
     function deleteQRFromHistory(idx) {
@@ -889,14 +889,14 @@
         list.splice(idx, 1);
         saveQRHistory(list);
         renderQRHistory();
-        showToast('ðŸ—‘ï¸ QR Code deleted', 'error');
+        showToast('🗑️ QR Code deleted', 'error');
     }
 
     function generateQRCode() {
         const roomInput = document.getElementById('qrRoomInput').value.trim();
         const btn = document.getElementById('btnGenerateQR');
         if(!roomInput) {
-            showToast('âš ï¸ Please enter a Room Number', 'error');
+            showToast('⚠️ Please enter a Room Number', 'error');
             return;
         }
 
@@ -925,10 +925,10 @@
             }
             saveQRHistory(list);
             renderQRHistory();
-            showToast('âœ… QR Code saved to history!', 'success');
+            showToast('✅ QR Code saved to history!', 'success');
         };
         qrImg.onerror = () => {
-            showToast('ðŸ”´ Failed to load QR Code', 'error');
+            showToast('🔴 Failed to load QR Code', 'error');
             btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles mr-2"></i> Generate QR Code';
             btn.disabled = false;
         };
@@ -951,7 +951,7 @@
                 a.click();
                 window.URL.revokeObjectURL(url);
             })
-            .catch(() => showToast('ðŸ”´ Error downloading image', 'error'));
+            .catch(() => showToast('🔴 Error downloading image', 'error'));
     }
 
     function clearQRCode() {
@@ -987,7 +987,7 @@
             `;
         });
         
-        document.getElementById('viewOrderTotal').textContent = 'â‚¹' + order.totalAmount;
+        document.getElementById('viewOrderTotal').textContent = '₹' + order.totalAmount;
         document.getElementById('viewOrderModal').classList.remove('hidden');
         document.getElementById('viewOrderModal').classList.add('flex');
     }
@@ -1055,26 +1055,26 @@
                 </div>
                 <div class="flex gap-4">
                     <div class="flex-1">
-                        <label class="block text-xs text-gray-400 mb-1">Price (â‚¹)</label>
+                        <label class="block text-xs text-gray-400 mb-1">Price (₹)</label>
                         <input type="number" id="newItemPrice" required min="1" class="w-full bg-black/60 border border-gold/25 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-gold transition">
                     </div>
                     <div class="flex-1">
                         <label class="block text-xs text-gray-400 mb-1">Type</label>
                         <select id="newItemType" class="w-full bg-black/60 border border-gold/25 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-gold transition">
-                            <option value="veg">ðŸŸ¢ Veg</option>
-                            <option value="non-veg">ðŸ”´ Non-Veg</option>
+                            <option value="veg">🟢 Veg</option>
+                            <option value="non-veg">🔴 Non-Veg</option>
                         </select>
                     </div>
                 </div>
                 <div>
                     <label class="block text-xs text-gray-400 mb-1">Category</label>
                     <select id="newItemCategory" class="w-full bg-black/60 border border-gold/25 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-gold transition">
-                        <option value="breakfast-snacks">ðŸ³ Breakfast & Snacks</option>
-                        <option value="soup-beverage">ðŸµ Soup & Beverages</option>
-                        <option value="veg-course">ðŸ¥¦ Veg Course</option>
-                        <option value="non-veg-course">ðŸ— Non-Veg Course</option>
-                        <option value="rice-roti">ðŸš Rice & Roti</option>
-                        <option value="dessert">ðŸ¨ Desserts</option>
+                        <option value="breakfast-snacks">🍳 Breakfast & Snacks</option>
+                        <option value="soup-beverage">🍵 Soup & Beverages</option>
+                        <option value="veg-course">🥦 Veg Course</option>
+                        <option value="non-veg-course">🍗 Non-Veg Course</option>
+                        <option value="rice-roti">🍚 Rice & Roti</option>
+                        <option value="dessert">🍨 Desserts</option>
                     </select>
                 </div>
                 <div>
