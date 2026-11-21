@@ -192,54 +192,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (modalCheckout) modalCheckout.value = formatDate(tomorrow);
 });
 
-// 7. Interactive Booking Modal functions
+// 7. Interactive Booking Redirector to RoomNexa
+const BOOKING_ENGINE_URL = 'https://hotel-puri-sand.roomnexa.com/';
+
 function openBookingModal(roomCategory = '') {
-  const modal = document.getElementById('booking-modal');
-  const container = document.getElementById('modal-container');
-  const roomSelect = document.getElementById('booking-room-type');
-  
-  if (!modal || !container) return;
-
-  // Set default values from Hero search form if filled and present
-  const heroCheckin = document.getElementById('hero-checkin');
-  const heroCheckout = document.getElementById('hero-checkout');
-  const heroGuests = document.getElementById('hero-guests');
-
-  const modalCheckin = document.getElementById('booking-checkin');
-  const modalCheckout = document.getElementById('booking-checkout');
-  const modalAdults = document.getElementById('booking-adults');
-
-  if (heroCheckin && modalCheckin) modalCheckin.value = heroCheckin.value;
-  if (heroCheckout && modalCheckout) modalCheckout.value = heroCheckout.value;
-
-  if (heroGuests && modalAdults) {
-    const guestsNum = parseInt(heroGuests.value);
-    if (!isNaN(guestsNum) && guestsNum >= 1 && guestsNum <= 4) {
-      modalAdults.value = guestsNum.toString();
-    } else if (guestsNum > 4) {
-      modalAdults.value = '5+';
-    }
-  }
-
-  // Pre-select category if specified
-  if (roomCategory && roomSelect) {
-    roomSelect.value = roomCategory;
-  } else {
-    // If no room category selected but hero selector had a value
-    const heroRoom = document.getElementById('hero-room-type');
-    if (heroRoom && roomSelect) {
-      roomSelect.value = heroRoom.value;
-    }
-  }
-
-  // Open modal
-  modal.classList.remove('hidden');
-  modal.classList.add('flex');
-  setTimeout(() => {
-    container.classList.remove('scale-95');
-    container.classList.add('scale-100');
-  }, 10);
-  document.body.style.overflow = 'hidden';
+  window.location.href = BOOKING_ENGINE_URL;
 }
 
 function closeBookingModal() {
@@ -266,113 +223,10 @@ window.onclick = function(event) {
 
 // Hero Search Bar Direct Booking Redirector
 function triggerDirectHeroBooking() {
-  const heroRoomEl = document.getElementById('hero-room-type');
-  const heroRoomType = heroRoomEl ? heroRoomEl.value : '';
-  openBookingModal(heroRoomType);
+  window.location.href = BOOKING_ENGINE_URL;
 }
 
-// Generate WhatsApp Pre-filled message and redirect
+// Generate WhatsApp Pre-filled message and redirect / Redirect to Booking Engine
 async function sendWhatsAppBooking() {
-  const nameInput = document.getElementById('booking-name');
-  const checkinInput = document.getElementById('booking-checkin');
-  const checkoutInput = document.getElementById('booking-checkout');
-  const roomSelect = document.getElementById('booking-room-type');
-  const adultsSelect = document.getElementById('booking-adults');
-  const childrenSelect = document.getElementById('booking-children');
-  const deskSelect = document.getElementById('booking-desk');
-
-  const name = nameInput ? nameInput.value.trim() : '';
-  const checkin = checkinInput ? checkinInput.value : '';
-  const checkout = checkoutInput ? checkoutInput.value : '';
-  const roomType = roomSelect ? roomSelect.value : '';
-  const adults = adultsSelect ? adultsSelect.value : '';
-  const children = childrenSelect ? childrenSelect.value : '';
-  const bookingDesk = deskSelect ? deskSelect.value : '9437752000';
-
-  // Basic verification
-  if (!name) {
-    alert("Please enter your name to proceed.");
-    if (nameInput) nameInput.focus();
-    return;
-  }
-  if (!checkin || !checkout) {
-    alert("Please select both check-in and check-out dates.");
-    return;
-  }
-
-  // Formatting dates for presentation
-  const formatDateString = (dateStr) => {
-    const d = new Date(dateStr);
-    return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
-  };
-
-  const submitBtn = document.querySelector("#booking-modal button[onclick='sendWhatsAppBooking()']");
-  const originalText = submitBtn ? submitBtn.innerHTML : "Confirm Booking";
-  if (submitBtn) {
-      submitBtn.innerHTML = "<i class='fa-solid fa-spinner fa-spin'></i> Processing...";
-      submitBtn.disabled = true;
-  }
-
-  // 1. Send Booking to Backend
-  try {
-      const bookingData = {
-          customerName: name,
-          checkIn: checkin,
-          checkOut: checkout,
-          roomCategory: roomType,
-          bookingDesk: bookingDesk
-      };
-
-      // Note: Change this URL to your Render/Vercel URL once hosted
-      // Example: const BACKEND_URL = "https://hotel-puri-sand-backend.onrender.com";
-      const isLocalCheck = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname.startsWith('192.168.') || window.location.hostname.startsWith('10.');
-      const BACKEND_URL = isLocalCheck ? `http://${window.location.hostname}:5000` : '';
-      
-      const response = await fetch(`${BACKEND_URL}/api/bookings`, {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(bookingData)
-      });
-      
-      const result = await response.json();
-      
-      if (!response.ok || !result.success) {
-          console.error("Backend Error:", result);
-      }
-  } catch (err) {
-      console.error("Failed to save booking to database. Proceeding to WhatsApp.", err);
-  }
-
-  // Build WhatsApp template text
-  const message = `✨ *LUXURY STAY RESERVATION REQUEST* ✨
-
-` +
-                  `👤 *Name:* ${name}
-` +
-                  `📅 *Check-In:* ${formatDateString(checkin)}
-` +
-                  `📅 *Check-Out:* ${formatDateString(checkout)}
-` +
-                  `🛏 *Room Category:* ${roomType}
-` +
-                  `👥 *Guests:* ${adults} Adults | ${children} Children
-
-` +
-                  `Please confirm room availability. Thank you!`;
-
-  const encodedMsg = encodeURIComponent(message);
-  const whatsappUrl = `https://wa.me/91${bookingDesk}?text=${encodedMsg}`;
-
-  setTimeout(() => {
-      if (submitBtn) {
-          submitBtn.innerHTML = originalText;
-          submitBtn.disabled = false;
-      }
-      closeBookingModal();
-  }, 1000);
-
-  // Use window.location.href for better mobile support
-  window.location.href = whatsappUrl;
+  window.location.href = BOOKING_ENGINE_URL;
 }
